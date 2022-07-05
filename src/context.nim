@@ -57,7 +57,7 @@ proc init*(this: Context): void =
   setCfgDefaults(this)
   let cfgDir = os.getConfigDir()
   var dataDir = os.getHomeDir()
-  dataDir = os.joinPath(dataDir, ".local", "share", "nimtest")
+  dataDir = os.joinPath(dataDir, ".local", "share", "nim_fetchweather")
   debugmsg "The data dir is: " & dataDir
 
   try:
@@ -68,8 +68,8 @@ proc init*(this: Context): void =
     echo e.msg
     system.quit(-1)
 
-  this.cfgDirPath = os.joinPath(cfgDir, "nimtest")
-  this.cfgFilePath = os.joinPath(this.cfgDirPath, "nimtestrc")
+  this.cfgDirPath = os.joinPath(cfgDir, "nim_fetchweather")
+  this.cfgFilePath = os.joinPath(this.cfgDirPath, "nim_fetchweatherrc")
 
   # read the existing config (if we have one)
   if os.fileExists(this.cfgFilePath):

@@ -6,15 +6,14 @@ license       = "MIT"
 srcDir        = "src"
 bin           = @["nim_fetchweather"]
 
-
 # Dependencies
 
 requires "nim >= 1.6.6"
 
 task release, "We just foo around":
-    exec("nim compile  --threads:on --mm:arc --cc:clang -d:danger src/nim_fetchweather.nim")
-    exec("src/nim_testproject")
+    exec("nim compile  -o:build/release/nim_fetchweather -r --threads:on --mm:arc --cc:clang -d:danger src/nim_fetchweather.nim")
+    exec("build/release/nim_fetchweather")
 
 task debug, "Debug build":
-    exec("nim compile  --threads:on --mm:arc --cc:gcc -d:debug --lineDir:on --debuginfo --debugger:native src/nim_fetchweather.nim")
-    exec("src/nim_testproject")
+    exec("nim compile  -o:build/debug/nim_fetchweather -r --threads:on --mm:arc --cc:gcc -d:debug --lineDir:on --debuginfo --debugger:native src/nim_fetchweather.nim")
+    exec("build/debug/nim_feathweather")
