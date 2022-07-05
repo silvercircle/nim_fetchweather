@@ -1,0 +1,11 @@
+[General]
+firstRun=yes
+[OWM]
+apikey=OWM_apikey
+; data for climacell
+[CC]
+apikey=your api key
+; must be lat,lon format
+loc="48.1222795,16.3347827"
+; set this to your time zone
+timezone=Europe/Vienna
