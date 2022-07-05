@@ -11,7 +11,7 @@ bin           = @["nim_fetchweather"]
 requires "nim >= 1.6.6"
 
 task release, "We just foo around":
-    exec("nim compile  -o:build/release/nim_fetchweather -r --threads:on --mm:arc --cc:clang -d:danger src/nim_fetchweather.nim")
+    exec("nim compile  -o:build/release/nim_fetchweather -r --threads:on --mm:arc --cc:clang -d:release --opt:speed src/nim_fetchweather.nim")
     #exec("build/release/nim_fetchweather")
 
 task debug, "Debug build":
