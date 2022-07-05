@@ -70,5 +70,4 @@ Thumbs.db
 # --------
 *.dll
 *.exe
-src/nim_fetchweather
-
+build/*
