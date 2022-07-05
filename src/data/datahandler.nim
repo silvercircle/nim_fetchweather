@@ -1,3 +1,11 @@
+import std/json
+
+type DailyForecast = object
+    code:                                           char
+    temperatureMin, temperatureMax:                 float
+    weekDay:                                        string
+    pop:                                            float
+
 type DataPoint = object
   is_day, valid:                                    bool
 #  timeRecorded, sunsetTime, sunriseTime:
@@ -26,9 +34,12 @@ type DataPoint = object
 
 
 type DataHandler* = ref object of RootObj
-  p*: DataPoint
+  p*:       DataPoint
+  daily:    array[3, DailyForecast]
 
-method doOutput*(this: DataHandler): void =
+  currentResult*, forecastResult*: JsonNode
+
+method doOutput*(this: DataHandler): void {.base.} =
   echo "doOutput"
   echo "Is this day?" & $this.p.is_day
 

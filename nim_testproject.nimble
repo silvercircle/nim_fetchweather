@@ -12,8 +12,8 @@ requires "nim >= 1.6.6"
 
 task release, "We just foo around":
     exec("nim compile  -o:build/release/nim_fetchweather -r --threads:on --mm:arc --cc:clang -d:danger src/nim_fetchweather.nim")
-    exec("build/release/nim_fetchweather")
+    #exec("build/release/nim_fetchweather")
 
 task debug, "Debug build":
     exec("nim compile  -o:build/debug/nim_fetchweather -r --threads:on --mm:arc --cc:gcc -d:debug --lineDir:on --debuginfo --debugger:native src/nim_fetchweather.nim")
-    exec("build/debug/nim_feathweather")
+    #exec("build/debug/nim_feathweather")

@@ -9,14 +9,15 @@ when isMainModule:
 
 proc main(): cint =
   CTX.init()
-  CTX.greeter()
   var
     data: DataHandler
   let api = "CC"
 
   if api == "CC":
     data = DataHandler_CC()
-    data.populateSnapshot()
+    if data.readFromApi() == 0:
+      data.populateSnapshot()
+
   elif api == "OWM":
     data = DataHandler_OWM()
     data.populateSnapshot()

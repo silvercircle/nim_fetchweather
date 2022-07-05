@@ -17,3 +17,8 @@ proc fwprintf*(stream: File, format: cstring, arg: varargs[typed, `$`]): cint {.
 proc wprintf_s*(format: cstring, arg: varargs[typed, `$`]): cint {.importc, header: "<stdio.h>".}
 proc fwprintf_s*(stream: File, format: cstring, arg: varargs[typed, `$`]): cint {.importc, header: "<stdio.h>".}
 proc fwrite*(formatstr: cstring, size: cuint, nmemb: cuint, stream: File): cint {.importc, header: "<stdio.h>".}
+
+proc curlWriteFn*(buffer: cstring, size: int, count: int, outstream: pointer): int =
+  let outbuf = cast[ref string](outstream)
+  outbuf[] &= buffer
+  result = size * count

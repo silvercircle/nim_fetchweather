@@ -11,6 +11,7 @@ template debugmsg*(data: untyped) =
 type Options = object
   dryRun*: bool
   inited*: string
+  apikey*: string
 
 # this initializes our configuration object
 # it sets defaults and parses the command line options
@@ -19,7 +20,8 @@ proc initOptions(): Options =
   var o: Options
   o = Options(
     dryRun: false,
-    inited: "yes")
+    inited: "yes",
+    apikey: "none")
   return o
 
 type Context* = ref object
@@ -48,6 +50,10 @@ proc setCfgDefaults(this: Context): void =
   this.cfgFile.setSectionKey("General", "firstRun", "yes")
   this.cfgFile.setSectionKey("Auth", "username", "alex")
   this.cfgFile.setSectionKey("Auth", "pass", "foo")
+  this.cfgFile.setSectionKey("CC", "apikey", "none")
+  this.cfgFile.setSectionKey("OWM", "apikey", "none")
+  this.cfgFile.setSectionKey("CC", "loc", "none")
+  this.cfgFile.setSectionKey("OWM", "loc", "none")
 
 # init the config, read config file (or create one), handle default
 # values
@@ -78,7 +84,7 @@ proc init*(this: Context): void =
   # create a new config file if none exists.
   try:
     if os.existsOrCreateDir(this.cfgDirPath):
-      debug "The config file is at " & this.cfgFilePath
+      # debug "The config file is at " & this.cfgFilePath
       if not os.fileExists(this.cfgFilePath):
         let f = system.open(this.cfgFilePath, fmReadWrite)
         defer: f.close()
@@ -88,7 +94,7 @@ proc init*(this: Context): void =
     echo e.msg
     system.quit(-1)
 
-  echo this.cfgFile
+  # echo this.cfgFile
   this.cfg = initOptions()
   this.cfg_saved = this.cfg
   this.cfg_saved.dryRun = true
