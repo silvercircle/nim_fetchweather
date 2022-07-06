@@ -55,13 +55,13 @@ proc main(): cint =
   CTX.init()
   var
     data: DataHandler
-  let api = "CC"
+  let api = "OWM"
 
   if api == "CC":
     data = DataHandler_CC()
     discard run(data)
   elif api == "OWM":
     data = DataHandler_OWM()
-    discard data.populateSnapshot()
+    discard run(data)
 
   system.quit(0)

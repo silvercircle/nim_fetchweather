@@ -1,0 +1,211 @@
+{
+  "data": {
+    "timelines": [
+      {
+        "timestep": "1d",
+        "endTime": "2022-07-20T06:00:00+02:00",
+        "startTime": "2022-07-06T06:00:00+02:00",
+        "intervals": [
+          {
+            "startTime": "2022-07-06T06:00:00+02:00",
+            "values": {
+              "moonPhase": 2,
+              "precipitationProbability": 5,
+              "precipitationType": 1,
+              "sunriseTime": "2022-07-06T03:20:00Z",
+              "sunsetTime": "2022-07-06T18:37:00Z",
+              "temperatureMax": 25.89,
+              "temperatureMin": 17.03,
+              "weatherCode": 1101
+            }
+          },
+          {
+            "startTime": "2022-07-07T06:00:00+02:00",
+            "values": {
+              "moonPhase": 2,
+              "precipitationProbability": 20,
+              "precipitationType": 1,
+              "sunriseTime": "2022-07-07T03:21:00Z",
+              "sunsetTime": "2022-07-07T18:37:00Z",
+              "temperatureMax": 22.84,
+              "temperatureMin": 15.57,
+              "weatherCode": 1001
+            }
+          },
+          {
+            "startTime": "2022-07-08T06:00:00+02:00",
+            "values": {
+              "moonPhase": 2,
+              "precipitationProbability": 5,
+              "precipitationType": 1,
+              "sunriseTime": "2022-07-08T03:21:00Z",
+              "sunsetTime": "2022-07-08T18:37:00Z",
+              "temperatureMax": 22.19,
+              "temperatureMin": 14.96,
+              "weatherCode": 1001
+            }
+          },
+          {
+            "startTime": "2022-07-09T06:00:00+02:00",
+            "values": {
+              "moonPhase": 3,
+              "precipitationProbability": 10,
+              "precipitationType": 1,
+              "sunriseTime": "2022-07-09T03:22:00Z",
+              "sunsetTime": "2022-07-09T18:37:00Z",
+              "temperatureMax": 22.33,
+              "temperatureMin": 15.94,
+              "weatherCode": 1001
+            }
+          },
+          {
+            "startTime": "2022-07-10T06:00:00+02:00",
+            "values": {
+              "moonPhase": 3,
+              "precipitationProbability": 10,
+              "precipitationType": 1,
+              "sunriseTime": "2022-07-10T03:22:00Z",
+              "sunsetTime": "2022-07-10T18:36:00Z",
+              "temperatureMax": 21.21,
+              "temperatureMin": 13.47,
+              "weatherCode": 1001
+            }
+          },
+          {
+            "startTime": "2022-07-11T06:00:00+02:00",
+            "values": {
+              "moonPhase": 3,
+              "precipitationProbability": 5,
+              "precipitationType": 1,
+              "sunriseTime": "2022-07-11T03:23:00Z",
+              "sunsetTime": "2022-07-11T18:36:00Z",
+              "temperatureMax": 21.61,
+              "temperatureMin": 14.89,
+              "weatherCode": 1001
+            }
+          },
+          {
+            "startTime": "2022-07-12T06:00:00+02:00",
+            "values": {
+              "moonPhase": 3,
+              "precipitationProbability": 0,
+              "precipitationType": 0,
+              "sunriseTime": "2022-07-12T03:23:00Z",
+              "sunsetTime": "2022-07-12T18:36:00Z",
+              "temperatureMax": 26.64,
+              "temperatureMin": 17.14,
+              "weatherCode": 1001
+            }
+          },
+          {
+            "startTime": "2022-07-13T06:00:00+02:00",
+            "values": {
+              "moonPhase": 4,
+              "precipitationProbability": 0,
+              "precipitationType": 0,
+              "sunriseTime": "2022-07-13T03:24:00Z",
+              "sunsetTime": "2022-07-13T18:35:00Z",
+              "temperatureMax": 30.01,
+              "temperatureMin": 20.94,
+              "weatherCode": 1001
+            }
+          },
+          {
+            "startTime": "2022-07-14T06:00:00+02:00",
+            "values": {
+              "moonPhase": 4,
+              "precipitationProbability": 35,
+              "precipitationType": 1,
+              "sunriseTime": "2022-07-14T03:25:00Z",
+              "sunsetTime": "2022-07-14T18:35:00Z",
+              "temperatureMax": 33.31,
+              "temperatureMin": 21.51,
+              "weatherCode": 1001
+            }
+          },
+          {
+            "startTime": "2022-07-15T06:00:00+02:00",
+            "values": {
+              "moonPhase": 4,
+              "precipitationProbability": 25,
+              "precipitationType": 1,
+              "sunriseTime": "2022-07-15T03:25:00Z",
+              "sunsetTime": "2022-07-15T18:34:00Z",
+              "temperatureMax": 25.71,
+              "temperatureMin": 19.11,
+              "weatherCode": 1001
+            }
+          },
+          {
+            "startTime": "2022-07-16T06:00:00+02:00",
+            "values": {
+              "moonPhase": 5,
+              "precipitationProbability": 0,
+              "precipitationType": 1,
+              "sunriseTime": "2022-07-16T03:26:00Z",
+              "sunsetTime": "2022-07-16T18:34:00Z",
+              "temperatureMax": 31,
+              "temperatureMin": 21.58,
+              "weatherCode": 1000
+            }
+          },
+          {
+            "startTime": "2022-07-17T06:00:00+02:00",
+            "values": {
+              "moonPhase": 5,
+              "precipitationProbability": 15,
+              "precipitationType": 1,
+              "sunriseTime": "2022-07-17T03:27:00Z",
+              "sunsetTime": "2022-07-17T18:34:00Z",
+              "temperatureMax": 35.16,
+              "temperatureMin": 22.43,
+              "weatherCode": 1100
+            }
+          },
+          {
+            "startTime": "2022-07-18T06:00:00+02:00",
+            "values": {
+              "moonPhase": 5,
+              "precipitationProbability": 0,
+              "precipitationType": 0,
+              "sunriseTime": "2022-07-18T03:27:00Z",
+              "sunsetTime": "2022-07-18T18:33:00Z",
+              "temperatureMax": 34.86,
+              "temperatureMin": 23.3,
+              "weatherCode": 1100
+            }
+          },
+          {
+            "startTime": "2022-07-19T06:00:00+02:00",
+            "values": {
+              "moonPhase": 6,
+              "precipitationProbability": 0,
+              "precipitationType": 0,
+              "sunriseTime": "2022-07-19T03:28:00Z",
+              "sunsetTime": "2022-07-19T18:32:00Z",
+              "temperatureMax": 35.26,
+              "temperatureMin": 23.56,
+              "weatherCode": 1000
+            }
+          },
+          {
+            "startTime": "2022-07-20T06:00:00+02:00",
+            "values": {
+              "moonPhase": 6,
+              "precipitationProbability": 0,
+              "precipitationType": 0,
+              "sunriseTime": "2022-07-20T03:29:00Z",
+              "sunsetTime": "2022-07-20T18:32:00Z",
+              "temperatureMax": 37.99,
+              "temperatureMin": 27.35,
+              "weatherCode": 1000
+            }
+          }
+        ]
+      }
+    ],
+    "status": {
+      "code": "success"
+    }
+  }
+}

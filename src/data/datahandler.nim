@@ -24,7 +24,7 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
-import std/[json, parsecfg, times]
+import std/[json, parsecfg, times, os]
 import "../context"
 import "../utils/utils"
 
@@ -75,6 +75,13 @@ method populateSnapshot*(this: DataHandler): bool {.base.} = true
 method readFromApi*(this: DataHandler): int {.base.} = -1
 method getCondition*(this: DataHandler, c: int): string {.base.} = "Clear"
 
+method writeCache*(this: DataHandler, prefix: string): void {.base.} =
+  let file_current = os.joinPath(CTX.dataDirPath, prefix & "_current.json")
+  let file_forecast = os.joinPath(CTX.dataDirPath, prefix & "_forecast.json")
+  echo file_current
+  echo file_forecast
+  writeFile(file_current, $this.currentResult)
+  writeFile(file_forecast, $this.forecastResult)
 
 method convertPressure*(this: DataHandler, hPa: float = 1013): float {.base.} =
   return (if CTX.cfgFile.getSectionValue("units", "pressure", "hPa") == "inhg": hPa / 33.863886666667 else: hPa)

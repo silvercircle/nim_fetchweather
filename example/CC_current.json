@@ -1,0 +1,37 @@
+{
+  "data": {
+    "timelines": [
+      {
+        "timestep": "current",
+        "endTime": "2022-07-06T13:15:00+02:00",
+        "startTime": "2022-07-06T13:15:00+02:00",
+        "intervals": [
+          {
+            "startTime": "2022-07-06T13:15:00+02:00",
+            "values": {
+              "cloudBase": 1.38,
+              "cloudCeiling": 1.38,
+              "cloudCover": 60,
+              "dewPoint": 14.19,
+              "humidity": 51,
+              "precipitationIntensity": 0,
+              "precipitationProbability": 0,
+              "precipitationType": 1,
+              "pressureSeaLevel": 1019.13,
+              "temperature": 25.13,
+              "temperatureApparent": 25.13,
+              "visibility": 16,
+              "weatherCode": 1101,
+              "windDirection": 320.31,
+              "windGust": 10.5,
+              "windSpeed": 3.5
+            }
+          }
+        ]
+      }
+    ],
+    "status": {
+      "code": "success"
+    }
+  }
+}

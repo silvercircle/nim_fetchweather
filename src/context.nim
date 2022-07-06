@@ -35,9 +35,11 @@ template debugmsg*(data: untyped) =
 
 # the class itself is private so no other instances can be created
 type Options = object
-  dryRun*: bool
-  inited*: string
-  apikey*: string
+  dryRun*:    bool
+  inited*:    string
+  apikey*:    string
+  loc*:       string
+  timezone*:  string
 
 # this initializes our configuration object
 # it sets defaults and parses the command line options
@@ -47,7 +49,9 @@ proc initOptions(): Options =
   o = Options(
     dryRun: false,
     inited: "yes",
-    apikey: "none")
+    apikey: "none",
+    loc: "none",
+    timezone: "none")
   return o
 
 type Context* = ref object
@@ -59,11 +63,20 @@ type Context* = ref object
   cfgFile*: parsecfg.Config
 
   # directories
-  cfgDirPath, cfgFilePath, dataDirPath: string
-  stdLogger*: logging.ConsoleLogger
+  cfgDirPath, cfgFilePath, logFilePath, dataDirPath*: string
+  stdLogger*: logging.FileLogger
 
 # this is the instance, it's public and will be initialized automatically
 var CTX*: Context = Context(id: 111, timestamp: times.now())
+
+template LOG_INFO*(data: untyped) =
+  CTX.stdLogger.log(logging.lvlInfo, data)
+
+template LOG_ERR*(data: untyped) =
+  CTX.stdLogger.log(logging.lvlError, data)
+
+template LOG_FATAL*(data: untyped) =
+  CTX.stdLogger.log(logging.lvlFatal, data)
 
 proc greeter*(this: Context): void =
   echo "The context ID is: " & $this.id
@@ -84,8 +97,6 @@ proc setCfgDefaults(this: Context): void =
 # init the config, read config file (or create one), handle default
 # values
 proc init*(this: Context): void =
-  this.stdLogger = logging.newConsoleLogger()
-  logging.addHandler(this.stdLogger)
   setCfgDefaults(this)
   let cfgDir = os.getConfigDir()
   var dataDir = os.getHomeDir()
@@ -100,6 +111,11 @@ proc init*(this: Context): void =
     echo e.msg
     system.quit(-1)
 
+  this.logfilePath = os.joinPath(dataDir, "log.log")
+  this.stdLogger = logging.newFileLogger(this.logFilePath)
+  logging.addHandler(this.stdLogger)
+  this.stdLogger.fmtStr = "$datetime: $levelname - "
+  this.stdLogger.log(logging.lvlInfo, "------------------ Logger created ------------------ ")
   this.cfgDirPath = os.joinPath(cfgDir, "nim_fetchweather")
   this.cfgFilePath = os.joinPath(this.cfgDirPath, "nim_fetchweatherrc")
 

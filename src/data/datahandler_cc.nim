@@ -32,6 +32,7 @@ import std/[json, parsecfg, tables]
 import libcurl
 import "../utils/utils" as utils
 import "../context"
+import times
 
 var conditions: Table[int, string] = {
        1000: "Clear", 1001: "Cloudy",
@@ -84,9 +85,7 @@ method readFromAPI*(this: DataHandler_CC): int =
   baseurl = CTX.cfgFile.getSectionValue("CC", "baseurl", "https://data.climacell.co/v4/timelines?&apikey=")
   baseurl.add(CTX.cfgFile.getSectionValue("CC", "apikey", "none"))
   baseurl.add("&location=" & $CTX.cfgFile.getSectionValue("CC", "loc", "0,0"))
-  baseurl.add("&timezone=" & $CTX.cfgFile.getSectionValue("CC", "timezone",
-      "Europe/Berlin"))
-
+  baseurl.add("&timezone=" & $CTX.cfgFile.getSectionValue("CC", "timezone","Europe/Vienna"))
   url.add(baseurl)
   url.add("&fields=weatherCode,temperature,temperatureApparent,visibility,windSpeed,windDirection,")
   url.add("precipitationType,precipitationProbability,pressureSeaLevel,windGust,cloudCover,cloudBase,")
@@ -109,7 +108,6 @@ method readFromAPI*(this: DataHandler_CC): int =
     except:
       this.currentResult["data"]["status"] = %* {"code": "failure"}
   else:
-    this.currentResult["data"]["status"] = %* {"code": "failure"}
     return -1
 
   # build forecast url
@@ -123,25 +121,30 @@ method readFromAPI*(this: DataHandler_CC): int =
   # fetch the forecast
   ret = curl.easy_perform()
   if ret == E_OK:
+    # request was ok, but we have to make sure parsing won't fail
     try:
       this.forecastResult = json.parseJson(webData_fc[])
       this.forecastResult["data"]["status"] = %* {"code": "success"}
     except:
       this.forecastResult["data"]["status"] = %* {"code": "failure"}
+    this.writeCache(prefix = "CC")
     return 0
   else:
-    this.forecastResult["data"]["status"] = %* {"code": "failure"}
     return -1
 
 
 method populateSnapshot*(this: DataHandler_CC): bool =
-  var n: json.JsonNode
+  var n, f: json.JsonNode
 
   n = this.currentResult["data"]["timelines"][0]["intervals"][0]["values"]
+  f = this.forecastResult["data"]["timelines"][0]["intervals"][0]["values"]
+
+  echo times.parse(f["sunriseTime"].getStr(), "yyyy-MM-dd'T'HH:mm:sszz", times.local())
+  echo times.parse(f["sunsetTime"].getStr(), "yyyy-MM-dd'T'HH:mm:sszz", times.local())
   this.p.is_day = true
   this.p.weatherCode = n["weatherCode"].getInt()
+  this.p.timeZone = CTX.cfgFile.getSectionValue("CC", "timezone")
   this.p.conditionAsString = this.getCondition(n["weatherCode"].getInt())
-  echo this.p
   try:
     echo n["dewPoint"]
   except:
