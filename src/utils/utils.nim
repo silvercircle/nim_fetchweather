@@ -26,7 +26,7 @@
 
 # printf like C
 proc printf*(format: cstring): cint {.importc, header: "<stdio.h>", varargs.}
-proc fprintf*(stream: File, format: cstring): cint {.importc, header: "<stdio.h>".}
+proc fprintf*(stream: File, format: cstring): cint {.importc, header: "<stdio.h>", varargs.}
 proc sprintf*(str: cstring, format: cstring): cint {.header: "<stdio.h>", importc: "sprintf", varargs.}
 proc snprintf*(str: cstring, len: int, format: cstring): cint {.header: "<stdio.h>", importc: "snprintf", varargs.}
 proc vsprintf*(str: var cstring, format: cstring, arg: varargs[typed, `$`]): cint {.importc, header: "<stdio.h>".}

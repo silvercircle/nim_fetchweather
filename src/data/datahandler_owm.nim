@@ -28,13 +28,67 @@
 
 
 import datahandler
-import std/[json, parsecfg, tables, logging, strformat]
+import std/[json, tables, logging, strformat, parsecfg]
 import libcurl
-import "../utils/utils" as utils
 import "../context"
+import "../utils/utils"
 import times
 
 type DataHandler_OWM* = ref object of DataHandler
+
+method getIcon(this: DataHandler_OWM, code: int = 100): char =
+  var
+    symbol: char = 'c'
+    daylight: bool = this.p.is_day
+
+  if code >= 200 and code <= 299:         # thunderstorm
+    symbol = (if daylight: 'k' else: 'K')
+
+  if code >= 300 and code <= 399:         # drizzle
+    symbol = 'x'
+
+  if code == 800:
+    symbol = 'a'
+
+  if code >= 500 and code <= 599:    # rain
+    case code:
+      of 511:
+        symbol = 's'
+      of 502, 503, 504:
+        symbol = 'j'
+      else:
+        symbol = (if daylight: 'g' else: 'G')
+
+  if code >= 600 and code <= 699:         # snow
+    case code:
+      of 602, 522:
+        symbol = 'w'
+      of 504:
+        symbol = 'j'
+      else:
+        symbol = (if daylight: 'o' else: 'O')
+
+  if code >= 800 and code <= 899:         # other
+    case code:
+      of 801:
+        symbol = (if daylight: 'b' else: 'B')
+      of 802:
+        symbol = (if daylight: 'c' else: 'C')
+      of 803:
+        symbol = (if daylight: 'e' else: 'f')
+      of 804:
+        symbol = (if daylight: 'd' else: 'D')
+      else:
+        symbol = (if daylight: 'c' else: 'C')
+
+  if code >= 700 and code <= 799:
+    case code:
+      of 711, 741, 701:
+        symbol = '0'
+      else:
+        symbol = (if daylight: 'c' else: 'C')
+
+  return symbol
 
 method readFromAPI*(this: DataHandler_OWM): int =
   var
@@ -53,8 +107,7 @@ method readFromAPI*(this: DataHandler_OWM): int =
   url.add(baseurl)
   url.add("&exclude=minutely&units=metric");
 
-  debugmsg "THE URL IS  " & url
-
+  context.LOG_INFO(fmt"The url is: {url}")
   discard curl.easy_setopt(OPT_USERAGENT, "Mozilla/5.0")
   discard curl.easy_setopt(OPT_HTTPGET, 1)
   discard curl.easy_setopt(OPT_WRITEDATA, webData)
@@ -75,13 +128,22 @@ method readFromAPI*(this: DataHandler_OWM): int =
   else:
     return -1
 
+# populate DataHandler.p (type DataPoint) with current and 3 days
+# forecast
+
 method populateSnapshot*(this: DataHandler_OWM): bool =
-  var n, f: json.JsonNode
+  var
+    n, f, h: json.JsonNode
+    d: ref DailyForecast
+
   context.LOG_INFO(fmt"OWM:populateSnapshot()")
 
   n = this.currentResult["current"]
   f = this.currentResult["daily"][0]
+  h = this.currentResult["hourly"][0]
+
   this.p.valid = true
+  this.p.api = "OWM"
 
   this.p.sunriseTime = times.fromUnix(n["sunrise"].getInt())
   this.p.sunsetTime = times.fromUnix(n["sunset"].getInt())
@@ -89,14 +151,36 @@ method populateSnapshot*(this: DataHandler_OWM): bool =
   this.p.timeRecordedAsText = times.format(this.p.timeRecorded, "HH:MM", times.local())
   this.p.is_day = (if this.p.timeRecorded > this.p.sunriseTime and this.p.timeRecorded < this.p.sunsetTime: true else: false)
   this.p.weatherCode = n["weather"][0]["id"].getInt()
+  this.p.weatherSymbol = this.getIcon()
   this.p.timeZone = CTX.cfgFile.getSectionValue("OWM", "timezone")
   this.p.conditionAsString = n["weather"][0]["main"].getStr()
 
-  echo this.p
-  try:
-    echo n["dew_point"]
-  except:
-    echo getCurrentExceptionMsg()
-    return false
+  this.p.temperature = n["temp"].getFloat()
+  this.p.temperatureApparent = n["feels_like"].getFloat()
+  this.p.temperatureMax = f["temp"]["max"].getFloat()
+  this.p.temperatureMin = f["temp"]["min"].getFloat()
 
+  # wind stuff
+  this.p.windSpeed = this.convertWindspeed(n["wind_speed"].getFloat())
+  this.p.windGust = this.convertWindspeed(h["wind_gust"].getFloat())
+  this.p.windDirection = n["wind_deg"].getInt()
+  this.p.windBearing = this.degToBearing(this.p.windDirection)
+  this.p.windUnit = CTX.cfg.wind_unit
+
+  this.p.visibility = this.convertVis(n["visibility"].getFloat())
+
+  this.p.pressureSeaLevel = this.convertPressure(n["pressure"].getFloat())
+  this.p.humidity = n["humidity"].getFloat()
+
+  # daily forecasts
+  for i in countup(0, 2):
+    # echo i, " Code = ", this.currentResult["daily"][i + 1]["weather"][0]["id"].getInt()
+    this.daily[i].code = this.getIcon(this.currentResult["daily"][i + 1]["weather"][0]["id"].getInt())
+    this.daily[i].temperatureMin = this.currentResult["daily"][i + 1]["temp"]["min"].getFloat()
+    this.daily[i].temperatureMax = this.currentResult["daily"][i + 1]["temp"]["max"].getFloat()
+    this.daily[i].weekDay = times.format(times.fromUnix(this.currentResult["daily"][i + 1]["dt"].getInt()), "ddd", times.local())
+  this.p.haveUVI = true
+  this.p.uvIndex = n["uvi"].getInt()
+
+  this.p.dewPoint = n["dew_point"].getFloat()
   return true

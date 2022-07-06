@@ -35,11 +35,15 @@ template debugmsg*(data: untyped) =
 
 # the class itself is private so no other instances can be created
 type Options = object
-  dryRun*:    bool
-  inited*:    string
-  apikey*:    string
-  loc*:       string
-  timezone*:  string
+  dryRun*:        bool
+  inited*:        string
+  apikey*:        string
+  loc*:           string
+  timezone*:      string
+  wind_unit*:     string
+  vis_unit*:      string
+  pressure_unit*: string
+  metric*:        bool
 
 # this initializes our configuration object
 # it sets defaults and parses the command line options
@@ -51,7 +55,11 @@ proc initOptions(): Options =
     inited: "yes",
     apikey: "none",
     loc: "none",
-    timezone: "none")
+    timezone: "none",
+    wind_unit: "m/s",
+    vis_unit: "km",
+    pressure_unit: "hPa",
+    metric: true)
   return o
 
 type Context* = ref object
@@ -87,6 +95,7 @@ proc greeter*(this: Context): void =
 proc setCfgDefaults(this: Context): void =
   this.cfgFile = newConfig()
   this.cfgFile.setSectionKey("General", "firstRun", "yes")
+  this.cfgFile.setSectionKey("General", "metric", "true")
   this.cfgFile.setSectionKey("Auth", "username", "alex")
   this.cfgFile.setSectionKey("Auth", "pass", "foo")
   this.cfgFile.setSectionKey("CC", "apikey", "none")
@@ -101,7 +110,6 @@ proc init*(this: Context): void =
   let cfgDir = os.getConfigDir()
   var dataDir = os.getHomeDir()
   dataDir = os.joinPath(dataDir, ".local", "share", "nim_fetchweather")
-  debugmsg "The data dir is: " & dataDir
 
   try:
     if os.existsOrCreateDir(dataDir):
@@ -138,5 +146,9 @@ proc init*(this: Context): void =
 
   # echo this.cfgFile
   this.cfg = initOptions()
+  this.cfg.metric = (if $this.cfgFile.getSectionValue("units", "metric", "true") == "true": true else: false)
+  this.cfg.wind_unit = $this.cfgFile.getSectionValue("units", "windspeed", "m/s")
+  this.cfg.vis_unit = $this.cfgFile.getSectionValue("units", "visibility", "km")
+  this.cfg.vis_unit = $this.cfgFile.getSectionValue("units", "pressure", "hPa")
   this.cfg_saved = this.cfg
   this.cfg_saved.dryRun = true
