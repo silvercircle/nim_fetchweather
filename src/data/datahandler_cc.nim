@@ -25,34 +25,74 @@
  *]#
 
 {.warning[CStringConv]: off.}
-{.warning[LockLevel]:off.}
+{.warning[LockLevel]: off.}
 
 import datahandler
-import std/json
-import "../utils/utils" as utils
+import std/[json, parsecfg, tables]
 import libcurl
-import std/parsecfg
+import "../utils/utils" as utils
 import "../context"
+
+var conditions: Table[int, string] = {
+       1000: "Clear", 1001: "Cloudy",
+       1100: "Mostly Clear", 1101: "Partly Cloudy",
+       1102: "Mostly Cloudy", 2000: "Fog",
+       2100: "Light Fog", 3000: "Light Wind",
+       3001: "Wind", 3002: "Strong Wind",
+       4000: "Drizzle", 4001: "Rain",
+       4200: "Light Rain", 4201: "Heavy Rain",
+       5000: "Snow", 5001: "Flurries",
+       5100: "Light Snow", 5101: "Heavy Snow",
+       6000: "Freezing Drizzle", 6001: "Freezing Rain",
+       6200: "Light Freezing Rain", 6201: "Heavy Freezing Rain",
+       7000: "Ice Pellets", 7001: "Heavy Ice Pellets",
+       7102: "Light Ice Pellets", 8000: "Thunderstorm"}.toTable()
+
+var icons: Table[int, string] = {
+      1000: "aA", 1001: "ef",
+      1100: "bB", 1101: "cC",
+      1102: "dD", 2000: "00",
+      2100: "77", 3000: "99",
+      3001: "99", 3002: "23",
+      4000: "xx", 4001: "gG",
+      4200: "gg", 4201: "jj",
+      5000: "oO", 5001: "xx",
+      5100: "oO", 5101: "ww",
+      6000: "xx", 6001: "yy",
+      6200: "ss", 6201: "yy",
+      7000: "uu", 7001: "uu",
+      7102: "uu", 8000: "kK"}.toTable()
 
 type DataHandler_CC* = ref object of DataHandler
 
+method getCondition*(this: DataHandler_CC, c: int): string =
+  try:
+    return conditions[c]
+  except:
+    return "Clear(E)"
+
 method readFromAPI*(this: DataHandler_CC): int =
   var
-    baseurl: string
-    url: string
+    baseurl, url, forecasturl: string
+    ret: Code
 
   let webData: ref string = new string
+  let webData_fc: ref string = new string
+
   let curl = libcurl.easy_init()
 
-  baseurl = "https://data.climacell.co/v4/timelines?&apikey="
-  baseurl.add(CTX.cfgFile.getSectionValue("CC", "apikey"))
-  baseurl.add("&location=" & $CTX.cfgFile.getSectionValue("CC", "loc"))
-  baseurl.add("&timezone=" & $CTX.cfgFile.getSectionValue("CC", "timezone"))
+  baseurl = CTX.cfgFile.getSectionValue("CC", "baseurl", "https://data.climacell.co/v4/timelines?&apikey=")
+  baseurl.add(CTX.cfgFile.getSectionValue("CC", "apikey", "none"))
+  baseurl.add("&location=" & $CTX.cfgFile.getSectionValue("CC", "loc", "0,0"))
+  baseurl.add("&timezone=" & $CTX.cfgFile.getSectionValue("CC", "timezone",
+      "Europe/Berlin"))
 
   url.add(baseurl)
   url.add("&fields=weatherCode,temperature,temperatureApparent,visibility,windSpeed,windDirection,")
   url.add("precipitationType,precipitationProbability,pressureSeaLevel,windGust,cloudCover,cloudBase,")
   url.add("cloudCeiling,humidity,precipitationIntensity,dewPoint&timesteps=current&units=metric")
+
+  debugmsg "THE URL IS  " & url
 
   discard curl.easy_setopt(OPT_USERAGENT, "Mozilla/5.0")
   discard curl.easy_setopt(OPT_HTTPGET, 1)
@@ -60,16 +100,52 @@ method readFromAPI*(this: DataHandler_CC): int =
   discard curl.easy_setopt(OPT_WRITEFUNCTION, utils.curlWriteFn)
   discard curl.easy_setopt(OPT_URL, url)
 
-  let ret = curl.easy_perform()
+  # fetch the current conditions
+  ret = curl.easy_perform()
   if ret == E_OK:
-    this.currentResult = json.parseJson(webData[])
+    try:
+      this.currentResult = json.parseJson(webData[])
+      this.currentResult["data"]["status"] = %* {"code": "success"}
+    except:
+      this.currentResult["data"]["status"] = %* {"code": "failure"}
+  else:
+    this.currentResult["data"]["status"] = %* {"code": "failure"}
+    return -1
+
+  # build forecast url
+  forecasturl.add(baseurl)
+  forecasturl.add("&fields=weatherCode,temperatureMax,temperatureMin,sunriseTime,sunsetTime,moonPhase,")
+  forecasturl.add("precipitationType,precipitationProbability&timesteps=1d&startTime=")
+
+  discard curl.easy_setopt(OPT_WRITEDATA, webData_fc)
+  discard curl.easy_setopt(OPT_URL, forecasturl)
+
+  # fetch the forecast
+  ret = curl.easy_perform()
+  if ret == E_OK:
+    try:
+      this.forecastResult = json.parseJson(webData_fc[])
+      this.forecastResult["data"]["status"] = %* {"code": "success"}
+    except:
+      this.forecastResult["data"]["status"] = %* {"code": "failure"}
     return 0
   else:
+    this.forecastResult["data"]["status"] = %* {"code": "failure"}
     return -1
 
 
-method populateSnapshot*(this: DataHandler_CC): void =
+method populateSnapshot*(this: DataHandler_CC): bool =
   var n: json.JsonNode
 
   n = this.currentResult["data"]["timelines"][0]["intervals"][0]["values"]
-  echo n["weatherCode"]
+  this.p.is_day = true
+  this.p.weatherCode = n["weatherCode"].getInt()
+  this.p.conditionAsString = this.getCondition(n["weatherCode"].getInt())
+  echo this.p
+  try:
+    echo n["dewPoint"]
+  except:
+    echo getCurrentExceptionMsg()
+    return false
+
+  return true

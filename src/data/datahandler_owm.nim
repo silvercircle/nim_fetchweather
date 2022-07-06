@@ -33,5 +33,6 @@ type DataHandler_OWM* = ref object of DataHandler
 method readFromAPI*(this: DataHandler_OWM): int =
   discard
 
-method populateSnapshot*(this: DataHandler_OWM): void =
+method populateSnapshot*(this: DataHandler_OWM): bool =
   echo "populate in DataHandler_OWM"
+  return true

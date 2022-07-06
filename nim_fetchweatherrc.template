@@ -4,6 +4,7 @@ firstRun=yes
 apikey=OWM_apikey
 ; data for climacell
 [CC]
+baseurl=https://data.climacell.co/v4/timelines?&apikey=
 apikey=your api key
 ; must be lat,lon format
 loc="48.1222795,16.3347827"

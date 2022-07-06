@@ -24,7 +24,7 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
-import std/[os]
+import std/[os, times, json]
 import context
 
 import data/[datahandler, datahandler_cc, datahandler_owm]
@@ -32,6 +32,24 @@ import data/[datahandler, datahandler_cc, datahandler_owm]
 proc main(): cint
 when isMainModule:
   discard os.exitStatusLikeShell(main())
+
+proc run(dh: DataHandler): int =
+  if dh.readFromApi() == 0:
+    if dh.currentResult["data"]["status"]["code"].getStr() == "success" and
+        dh.forecastResult["data"]["status"]["code"].getStr() == "success":
+      if dh.populateSnapshot():
+        echo dh.convertPressure(1013.0)
+        echo dh.convertWindspeed(18.0)
+        echo dh.degToBearing(wind_direction = 195)
+        echo dh.getCondition(20000)
+        echo "Time is: ", now()
+        echo dh.currentResult["data"]["status"]
+        return 0
+    else:
+      return -1
+  else:
+    return -1
+
 
 proc main(): cint =
   CTX.init()
@@ -41,11 +59,9 @@ proc main(): cint =
 
   if api == "CC":
     data = DataHandler_CC()
-    if data.readFromApi() == 0:
-      data.populateSnapshot()
-
+    discard run(data)
   elif api == "OWM":
     data = DataHandler_OWM()
-    data.populateSnapshot()
+    discard data.populateSnapshot()
 
   system.quit(0)

@@ -42,7 +42,16 @@ proc wprintf_s*(format: cstring, arg: varargs[typed, `$`]): cint {.importc, head
 proc fwprintf_s*(stream: File, format: cstring, arg: varargs[typed, `$`]): cint {.importc, header: "<stdio.h>".}
 proc fwrite*(formatstr: cstring, size: cuint, nmemb: cuint, stream: File): cint {.importc, header: "<stdio.h>".}
 
+var wind_directions*:  array[16, string] = [
+      "N", "NNE", "NE",
+      "ENE", "E", "ESE",
+      "SE", "SSE", "S",
+      "SSW", "SW", "WSW",
+      "W", "WNW", "NW",
+      "NNW"]
+
 proc curlWriteFn*(buffer: cstring, size: int, count: int, outstream: pointer): int =
   let outbuf = cast[ref string](outstream)
   outbuf[] &= buffer
   result = size * count
+
