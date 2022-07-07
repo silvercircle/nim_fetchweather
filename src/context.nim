@@ -44,6 +44,7 @@ type Options = object
   vis_unit*:      string
   pressure_unit*: string
   metric*:        bool
+  api*:           string
 
 # this initializes our configuration object
 # it sets defaults and parses the command line options
@@ -59,7 +60,8 @@ proc initOptions(): Options =
     wind_unit: "m/s",
     vis_unit: "km",
     pressure_unit: "hPa",
-    metric: true)
+    metric: true,
+    api:  "OWM")
   return o
 
 type Context* = ref object
@@ -149,6 +151,7 @@ proc init*(this: Context): void =
   this.cfg.metric = (if $this.cfgFile.getSectionValue("units", "metric", "true") == "true": true else: false)
   this.cfg.wind_unit = $this.cfgFile.getSectionValue("units", "windspeed", "m/s")
   this.cfg.vis_unit = $this.cfgFile.getSectionValue("units", "visibility", "km")
-  this.cfg.vis_unit = $this.cfgFile.getSectionValue("units", "pressure", "hPa")
+  this.cfg.pressure_unit = $this.cfgFile.getSectionValue("units", "pressure", "hPa")
+  this.cfg.api = $this.cfgFile.getSectionValue("General", "api", "OWM")
   this.cfg_saved = this.cfg
   this.cfg_saved.dryRun = true

@@ -1,0 +1,1768 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"seq",
+				"sequence"
+			],
+			[
+				"exi",
+				"existsOrCreateDir"
+			],
+			[
+				"box-sh",
+				"box-shadow"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"ba",
+				"backgroundColor"
+			],
+			[
+				"bck",
+				"background-color"
+			],
+			[
+				"font-f",
+				"font-feature-settings"
+			],
+			[
+				"font-st",
+				"font-stretch"
+			],
+			[
+				"font-s",
+				"font-stretch"
+			],
+			[
+				"font-",
+				"font-stretch"
+			],
+			[
+				"margin-",
+				"margin-bottom"
+			],
+			[
+				"if",
+				"ife"
+			],
+			[
+				"aquo",
+				"daquo"
+			],
+			[
+				"quo",
+				"aquo"
+			],
+			[
+				"fad",
+				"fadeOut"
+			],
+			[
+				"table-c",
+				"table-cell"
+			],
+			[
+				"min",
+				"min-content"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"wan",
+				"want_desc"
+			],
+			[
+				"ca",
+				"category"
+			],
+			[
+				"iso",
+				"isoformat"
+			],
+			[
+				"date",
+				"datetime"
+			],
+			[
+				"ident_",
+				"indent_size"
+			],
+			[
+				"sub",
+				"substring"
+			],
+			[
+				"the",
+				"theme_default"
+			],
+			[
+				"no",
+				"no_sidebar"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"over",
+				"overflow-y"
+			],
+			[
+				"f",
+				"false"
+			],
+			[
+				"bord",
+				"border-radius"
+			],
+			[
+				"cli",
+				"clickable"
+			],
+			[
+				"get",
+				"getSelection"
+			],
+			[
+				"r",
+				"registers"
+			],
+			[
+				"fina",
+				"final_url"
+			],
+			[
+				"fin",
+				"final_url"
+			],
+			[
+				"text",
+				"text-overflow"
+			],
+			[
+				"text-o",
+				"text-overflow"
+			],
+			[
+				"max-",
+				"max-height"
+			],
+			[
+				"ch",
+				"child"
+			],
+			[
+				"padd",
+				"padding-top"
+			],
+			[
+				"box-",
+				"box-shadow"
+			],
+			[
+				"b",
+				"baseurl"
+			],
+			[
+				"fi",
+				"first-child"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/context.nim",
+			"settings":
+			{
+				"buffer_size": 5734,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					17,
+					1,
+					"reindent",
+					null,
+					"AQAAAFsLAAAAAAAAXQsAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABbCwAAAAAAAFsLAAAAAAAAAAAAAACAZkA"
+				],
+				[
+					18,
+					1,
+					"insert",
+					{
+						"characters": "CTX."
+					},
+					"BAAAAF0LAAAAAAAAXgsAAAAAAAAAAAAAXgsAAAAAAABfCwAAAAAAAAAAAABfCwAAAAAAAGALAAAAAAAAAAAAAGALAAAAAAAAYQsAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABdCwAAAAAAAF0LAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					21,
+					2,
+					"right_delete",
+					null,
+					"AgAAAFsLAAAAAAAAWwsAAAAAAAAGAAAAICBDVFguWwsAAAAAAABbCwAAAAAAAAEAAAAK",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABbCwAAAAAAAGELAAAAAAAA////////738"
+				],
+				[
+					22,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAFsLAAAAAAAAXAsAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABbCwAAAAAAAFsLAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					23,
+					1,
+					"remove_final_newlines",
+					null,
+					"AQAAAGYWAAAAAAAAZhYAAAAAAAABAAAACg",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABcCwAAAAAAAFwLAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		},
+		{
+			"contents": " _______________________________________ \n/ Machine-Independent, adj.:            \\\n|                                       |\n\\ Does not run on any existing machine. /\n --------------------------------------- \n        \\   ^__^\n         \\  (oo)\\_______\n            (__)\\       )\\/\\\n                ||----w |\n                ||     ||\n[0:59:21::alex@warpcore:nim/nim_fetchweather]$>",
+			"settings":
+			{
+				"buffer_size": 380,
+				"line_ending": "Unix",
+				"name": "zsh",
+				"scratch": true
+			},
+			"undo_stack":
+			[
+				[
+					3,
+					3,
+					"terminus_render",
+					null,
+					"OwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAgAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAwAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABQAAAAAAAAAAAAAABQAAAAAAAAAFAAAAAAAAAAAAAAAFAAAAAAAAAAYAAAAAAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAAAAAABgAAAAAAAAAHAAAAAAAAAAAAAAAHAAAAAAAAAAcAAAAAAAAAAAAAAAcAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAkAAAAAAAAAAAAAAAkAAAAAAAAACQAAAAAAAAAAAAAACQAAAAAAAAAKAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAAAAAAkAAAAAAAAACQAAAAAAAAABAAAACggAAAAAAAAACAAAAAAAAAABAAAACgcAAAAAAAAABwAAAAAAAAABAAAACgYAAAAAAAAABgAAAAAAAAABAAAACgUAAAAAAAAABQAAAAAAAAABAAAACgQAAAAAAAAABAAAAAAAAAABAAAACgMAAAAAAAAAAwAAAAAAAAABAAAACgIAAAAAAAAAAgAAAAAAAAABAAAACgEAAAAAAAAAAQAAAAAAAAABAAAACgAAAAAAAAAAAAAAAAAAAAABAAAACgAAAAAAAAAAKAAAAAAAAAAAAAAAKAAAAAAAAAApAAAAAAAAAAAAAAApAAAAAAAAACoAAAAAAAAAAAAAACoAAAAAAAAAUwAAAAAAAAAAAAAAUwAAAAAAAABUAAAAAAAAAAAAAABUAAAAAAAAAH0AAAAAAAAAAAAAAH0AAAAAAAAAfgAAAAAAAAAAAAAAfgAAAAAAAACnAAAAAAAAAAAAAACnAAAAAAAAAKgAAAAAAAAAAAAAAKgAAAAAAAAA0AAAAAAAAAAAAAAA0AAAAAAAAADRAAAAAAAAAAAAAADRAAAAAAAAANIAAAAAAAAAAAAAANIAAAAAAAAA4gAAAAAAAAAAAAAA4gAAAAAAAADjAAAAAAAAAAAAAADjAAAAAAAAAPsAAAAAAAAAAAAAAPsAAAAAAAAA/AAAAAAAAAAAAAAA/AAAAAAAAAAYAQAAAAAAAAAAAAAYAQAAAAAAABkBAAAAAAAAAAAAABkBAAAAAAAAMgEAAAAAAAAAAAAAMgEAAAAAAAAzAQAAAAAAAAAAAAAzAQAAAAAAAEwBAAAAAAAAAAAAAEwBAAAAAAAATQEAAAAAAAAAAAAATQEAAAAAAABNAQAAAAAAAAAAAABNAQAAAAAAANMBAAAAAAAAAAAAAE0BAAAAAAAATQEAAAAAAACGAAAAICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNAQAAAAAAAHwBAAAAAAAAAAAAAHwBAAAAAAAA0wEAAAAAAAAAAAAAfAEAAAAAAAB8AQAAAAAAAFcAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					5,
+					2,
+					"terminus_render",
+					null,
+					"HgAAAAAAAAAAAAAAKAAAAAAAAAApAAAAIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyAoAAAAAAAAACkAAAAAAAAAAAAAACoAAAAAAAAAUwAAAAAAAAApAAAALyBNYWNoaW5lLUluZGVwZW5kZW50LCBhZGouOiAgICAgICAgICAgIFxUAAAAAAAAAH0AAAAAAAAAKQAAAHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8fgAAAAAAAACnAAAAAAAAACkAAABcIERvZXMgbm90IHJ1biBvbiBhbnkgZXhpc3RpbmcgbWFjaGluZS4gL6gAAAAAAAAA0AAAAAAAAAApAAAAIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDQAAAAAAAAANEAAAAAAAAAAAAAANIAAAAAAAAA4gAAAAAAAAAQAAAAICAgICAgICBcICAgXl9fXuMAAAAAAAAA+wAAAAAAAAAYAAAAICAgICAgICAgXCAgKG9vKVxfX19fX19f/AAAAAAAAAAYAQAAAAAAABwAAAAgICAgICAgICAgICAoX18pXCAgICAgICApXC9cGQEAAAAAAAAyAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwtLS0tdyB8MwEAAAAAAABMAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwgICAgIHx8TQEAAAAAAAB8AQAAAAAAAC8AAABbMDo1ODowMTo6YWxleEB3YXJwY29yZTpuaW0vbmltX2ZldGNod2VhdGhlcl0kPnwBAAAAAAAA0wEAAAAAAAAAAAAA0wEAAAAAAADUAQAAAAAAAAAAAADUAQAAAAAAANQBAAAAAAAAAAAAANQBAAAAAAAA1QEAAAAAAAAAAAAA1QEAAAAAAADVAQAAAAAAAAAAAADUAQAAAAAAANQBAAAAAAAAAQAAAArTAQAAAAAAANMBAAAAAAAAAQAAAAp8AQAAAAAAAHwBAAAAAAAAVwAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE0BAAAAAAAAfAEAAAAAAAAvAAAAWzA6NTg6MDE6OmFsZXhAd2FycGNvcmU6bmltL25pbV9mZXRjaHdlYXRoZXJdJD58AQAAAAAAANMBAAAAAAAAAAAAANMBAAAAAAAA1AEAAAAAAAAAAAAA1AEAAAAAAADUAQAAAAAAAAAAAADUAQAAAAAAANUBAAAAAAAAAAAAANUBAAAAAAAA1QEAAAAAAAAAAAAA1AEAAAAAAADUAQAAAAAAAAEAAAAK0wEAAAAAAADTAQAAAAAAAAEAAAAKfAEAAAAAAAB8AQAAAAAAAFcAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAB8AQAAAAAAAHwBAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					7,
+					2,
+					"terminus_render",
+					null,
+					"EgAAAAAAAAAAAAAAKAAAAAAAAAApAAAAIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyAoAAAAAAAAACkAAAAAAAAAAAAAACoAAAAAAAAAUwAAAAAAAAApAAAALyBNYWNoaW5lLUluZGVwZW5kZW50LCBhZGouOiAgICAgICAgICAgIFxUAAAAAAAAAH0AAAAAAAAAKQAAAHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8fgAAAAAAAACnAAAAAAAAACkAAABcIERvZXMgbm90IHJ1biBvbiBhbnkgZXhpc3RpbmcgbWFjaGluZS4gL6gAAAAAAAAA0AAAAAAAAAApAAAAIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDQAAAAAAAAANEAAAAAAAAAAAAAANIAAAAAAAAA4gAAAAAAAAAQAAAAICAgICAgICBcICAgXl9fXuMAAAAAAAAA+wAAAAAAAAAYAAAAICAgICAgICAgXCAgKG9vKVxfX19fX19f/AAAAAAAAAAYAQAAAAAAABwAAAAgICAgICAgICAgICAoX18pXCAgICAgICApXC9cGQEAAAAAAAAyAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwtLS0tdyB8MwEAAAAAAABMAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwgICAgIHx8TQEAAAAAAAB8AQAAAAAAAC8AAABbMDo1ODowNTo6YWxleEB3YXJwY29yZTpuaW0vbmltX2ZldGNod2VhdGhlcl0kPnwBAAAAAAAA0wEAAAAAAAAAAAAAfAEAAAAAAAB8AQAAAAAAAFcAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNAQAAAAAAAHwBAAAAAAAALwAAAFswOjU4OjA1OjphbGV4QHdhcnBjb3JlOm5pbS9uaW1fZmV0Y2h3ZWF0aGVyXSQ+fAEAAAAAAADUAQAAAAAAAAAAAAB8AQAAAAAAAHwBAAAAAAAAWAAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAB8AQAAAAAAAHwBAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					9,
+					2,
+					"terminus_render",
+					null,
+					"HgAAAAAAAAAAAAAAKAAAAAAAAAApAAAAIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyAoAAAAAAAAACkAAAAAAAAAAAAAACoAAAAAAAAAUwAAAAAAAAApAAAALyBNYWNoaW5lLUluZGVwZW5kZW50LCBhZGouOiAgICAgICAgICAgIFxUAAAAAAAAAH0AAAAAAAAAKQAAAHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8fgAAAAAAAACnAAAAAAAAACkAAABcIERvZXMgbm90IHJ1biBvbiBhbnkgZXhpc3RpbmcgbWFjaGluZS4gL6gAAAAAAAAA0AAAAAAAAAApAAAAIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDQAAAAAAAAANEAAAAAAAAAAAAAANIAAAAAAAAA4gAAAAAAAAAQAAAAICAgICAgICBcICAgXl9fXuMAAAAAAAAA+wAAAAAAAAAYAAAAICAgICAgICAgXCAgKG9vKVxfX19fX19f/AAAAAAAAAAYAQAAAAAAABwAAAAgICAgICAgICAgICAoX18pXCAgICAgICApXC9cGQEAAAAAAAAyAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwtLS0tdyB8MwEAAAAAAABMAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwgICAgIHx8TQEAAAAAAAB8AQAAAAAAAC8AAABbMDo1OToxMzo6YWxleEB3YXJwY29yZTpuaW0vbmltX2ZldGNod2VhdGhlcl0kPnwBAAAAAAAA1AEAAAAAAAAAAAAA1AEAAAAAAADVAQAAAAAAAAAAAADVAQAAAAAAANUBAAAAAAAAAAAAANUBAAAAAAAA1gEAAAAAAAAAAAAA1gEAAAAAAADWAQAAAAAAAAAAAADVAQAAAAAAANUBAAAAAAAAAQAAAArUAQAAAAAAANQBAAAAAAAAAQAAAAp8AQAAAAAAAHwBAAAAAAAAWAAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNAQAAAAAAAHwBAAAAAAAALwAAAFswOjU5OjEzOjphbGV4QHdhcnBjb3JlOm5pbS9uaW1fZmV0Y2h3ZWF0aGVyXSQ+fAEAAAAAAADlAQAAAAAAAAAAAADlAQAAAAAAAOYBAAAAAAAAAAAAAOYBAAAAAAAA5gEAAAAAAAAAAAAA5gEAAAAAAADnAQAAAAAAAAAAAADnAQAAAAAAAOcBAAAAAAAAAAAAAOYBAAAAAAAA5gEAAAAAAAABAAAACuUBAAAAAAAA5QEAAAAAAAABAAAACnwBAAAAAAAAfAEAAAAAAABpAAAAICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAB8AQAAAAAAAHwBAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					11,
+					2,
+					"terminus_render",
+					null,
+					"HgAAAAAAAAAAAAAAKAAAAAAAAAApAAAAIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyAoAAAAAAAAACkAAAAAAAAAAAAAACoAAAAAAAAAUwAAAAAAAAApAAAALyBNYWNoaW5lLUluZGVwZW5kZW50LCBhZGouOiAgICAgICAgICAgIFxUAAAAAAAAAH0AAAAAAAAAKQAAAHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8fgAAAAAAAACnAAAAAAAAACkAAABcIERvZXMgbm90IHJ1biBvbiBhbnkgZXhpc3RpbmcgbWFjaGluZS4gL6gAAAAAAAAA0AAAAAAAAAApAAAAIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDQAAAAAAAAANEAAAAAAAAAAAAAANIAAAAAAAAA4gAAAAAAAAAQAAAAICAgICAgICBcICAgXl9fXuMAAAAAAAAA+wAAAAAAAAAYAAAAICAgICAgICAgXCAgKG9vKVxfX19fX19f/AAAAAAAAAAYAQAAAAAAABwAAAAgICAgICAgICAgICAoX18pXCAgICAgICApXC9cGQEAAAAAAAAyAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwtLS0tdyB8MwEAAAAAAABMAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwgICAgIHx8TQEAAAAAAAB8AQAAAAAAAC8AAABbMDo1OToyMDo6YWxleEB3YXJwY29yZTpuaW0vbmltX2ZldGNod2VhdGhlcl0kPnwBAAAAAAAA5QEAAAAAAAAAAAAA5QEAAAAAAADmAQAAAAAAAAAAAADmAQAAAAAAAOYBAAAAAAAAAAAAAOYBAAAAAAAA5wEAAAAAAAAAAAAA5wEAAAAAAADnAQAAAAAAAAAAAADmAQAAAAAAAOYBAAAAAAAAAQAAAArlAQAAAAAAAOUBAAAAAAAAAQAAAAp8AQAAAAAAAHwBAAAAAAAAaQAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE0BAAAAAAAAfAEAAAAAAAAvAAAAWzA6NTk6MjA6OmFsZXhAd2FycGNvcmU6bmltL25pbV9mZXRjaHdlYXRoZXJdJD58AQAAAAAAAOUBAAAAAAAAAAAAAOUBAAAAAAAA5gEAAAAAAAAAAAAA5gEAAAAAAADmAQAAAAAAAAAAAADmAQAAAAAAAOcBAAAAAAAAAAAAAOcBAAAAAAAA5wEAAAAAAAAAAAAA5gEAAAAAAADmAQAAAAAAAAEAAAAK5QEAAAAAAADlAQAAAAAAAAEAAAAKfAEAAAAAAAB8AQAAAAAAAGkAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAB8AQAAAAAAAHwBAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"terminus tab",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"upgrad",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"install p",
+				"Package Control: Install Package"
+			],
+			[
+				"disable",
+				"Package Control: Disable Package"
+			],
+			[
+				"resourc",
+				"PackageResourceViewer: Extract Package"
+			],
+			[
+				"package",
+				"Package Control: List Packages"
+			],
+			[
+				"nim",
+				"SublimeNim: (Nimble) Check that the .nimble file is valid"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"sublimen",
+				"Preferences: SublimeNim Settings"
+			],
+			[
+				"term",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"packa ad",
+				"Package Control: Add Repository"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"terminu",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"termin",
+				"Terminus: Open Default Shell in Panel"
+			],
+			[
+				"lsp goto",
+				"LSP: Goto Symbol In Project"
+			],
+			[
+				"terminus",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"shell",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"lsp dar",
+				"Preferences: LSP-Dart Settings"
+			],
+			[
+				"lsp-dar",
+				"Preferences: LSP-Dart Settings"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"upgr",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"lsp dart",
+				"Preferences: LSP-Dart Settings"
+			],
+			[
+				"upgrade",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"upgra",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"terminus ope",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"terminus op",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"termi",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"dis",
+				"Package Control: Disable Package"
+			],
+			[
+				"updg",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"Snippet: qu",
+				"Snippet: quoted"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"Snippet: ",
+				"Snippet: cquoted"
+			],
+			[
+				"terminusop",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"upgrd",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"en",
+				"Package Control: Enable Package"
+			],
+			[
+				"snicq",
+				"Snippet: cquoted"
+			],
+			[
+				"reind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"sni",
+				"Snippet: liquid capture"
+			],
+			[
+				"Snippet: sni",
+				"Snippet: liquid if"
+			],
+			[
+				"Snippet: quo",
+				"Snippet: cquoted"
+			],
+			[
+				"Snippet: sty",
+				"Snippet: spanstyle"
+			],
+			[
+				"Snippet: sp",
+				"Snippet: spanstyle"
+			],
+			[
+				"snip",
+				"Snippet: spanstyle"
+			],
+			[
+				"snipst",
+				"Snippet: spanstyle"
+			],
+			[
+				"uggr",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"cq",
+				"Snippet: cquoted"
+			],
+			[
+				"sn",
+				"Snippet: cquoted"
+			],
+			[
+				"resou",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"ope",
+				"Favorite Files: Open File(s)"
+			],
+			[
+				"open",
+				"Favorite Files: Open File(s)"
+			],
+			[
+				"favor",
+				"Favorite Files: Add File(s)"
+			],
+			[
+				"favo",
+				"Favorite Files: Add File(s)"
+			],
+			[
+				"add",
+				"Favorite Files: Add File(s)"
+			],
+			[
+				"fav",
+				"Favorite Files: Open File(s)"
+			],
+			[
+				"ena",
+				"Package Control: Enable Package"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"enab",
+				"Package Control: Enable Package"
+			],
+			[
+				"disp",
+				"Package Control: Disable Package"
+			],
+			[
+				"list ",
+				"Package Control: List Packages"
+			],
+			[
+				"open fi",
+				"Favorite Files: Open File(s)"
+			],
+			[
+				"add fi",
+				"Favorite Files: Add File(s)"
+			],
+			[
+				"todo",
+				"TodoReview: Open Files"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"upg",
+				"Package Control: List Unmanaged Packages"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"goto",
+				"SublimeBookmarks: Goto Bookmark"
+			],
+			[
+				"rei",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"editorcon",
+				"Set Syntax: EditorConfig"
+			],
+			[
+				"terminus l",
+				"Terminus: List Shells"
+			],
+			[
+				"termini",
+				"Terminus: List Shells"
+			],
+			[
+				"tab filter",
+				"Tab Filter (Active Group)"
+			],
+			[
+				"enble",
+				"Package Control: Enable Package"
+			],
+			[
+				"book",
+				"SublimeBookmarks: Goto Bookmark"
+			],
+			[
+				"go",
+				"SublimeBookmarks: Goto Bookmark"
+			],
+			[
+				"list p",
+				"Package Control: List Packages"
+			],
+			[
+				"boo",
+				"SublimeBookmarks: Show Bookmarks Only In Current Project "
+			],
+			[
+				"bookm",
+				"SublimeBookmarks: Show All Bookmarks "
+			],
+			[
+				"sublime",
+				"SublimeBookmarks: Toggle Current Line"
+			],
+			[
+				"sublimeboo",
+				"SublimeBookmarks: Goto Bookmark"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"sublimebook",
+				"SublimeBookmarks: Goto Bookmark"
+			],
+			[
+				"ter",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"remove pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"lsp",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"package control install",
+				"Package Control: Install Package"
+			],
+			[
+				"package control",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
+				"terminus the",
+				"Terminus Utilities: Select Theme"
+			],
+			[
+				"terminus open",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"auto",
+				"Auto Wrap: Toggle"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"packagere",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"packageer",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"packageres",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"dict",
+				"View: Toggle Distraction Free"
+			],
+			[
+				"disabl",
+				"Package Control: Disable Package"
+			],
+			[
+				"packaged",
+				"PackageDev: Edit Current Color Scheme"
+			],
+			[
+				"cont",
+				"Package Control: Install Package"
+			],
+			[
+				"control",
+				"Package Control: Remove Package"
+			],
+			[
+				"dkit",
+				"DKit: Restart DCD Autocompletion Server"
+			],
+			[
+				"contr",
+				"Package Control: Remove Package"
+			],
+			[
+				"contro",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 251.0,
+		"history":
+		[
+			"view.clear_undo_stack()",
+			"insert_datetime",
+			"InsertDatetime",
+			"insert_datetime",
+			"sublime.log_commands(False)",
+			"view.settings().get(\"dictionary\")",
+			"view.user_settings().get(\"dictionary\")",
+			"view.settings().get(\"dictionary\")",
+			"sublime.log_commands(True)",
+			"view.settings().get(\"dictionary\")"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/data/mnt/shared/data/code/nim/nim_fetchweather",
+		"/data/mnt/shared/data/code/nim/nim_fetchweather/src"
+	],
+	"file_history":
+	[
+		"/data/mnt/shared/data/code/nim/nim_testproject/src/utils/tables.nim",
+		"/home/alex/.config/katerc",
+		"/home/alex/.config/Kvantum/ArcDark#/ArcDark#.kvconfig",
+		"/home/alex/.config/Kvantum/Mojave-dark/Mojave-dark.kvconfig",
+		"/home/alex/.config/Kvantum/KvArcDark#/KvArcDark#.kvconfig",
+		"/data/mnt/shared/data/code/nim/nim_testproject/src/utils/objects.nim",
+		"/data/mnt/shared/data/code/nim/nim_testproject/src/nim_testproject.nim",
+		"/data/mnt/shared/data/code/nim/nim_testproject/src/threads.nim",
+		"/home/alex/.choosenim/toolchains/nim-#devel/lib/pure/parsecfg.nim",
+		"/data/mnt/shared/data/code/nim/nim_testproject/src/utils/utils.nim",
+		"/data/mnt/shared/data/code/nim/nim_testproject/src/context.nim",
+		"/data/mnt/shared/data/code/nim/nim_testproject/nim_testproject.nimble",
+		"/home/alex/.vim/init.vim",
+		"/home/alex/.vim/plugin/buffet.vim",
+		"/data/mnt/shared/data/code/nim/nim_testproject/src/benchmarks/fasta.nim",
+		"/home/alex/.config/sublime-text-3/Packages/SublimeNim/SublimeNim.py",
+		"/home/alex/.choosenim/toolchains/nim-1.6.6/config/nim.cfg",
+		"/home/alex/.choosenim/toolchains/nim-1.6.6/config/config.nims",
+		"/data/mnt/shared/data/code/nim/nim_testproject/src/foo.nim",
+		"/home/alex/.config/JetBrains/CLion2021.2/clion.jdk.16",
+		"/mnt/shared/data/code/dart/dart_testproject/lib/testproject.dart",
+		"/mnt/shared/data/code/dart/dart_testproject/pubspec.yaml",
+		"/home/alex/.thunderbird/cvkasgqm.default/chrome/userChrome.css",
+		"/home/alex/.local/share/themes/Arc-Dark-Grey/gtk-3.0/gtk.css",
+		"/home/alex/.config/JetBrains/CLion2021.2/clion.jdk.17",
+		"/mnt/shared/data/code/dart/dart_testproject/lib/utils/isolate_demo.dart",
+		"/mnt/shared/data/code/dart/dart_testproject/lib/utils/utils.dart",
+		"/mnt/shared/data/code/dart/dart_testproject/lib/foo/foo.dart",
+		"/mnt/shared/data/code/dart/testproject/lib/testproject.dart",
+		"/mnt/shared/data/code/dart/testproject/lib/foo/foo.dart",
+		"/data/mnt/shared/data/code/dart/testproject/.git/config",
+		"/mnt/shared/data/code/dart/testproject/pubspec.yaml",
+		"/mnt/shared/data/code/dart/testproject/analysis_options.yaml",
+		"/mnt/shared/data/code/dart/testproject/lib/foo.dart",
+		"/data/opt/flutter/bin/cache/dart-sdk/lib/math/point.dart",
+		"/mnt/shared/data/code/flutter/testapp/lib/main.dart",
+		"/home/alex/Downloads/Age: 50 years young",
+		"/mnt/shared/data/code/flutter/testapp/linux/my_application.cc",
+		"/home/alex/Dropbox/Docs/scratchpad.md",
+		"/mnt/shared/data/testpage/_plugins/foo.dart",
+		"/home/alex/Dropbox/SUBLIME TEXT/config/sublime-text-3/Packages/User/Dart - Plugin Settings.sublime-settings",
+		"/mnt/shared/data/testpage/_plugins/foobar.f90",
+		"/mnt/shared/data/testpage/_plugins/foobar.f",
+		"/home/alex/Downloads/virXEve2.html",
+		"/home/alex/.thunderbird/cvkasgqm.default/prefs.js",
+		"/tmp/crontab.KqqMK8",
+		"/lib/systemd/system-sleep/wintvreset",
+		"/home/alex/.zshrc",
+		"/mnt/shared/data/testpage/_plugins/img.rb",
+		"/mnt/shared/data/testpage/_sass/theme-dark.scss",
+		"/home/alex/.config/kmail2rc",
+		"/mnt/shared/data/testpage/_plugins/sep.rb",
+		"/home/alex/.zshrc.pre-oh-my-zsh",
+		"/home/alex/.local/share/akonadi/mysql.conf",
+		"/etc/exim/exim.conf",
+		"/home/alex/.config/autostart/tracker-miner-fs-3.desktop",
+		"/etc/mail/virtusertable",
+		"/etc/mail/sendmail.mc",
+		"/etc/mail/virtusertable.db",
+		"/usr/share/applications/org.kde.kontact.desktop",
+		"/home/alex/.config/kmail.qss",
+		"/tmp/crontab.ZE5rCH",
+		"/home/alex/.config/pipewire/pipewire-pulse.conf",
+		"/home/alex/.local/share/aurorae/themes/Mojave-Dark/Mojave-Darkrc",
+		"/home/alex/.local/share/aurorae/themes/PlasmOSXDark/PlasmOSXDarkrc",
+		"/etc/sddm.conf.d/kde_settings.conf",
+		"/opt/libreoffice7.3/share/xdg/calc.desktop",
+		"/opt/libreoffice7.3/share/xdg/draw.desktop",
+		"/opt/libreoffice7.3/share/xdg/startcenter.desktop",
+		"/opt/libreoffice7.3/share/xdg/writer.desktop",
+		"/opt/libreoffice7.3/share/xdg/math.desktop",
+		"/opt/libreoffice7.3/share/xdg/impress.desktop",
+		"/home/alex/.local/share/applications/writer.desktop",
+		"/opt/libreoffice7.3/share/xdg/base.desktop",
+		"/home/alex/.local/share/CMakeTools/cmake-tools-kits.json",
+		"/home/alex/.config/plasma-locale-settings.sh",
+		"/home/alex/.config/plasma-workspace/env/qpa.sh",
+		"/home/alex/.config/plasma-org.kde.plasma.desktop-appletsrc",
+		"/home/alex/.config/autostart/blueman.desktop",
+		"/home/alex/.config/Kvantum/MateriaDark#/MateriaDark#.kvconfig",
+		"/home/alex/.config/konsolerc",
+		"/home/alex/.local/share/applications/power.desktop",
+		"/home/alex/Desktop/Dreck",
+		"/home/alex/.local/share/plasma/desktoptheme/breeze-black/colors",
+		"/home/alex/.config/autostart/geoclue-demo-agent.desktop",
+		"/home/alex/.config/plasma-localerc",
+		"/home/alex/.config/plasmarc",
+		"/home/alex/.config/Kvantum/MateriaMedium#/MateriaMedium#.kvconfig",
+		"/home/alex/.config/Kvantum/MateriaMedium/MateriaDark.kvconfig",
+		"/home/alex/.local/share/applications/sublime_text.desktop",
+		"/home/alex/.local/share/plasma/plasmoids/org.kde.plasma.advancedradio/contents/ui/main.qml",
+		"/home/alex/.local/share/plasma/plasmoids/org.kde.plasma.advancedradio/contents/config/main.xml",
+		"/home/alex/.local/share/plasma/plasmoids/org.kde.plasma.advancedradio/contents/config/config.qml",
+		"/mnt/shared/data/testpage/_sass/theme-light.scss",
+		"/home/alex/.local/share/applications/Thunderbird.desktop",
+		"/home/alex/.local/share/plasma/desktoptheme/Arc-Dark/colors",
+		"/home/alex/.local/share/plasma/desktoptheme/Materia/colors",
+		"/home/alex/.config/gtk-3.0/gtk.css",
+		"/home/alex/.config/kdeglobals",
+		"/home/alex/.local/share/plasma/desktoptheme/Gently/colors",
+		"/home/alex/Downloads/breezesettingsdata.kcfg",
+		"/home/alex/.mozilla/firefox/8b9yhi6l.default/chrome/userChrome.css",
+		"/home/alex/.config/autostart/conky.desktop",
+		"/home/alex/.config/plasmashellrc",
+		"/home/alex/.config/qtcurve/stylerc",
+		"/home/alex/.config/breezerc",
+		"/home/alex/.config/libreoffice/4/user/autotext/mytexts.bau",
+		"/etc/nginx/vhosts.d/home.conf",
+		"/home/SteamLibrary/steamapps/common/Counter-Strike Global Offensive/csgo_linux64",
+		"/spare/SteamLibrary/steamapps/common/Black Mesa/bms/cfg/autoexec.cfg",
+		"/home/alex/.local/share/applications/firefox-esr.desktop",
+		"/home/alex/.config/mpv/mpv.conf",
+		"/mnt/shared/data/testpage/_sass/font-iosevka-ss11.scss",
+		"/opt/firefox/firefox",
+		"/home/alex/.mozilla/firefox/8b9yhi6l.default/chrome/chrome/userChrome.css",
+		"/home/alex/.local/share/applications/steam.desktop",
+		"/home/alex/.mozilla/firefox/8b9yhi6l.default/chrome/userChrome.css.ARCLIGHT",
+		"/opt/st4/crack.sh",
+		"/home/alex/.weather/conkyrc",
+		"/home/alex/.tin/tinrc",
+		"/home/alex/.fltk/fltk.org/fltk.prefs",
+		"/mnt/shared/data/testpage/_includes/site_header.html",
+		"/mnt/shared/data/testpage/_posts/de/2021-12-23-hustinettenbaer.md",
+		"/mnt/shared/data/testpage/_plugins/video.rb",
+		"/mnt/shared/data/testpage/_sass/theme-retro.scss",
+		"/mnt/shared/data/testpage/assets/css/style.scss",
+		"/mnt/shared/data/testpage/_sass/font-breve-sans.scss",
+		"/home/alex/.thunderbird/cvkasgqm.default/chrome/arkdark/userChrome.css"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 107.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/context.nim",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5734,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1792,
+								1792
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ". ",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "nimlsp"
+								}
+							],
+							"bs_sintax": "nim",
+							"buffer_scroll_name": "0ffc20bf",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": false,
+							"incomplete_sync": null,
+							"lsp_active": true,
+							"lsp_hover_provider_count": 2,
+							"lsp_uri": "file:///data/mnt/shared/data/code/nim/nim_fetchweather/src/context.nim",
+							"remote_loading": false,
+							"show_definitions": false,
+							"spell_check": false,
+							"synced": false,
+							"syntax": "Packages/NimLime/Syntaxes/Nim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 380,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								380,
+								380
+							]
+						],
+						"settings":
+						{
+							"__vi_external_disable": true,
+							"auto_complete": false,
+							"auto_complete_commit_on_tab": false,
+							"bracket_highlighter.clone_locations":
+							{
+							},
+							"bracket_highlighter.ignore": true,
+							"bs_sintax": "plain text",
+							"color_scheme": "Terminus.hidden-color-scheme",
+							"draw_centered": false,
+							"draw_indent_guides": false,
+							"draw_unicode_white_space": false,
+							"draw_white_space": "none",
+							"gutter": false,
+							"highlight_line": false,
+							"incomplete_sync": null,
+							"is_widget": true,
+							"lsp_uri": "buffer://sublime/83",
+							"result_base_dir": "/data/mnt/shared/data/code/nim/nim_fetchweather",
+							"result_file_regex": null,
+							"result_line_regex": null,
+							"rulers":
+							[
+								80,
+								100,
+								120,
+								500
+							],
+							"scroll_past_end": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"terminus.highlight_counter": 8,
+							"terminus_view": true,
+							"terminus_view.args":
+							{
+								"auto_close": true,
+								"cancellable": false,
+								"cmd":
+								[
+									"zsh",
+									"-i",
+									"-l"
+								],
+								"cwd": "/data/mnt/shared/data/code/nim/nim_fetchweather",
+								"default_title": "zsh",
+								"env":
+								{
+									"LANG": "en_US.UTF-8",
+									"TERM": "linux",
+									"TERMINUS_SUBLIME": "1",
+									"TERM_PROGRAM": "Terminus-Sublime"
+								},
+								"file_regex": null,
+								"line_regex": null,
+								"panel_name": "Terminus",
+								"show_in_panel": null,
+								"tag": null,
+								"timeit": false,
+								"title": null
+							},
+							"terminus_view.cancellable": false,
+							"terminus_view.key.ctrl+k": true,
+							"terminus_view.key.ctrl+p": true,
+							"terminus_view.natural_keyboard": false,
+							"terminus_view.tag": null,
+							"terminus_view.viewport_y": 0.0,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 41.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.778188539741,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SFTP":
+	{
+		"height": 200.0
+	},
+	"output.compilation":
+	{
+		"height": 114.0
+	},
+	"output.diagnostics":
+	{
+		"height": 139.0
+	},
+	"output.exec":
+	{
+		"height": 121.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.language servers":
+	{
+		"height": 256.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.references":
+	{
+		"height": 260.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "nim_fetchweather.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"cust",
+				"_sass/customizations.scss"
+			],
+			[
+				"them",
+				"_sass/theme.scss"
+			],
+			[
+				"search",
+				"assets/js/search.js"
+			],
+			[
+				"foot",
+				"assets/js/footerscripts.js"
+			],
+			[
+				"sear",
+				"search.html"
+			],
+			[
+				"custo",
+				"_sass/customizations.scss"
+			],
+			[
+				"custom",
+				"_sass/customizations.scss"
+			],
+			[
+				"typ",
+				"_sass/typography.scss"
+			],
+			[
+				"font-war",
+				"_sass/font-warnock.scss"
+			],
+			[
+				"theme",
+				"_sass/theme-light.scss"
+			],
+			[
+				"menu.sc",
+				"_sass/menu.scss"
+			],
+			[
+				"witz",
+				"_posts/de/2021-10-21-bloede-witze-geloggt.md"
+			],
+			[
+				"klima",
+				"_posts/de/2021-08-13-klimawandel.md"
+			],
+			[
+				"witze",
+				"_posts/de/2021-10-21-bloede-witze-geloggt.md"
+			],
+			[
+				"kick",
+				"_posts/memes/2021-11-19-kickl-hat-besuch.md"
+			],
+			[
+				"font-t",
+				"_help/font-test.md"
+			],
+			[
+				"foo",
+				"assets/js/footerscripts.js"
+			],
+			[
+				"texas",
+				"_posts/en/2018-05-28-foreigners-travelguide-to-texas.md"
+			],
+			[
+				"down",
+				"_includes/download.html"
+			],
+			[
+				"dark",
+				"_sass/theme-dark.scss"
+			],
+			[
+				"cus",
+				"_sass/customizations.scss"
+			],
+			[
+				"cu",
+				"_sass/customizations.scss"
+			],
+			[
+				"conten",
+				"_sass/content.scss"
+			],
+			[
+				"ty",
+				"_sass/typography.scss"
+			],
+			[
+				"sty",
+				"assets/css/style.scss"
+			],
+			[
+				"cont",
+				"_sass/content.scss"
+			],
+			[
+				"cuso",
+				"_sass/customizations.scss"
+			],
+			[
+				"footer",
+				"assets/js/footerscripts.js"
+			],
+			[
+				"header",
+				"_includes/post_header_min.html"
+			],
+			[
+				"content",
+				"_sass/content.scss"
+			],
+			[
+				"klim",
+				"_posts/de/2021-08-13-klimawandel.md"
+			],
+			[
+				"wit",
+				"_posts/de/2021-10-21-bloede-witze-geloggt.md"
+			],
+			[
+				"site",
+				"_includes/site_header.html"
+			],
+			[
+				"media",
+				"_sass/mediaqueries.scss"
+			],
+			[
+				"",
+				"_posts/de/2021-10-30-benzinpreise.md"
+			],
+			[
+				"si",
+				"_includes/site_header.html"
+			],
+			[
+				"theme.c",
+				"_sass/theme.scss"
+			],
+			[
+				".edito",
+				".editorconfig"
+			],
+			[
+				"kl",
+				"_posts/de/2021-08-13-klimawandel.md"
+			],
+			[
+				"sit",
+				"_includes/site_header.html"
+			],
+			[
+				"pagina",
+				"_includes/paginator_body.html"
+			],
+			[
+				"kli",
+				"_posts/de/2021-08-13-klimawandel.md"
+			],
+			[
+				"fichte",
+				"_posts/memes/2021-09-12-fichte.md"
+			],
+			[
+				"isso",
+				"_sass/isso.scss"
+			],
+			[
+				"tweet",
+				"_posts/en/2021-10-21-jekyll-tweet-embed-tag.md"
+			],
+			[
+				"klm",
+				"_posts/de/2021-08-13-klimawandel.md"
+			],
+			[
+				".md",
+				"_drafts/2017-10-09-visiting-mahon.md"
+			],
+			[
+				"layout",
+				"_layouts/no_sidebar.html"
+			],
+			[
+				"site_he",
+				"_includes/site_header.html"
+			],
+			[
+				"theme.",
+				"_sass/theme.scss"
+			],
+			[
+				"gfx",
+				"_includes/gfx/FD.html"
+			],
+			[
+				"post",
+				"_includes/post_header_min.html"
+			],
+			[
+				"post_he",
+				"_includes/post_header_min.html"
+			],
+			[
+				"theme.s",
+				"_sass/theme.scss"
+			],
+			[
+				"post_hea",
+				"_includes/post_header_min.html"
+			],
+			[
+				"footersc",
+				"assets/js/footerscripts.js"
+			],
+			[
+				"img.",
+				"_plugins/img.rb"
+			],
+			[
+				".rb",
+				"_plugins/img.rb"
+			],
+			[
+				"paginator_bod",
+				"_includes/paginator_body_head_min.html"
+			],
+			[
+				"index.html",
+				"blog/index.html"
+			],
+			[
+				"wittz",
+				"_posts/de/2021-10-21-bloede-witze-geloggt.md"
+			],
+			[
+				"conte",
+				"_sass/content.scss"
+			],
+			[
+				"content.",
+				"_sass/content.scss"
+			],
+			[
+				"footer_sc",
+				"_includes/footer_scripts.html"
+			],
+			[
+				"theme.sc",
+				"_sass/theme.scss"
+			],
+			[
+				"footers",
+				"assets/js/footerscripts.js"
+			],
+			[
+				"lunr",
+				"_posts/en/2021-09-01-lunrjs-for-jekyll.md"
+			],
+			[
+				"se",
+				"search.html"
+			],
+			[
+				"inde",
+				"index.markdown"
+			],
+			[
+				"sea",
+				"search.html"
+			],
+			[
+				"index.",
+				"index.markdown"
+			],
+			[
+				"theme-",
+				"_sass/theme-light.scss"
+			],
+			[
+				"comm",
+				"_includes/comment_fragment.html"
+			],
+			[
+				"defs",
+				"_includes/defs.md"
+			],
+			[
+				"defs.",
+				"_includes/defs.md"
+			],
+			[
+				"abou",
+				"_help/about.markdown"
+			],
+			[
+				"index",
+				"index.markdown"
+			],
+			[
+				"priv",
+				"_help/privacy.md"
+			],
+			[
+				"faq",
+				"_help/sitefaq.md"
+			],
+			[
+				"about",
+				"_help/about.markdown"
+			],
+			[
+				"_cn",
+				"_config.yml"
+			],
+			[
+				"p",
+				"_help/privacy.md"
+			],
+			[
+				"pri",
+				"_help/privacy.md"
+			],
+			[
+				"index.ma",
+				"index.markdown"
+			],
+			[
+				"site_hea",
+				"_includes/site_header.html"
+			],
+			[
+				"seac",
+				"search.html"
+			],
+			[
+				"_config",
+				"_config.yml"
+			],
+			[
+				"font-tisa",
+				"_sass/font-ff-tisa.scss"
+			],
+			[
+				"font-tis",
+				"_sass/font-ff-tisa.scss"
+			],
+			[
+				"searc",
+				"assets/js/search.js"
+			],
+			[
+				"search.js",
+				"assets/js/search.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"/mnt/shared/data/code/fetchweather/fetchweather.sublime-project"
+			],
+			[
+				"lea",
+				"/mnt/shared/data/go/src/leafutil/leafutil.sublime-project"
+			],
+			[
+				"lib",
+				"/mnt/shared/data/code/gh-playground/libobjc2/libobjc2.sublime-project"
+			]
+		],
+		"width": 662.0
+	},
+	"select_symbol":
+	{
+		"height": 325.0,
+		"last_filter": "iso",
+		"selected_items":
+		[
+			[
+				"iso",
+				"isolate_demo"
+			],
+			[
+				"",
+				"distance"
+			],
+			[
+				"main",
+				"main"
+			],
+			[
+				"h3",
+				"h3listheading"
+			],
+			[
+				"spanauth",
+				"divauthor, span.author"
+			],
+			[
+				"sidebar",
+				"sidebar_listheader"
+			],
+			[
+				"main-content p",
+				"main-content p, #main-content li, div.tabcontrol.body"
+			],
+			[
+				"content-wr",
+				"content-wrapper"
+			],
+			[
+				"lunr-",
+				"lilunr-searchresult"
+			],
+			[
+				"main-content h1",
+				"main-content h1:first-child"
+			],
+			[
+				"symbol",
+				"spantime_symbol:before"
+			],
+			[
+				"sym",
+				"spankey_symbol"
+			],
+			[
+				"metainfo",
+				"divmeta-info-container, div.download-info-container"
+			],
+			[
+				"meta-",
+				"divmeta-info-container"
+			],
+			[
+				"hide-on",
+				"ulmarkdown-toc, .hide-on-small"
+			],
+			[
+				"download",
+				"spandownload_symbol"
+			],
+			[
+				"meta-inco",
+				"divmeta-info-container"
+			],
+			[
+				"main-con",
+				"main-content"
+			],
+			[
+				"indent",
+				"smallindent"
+			],
+			[
+				"high",
+				"highlight"
+			],
+			[
+				"pre",
+				"prehighlight"
+			],
+			[
+				"highlight",
+				"highlight"
+			],
+			[
+				"padd",
+				"clearfix.padded"
+			],
+			[
+				"tool",
+				"divimg_tooltip.gallery"
+			],
+			[
+				"tooltip",
+				"divimg_tooltip p"
+			],
+			[
+				"ytco",
+				"divytcontainer"
+			],
+			[
+				"content-separ",
+				"hrcontent-separator.thin"
+			],
+			[
+				"content-sep",
+				"hrcontent-separator.thin"
+			],
+			[
+				"video-padd",
+				"divvideo-padded"
+			],
+			[
+				"ytconta",
+				"divytcontainer"
+			],
+			[
+				"content-s",
+				"hrcontent-separator.superthin"
+			],
+			[
+				"c_pl",
+				"c_pleft"
+			],
+			[
+				"lunr",
+				"lilunr-searchresult"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 367.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

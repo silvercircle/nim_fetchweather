@@ -26,7 +26,7 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
-import std/[json, parsecfg, times, os]
+import std/[json, times, os]
 import "../context"
 import "../utils/utils"
 
@@ -57,10 +57,10 @@ type DataPoint* = object
   precipitationTypeAsString*:                         string
   precipitationProbability*, precipitationIntensity*: float
   pressureSeaLevel*, humidity*, dewPoint*:            float
-  sunsetTimeAsString, sunriseTimeAsString,
+  sunsetTimeAsString*, sunriseTimeAsString*,
     windBearing*, windUnit*:                          string
   conditionAsString*:                                 string
-  uvIndex*:                                           int
+  uvIndex*:                                           float
   haveUVI*:                                           bool
 
 
@@ -69,16 +69,25 @@ type DataHandler* = ref object of RootObj
   daily*:           array[3, DailyForecast]
   currentResult*, forecastResult*: JsonNode
 
+# abstract methods, must be overridden
 method populateSnapshot*(this: DataHandler): bool {.base.} = true
 method readFromApi*(this: DataHandler): int {.base.} = -1
 method getCondition*(this: DataHandler, c: int): string {.base.} = "Clear"
 method getIcon(this: DataHandler): char {.base.} = 'c'
+method checkRawDataValidity*(this: DataHandler): bool {.base.} = false
+
+# this marks the json result valid or invalid
+method markJsonValid*(this: DataHandler, valid: bool = false): void {.base.} =
+  if valid:
+    this.currentResult["data"] = %* {"status": {"code": "success"}}
+    this.forecastResult = json.parseJson """{"data": {"status": {"code": "success"}}}"""
+  else:
+    this.currentResult["data"] = %* {"status": {"code": "failure"}}
+    this.forecastResult = json.parseJson """{"data": {"status": {"code": "failure"}}}"""
 
 method writeCache*(this: DataHandler, prefix: string): void {.base.} =
   let file_current = os.joinPath(CTX.dataDirPath, prefix & "_current.json")
   let file_forecast = os.joinPath(CTX.dataDirPath, prefix & "_forecast.json")
-  echo file_current
-  echo file_forecast
   writeFile(file_current, $this.currentResult)
   writeFile(file_forecast, $this.forecastResult)
 
@@ -111,7 +120,7 @@ method convertTemperature(this: DataHandler, val: float): float {.base.} =
     return (val * (9.0 / 5.0)) + 32.0;
   return val
 
-method outputTemperature(this: DataHandler, stream: File, val: float, addUnit: bool, format: cstring = ""): void =
+method outputTemperature(this: DataHandler, stream: File, val: float, addUnit: bool, format: cstring = ""): void {.base.} =
   # char unit[5] = "\xc2\xB0X";    // UTF-8!! c2b0 is the utf8 sequence for ° (degree symbol)
 
   var
@@ -132,6 +141,45 @@ method doOutput*(this: DataHandler, stream: File): void {.base.} =
     this.outputTemperature(stream, this.daily[i].temperatureMax, false)
     discard fprintf(stream, "%s\n", this.daily[i].weekDay)
 
-  discard fprintf(stream, "Humidity: %.1f\n", this.p.humidity);                               # 18
+  this.outputTemperature(stream, this.p.temperatureApparent, true)
+  this.outputTemperature(stream, this.p.dewPoint, true)
+
+  discard fprintf(stream, "Humidity: %.1f\n", this.p.humidity);                                         # 18
   discard fprintf(stream, (if CTX.cfg.pressure_unit == "hPa": "%.0f hPa\n" else: "%.2f InHg\n"),        # 19
            this.p.pressureSeaLevel)
+
+  discard fprintf(stream, "%.1f %s\n", this.p.windSpeed, CTX.cfg.wind_unit)                             # 20
+
+  if this.p.precipitationIntensity > 0:
+    discard fprintf(stream, "%s (%.1fmm/1h)\n", this.p.precipitationTypeAsString,
+            this.p.precipitationIntensity);                                                             # 21
+  else:
+    discard fprintf(stream, "PoP: %.0f%%\n", this.p.precipitationProbability);                          # 21
+
+  discard fprintf(stream, "%.1f %s\n", this.p.visibility, CTX.cfg.vis_unit)                             # 22
+  discard fprintf(stream, "%s\n", this.p.sunriseTimeAsString)                                           # 23
+  discard fprintf(stream, "%s\n", this.p.sunsetTimeAsString)                                            # 24
+  discard fprintf(stream, "%s\n", this.p.windBearing)                                                   # 25
+  discard fprintf(stream, "%s\n", this.p.timeRecordedAsText)                                            # 26
+
+  discard fprintf(stream, "%s", this.p.conditionAsString)                                               # 27
+  if this.p.cloudCover > 0:
+    discard fprintf(stream, " (%.0f%% cov.)\n", this.p.cloudCover)                                      # 28
+  else:
+    discard fprintf(stream, "\n")
+
+  discard fprintf(stream, "%s\n", this.p.timeZone)                                                      # 29
+  this.outputTemperature(stream, this.p.temperatureMin, true)
+  this.outputTemperature(stream, this.p.temperatureMax, true)
+
+  if this.p.haveUVI:
+    discard fprintf(stream, "UV: %.1f\n", this.p.uvIndex);
+  else:
+    discard fprintf(stream, " \n")
+
+  discard fprintf(stream, "** end data **\n")
+  discard fprintf(stream, "%.0f (Clouds)\n", this.p.cloudCover)
+  discard fprintf(stream, "%.0f (Cloudbase)\n", this.p.cloudBase)
+  discard fprintf(stream, "%.0f (Cloudceil)\n", this.p.cloudCeiling)
+  discard fprintf(stream, "%d (Moon)\n", this.p.moonPhase);
+

@@ -15,5 +15,5 @@ task release, "We just foo around":
     #exec("build/release/nim_fetchweather")
 
 task debug, "Debug build":
-    exec("nim compile  -o:build/debug/nim_fetchweather -r --threads:on --mm:arc --cc:gcc -d:debug --lineDir:on --debuginfo --debugger:native src/nim_fetchweather.nim")
+    exec("nim compile  -o:build/debug/nim_fetchweather -r --threads:on --mm:arc --cc:clang -d:debug --lineDir:on --debuginfo --debugger:native src/nim_fetchweather.nim")
     #exec("build/debug/nim_feathweather")

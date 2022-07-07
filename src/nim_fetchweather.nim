@@ -24,8 +24,8 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
-import std/[os, times, json]
-import context
+import std/[os, json, parseopt]
+import context, sql
 
 import data/[datahandler, datahandler_cc, datahandler_owm]
 
@@ -33,13 +33,16 @@ proc main(): cint
 when isMainModule:
   discard os.exitStatusLikeShell(main())
 
-proc run(dh: DataHandler): int =
+proc run(dh: var DataHandler): int =
   if dh.readFromApi() == 0:
     if dh.currentResult["data"]["status"]["code"].getStr() == "success" and
         dh.forecastResult["data"]["status"]["code"].getStr() == "success":
       if dh.populateSnapshot():
         dh.doOutput(stdout)
+        sql.writeSQL(data = dh)
         return 0
+      else:
+        return -1
     else:
       return -1
   else:
@@ -50,13 +53,38 @@ proc main(): cint =
   CTX.init()
   var
     data: DataHandler
-  let api = "OWM"
+    argCtr : int
+  # command line optinos allow some overriding settings in the cfg file
+
+  for kind, key, value in getOpt():
+    case kind:
+    of cmdArgument:
+      echo "Got arg ", argCtr, ": \"", key, "\""
+      argCtr.inc
+
+    of cmdLongOption, cmdShortOption:
+      case key:
+      of "api":
+        if value == "OWM" or value == "CC":
+          CTX.cfg.api = value
+      of "apikey":
+        if value.len != 0:
+          CTX.cfg.apikey = value
+      else:
+        echo "Unknown option: ", key
+
+    of cmdEnd:
+      discard
+
+  let api = CTX.cfg.api
 
   if api == "CC":
     data = DataHandler_CC()
-    discard run(data)
+    if run(data) != 0:
+      system.quit(-1)
   elif api == "OWM":
     data = DataHandler_OWM()
-    discard run(data)
+    if run(data) != 0:
+      system.quit(-1)
 
   system.quit(0)

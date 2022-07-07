@@ -26,9 +26,8 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
-
 import datahandler
-import std/[json, tables, logging, strformat, parsecfg]
+import std/[json, logging, strformat, parsecfg]
 import libcurl
 import "../context"
 import "../utils/utils"
@@ -36,7 +35,7 @@ import times
 
 type DataHandler_OWM* = ref object of DataHandler
 
-method getIcon(this: DataHandler_OWM, code: int = 100): char =
+method getIcon(this: DataHandler_OWM, code: int = 100): char {.base.} =
   var
     symbol: char = 'c'
     daylight: bool = this.p.is_day
@@ -90,17 +89,39 @@ method getIcon(this: DataHandler_OWM, code: int = 100): char =
 
   return symbol
 
+# checks if the required Json Nodes are in the result and properly feeld
+method checkRawDataValidity*(this: DataHandler_OWM): bool =
+  # if it throws, there is a problem
+  try:
+    if this.currentResult["current"]["dt"].getInt() != 0 and
+        this.currentResult["hourly"][0]["dt"].getInt() != 0 and
+        this.currentResult["daily"][0]["dt"].getInt() != 0:
+          return true
+    else:
+      context.LOG_ERR(fmt"OWM: checkRawDataValidity(): validity check failed, aborting")
+      debugmsg "raw data check failed"
+      return false
+  except:
+    debugmsg "raw data check: exception"
+    context.LOG_ERR(fmt"OWM: checkRawDataValidity(): exception {getCurrentExceptionMsg()}")
+    return false
+
+# read from the json api, make sure, data is valid
 method readFromAPI*(this: DataHandler_OWM): int =
   var
     baseurl, url: string
     ret: Code
+    res: int32 = -1
 
   let webData: ref string = new string
 
   let curl = libcurl.easy_init()
 
   baseurl = CTX.cfgFile.getSectionValue("OWM", "baseurl", "http://api.openweathermap.org/data/2.5/onecall?appid=")
-  baseurl.add(CTX.cfgFile.getSectionValue("OWM", "apikey", "none"))
+  if CTX.cfg.apikey != "none":
+    baseurl.add(CTX.cfg.apikey)
+  else:
+    baseurl.add(CTX.cfgFile.getSectionValue("OWM", "apikey", "none"))
   baseurl.add("&lat=" & $CTX.cfgFile.getSectionValue("OWM", "lat", "0,0"))
   baseurl.add("&lon=" & $CTX.cfgFile.getSectionValue("OWM", "lon", "0,0"))
   # baseurl.add("&timezone=" & $CTX.cfgFile.getSectionValue("CC", "timezone","Europe/Vienna"))
@@ -119,22 +140,30 @@ method readFromAPI*(this: DataHandler_OWM): int =
   if ret == E_OK:
     try:
       this.currentResult = json.parseJson(webData[])
-      this.currentResult["data"] = %* {"status": {"code": "success"}}
-      this.forecastResult = json.parseJson """{"data": {"status": {"code": "success"}}}"""
+      if this.checkRawDataValidity() == true:
+        res = 0
+        this.markJsonValid(true)
+        this.writeCache("OWM")
+      else:
+        this.markJsonValid(false)
     except:
-      echo "EXCEPTION"
-      this.currentResult["data"] = %* {"status": {"code": "failure"}}
-      this.forecastResult = json.parseJson """{"data": {"status": {"code": "failure"}}}"""
+      context.LOG_ERR(fmt"OWM:readFromApi(), Exception: {getCurrentExceptionMsg()}")
+      debugmsg "readFromApi, possible parser exception" & getCurrentExceptionMsg()
+      this.markJsonValid(false)
   else:
-    return -1
+    res = -1
+
+  if res == 0:
+    return res
+  else:
+    # try to read cached data
+    context.LOG_ERR(fmt"OWM: readFromApi() failed, trying cached data")
 
 # populate DataHandler.p (type DataPoint) with current and 3 days
 # forecast
-
 method populateSnapshot*(this: DataHandler_OWM): bool =
   var
     n, f, h: json.JsonNode
-    d: ref DailyForecast
 
   context.LOG_INFO(fmt"OWM:populateSnapshot()")
 
@@ -145,16 +174,21 @@ method populateSnapshot*(this: DataHandler_OWM): bool =
   this.p.valid = true
   this.p.api = "OWM"
 
+  # times
   this.p.sunriseTime = times.fromUnix(n["sunrise"].getInt())
   this.p.sunsetTime = times.fromUnix(n["sunset"].getInt())
   this.p.timeRecorded = times.getTime()
-  this.p.timeRecordedAsText = times.format(this.p.timeRecorded, "HH:MM", times.local())
+  this.p.timeRecordedAsText = times.format(this.p.timeRecorded, "HH:mm", times.local())
+  this.p.sunsetTimeAsString = times.format(this.p.sunsetTime, "HH:mm", times.local())
+  this.p.sunriseTimeAsString = times.format(this.p.sunriseTime, "HH:mm", times.local())
+
   this.p.is_day = (if this.p.timeRecorded > this.p.sunriseTime and this.p.timeRecorded < this.p.sunsetTime: true else: false)
   this.p.weatherCode = n["weather"][0]["id"].getInt()
   this.p.weatherSymbol = this.getIcon()
   this.p.timeZone = CTX.cfgFile.getSectionValue("OWM", "timezone")
   this.p.conditionAsString = n["weather"][0]["main"].getStr()
 
+  # temps
   this.p.temperature = n["temp"].getFloat()
   this.p.temperatureApparent = n["feels_like"].getFloat()
   this.p.temperatureMax = f["temp"]["max"].getFloat()
@@ -172,15 +206,29 @@ method populateSnapshot*(this: DataHandler_OWM): bool =
   this.p.pressureSeaLevel = this.convertPressure(n["pressure"].getFloat())
   this.p.humidity = n["humidity"].getFloat()
 
-  # daily forecasts
+  # daily forecasts, 3 days. TODO: make it customizable?
   for i in countup(0, 2):
-    # echo i, " Code = ", this.currentResult["daily"][i + 1]["weather"][0]["id"].getInt()
     this.daily[i].code = this.getIcon(this.currentResult["daily"][i + 1]["weather"][0]["id"].getInt())
     this.daily[i].temperatureMin = this.currentResult["daily"][i + 1]["temp"]["min"].getFloat()
     this.daily[i].temperatureMax = this.currentResult["daily"][i + 1]["temp"]["max"].getFloat()
     this.daily[i].weekDay = times.format(times.fromUnix(this.currentResult["daily"][i + 1]["dt"].getInt()), "ddd", times.local())
+
   this.p.haveUVI = true
-  this.p.uvIndex = n["uvi"].getInt()
+  this.p.uvIndex = n["uvi"].getFloat()
+  debugmsg "The UVI is " & $this.p.uvIndex
 
   this.p.dewPoint = n["dew_point"].getFloat()
+  this.p.precipitationProbability = (if h["pop"].isNil(): 0.0 else: h["pop"].getFloat())
+
+  this.p.precipitationIntensity = 0.0
+  if n.contains("rain"):
+    this.p.precipitationIntensity = n["rain"]["1h"].getFloat()
+  if n.contains("snow"):
+    this.p.precipitationIntensity = n["snow"]["1h"].getFloat()
+
+  if this.p.precipitationIntensity > 0:
+    this.p.precipitationType = 1
+    this.p.precipitationTypeAsString =  (if n.contains("snow"): "Snow" else: "Rain")
+
+  this.p.cloudCover = n["clouds"].getFloat()
   return true
