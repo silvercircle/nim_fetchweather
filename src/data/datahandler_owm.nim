@@ -26,6 +26,10 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
+#[
+  * this implements the OpenWeatherMap API to fetch current conditions and a
+  * 3 days forecast
+]#
 import datahandler
 import std/[json, logging, strformat, parsecfg]
 import libcurl
@@ -34,6 +38,7 @@ import "../utils/utils"
 import times
 
 type DataHandler_OWM* = ref object of DataHandler
+  api_id*: string
 
 method getIcon(this: DataHandler_OWM, code: int = 100): char {.base.} =
   var
@@ -89,7 +94,7 @@ method getIcon(this: DataHandler_OWM, code: int = 100): char {.base.} =
 
   return symbol
 
-# checks if the required Json Nodes are in the result and properly feeld
+# checks if the required Json Nodes are in the result and properly filled
 method checkRawDataValidity*(this: DataHandler_OWM): bool =
   # if it throws, there is a problem
   try:

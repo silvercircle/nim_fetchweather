@@ -31,14 +31,18 @@ import std/db_sqlite as sql
 import std/[times, strformat]
 import data/datahandler
 import os
-import context
+import context as C
 
 proc writeSQL*(data: var DataHandler): void =
   var
     db: sql.DbConn
     d: ptr DataPoint = data.p.addr
 
-  let sqlite_filename = os.joinPath(CTX.dataDirPath, "history.sqlite3")
+  when defined(debug):
+    let sqlite_filename = os.joinPath(CTX.dataDirPath, "historydebug.sqlite3")
+    debugmsg fmt"writing to debug Database"
+  else:
+    let sqlite_filename = os.joinPath(CTX.dataDirPath, "history.sqlite3")
   debugmsg "The sql file name is: " & sqlite_filename
 
 #  when defined(debug):
@@ -92,7 +96,8 @@ proc writeSQL*(data: var DataHandler): void =
                         d.cloudCover, d.cloudCeiling, d.moonPhase, d.temperatureMin,
                         d.temperatureMax)
     if not res:
-      debugmsg fmt"failed insert"
+      debugmsg fmt"failed insert (code = {res})"
+      C.LOG_ERR(fmt"writeSql: insert failed with code {res}")
       dbError(db)
     else:
       debugmsg fmt"tryExec() successfull ret = {res}"
@@ -100,6 +105,6 @@ proc writeSQL*(data: var DataHandler): void =
     db.exec(sql"COMMIT")
   except:
     debugmsg fmt"Database Exception while inserting, {getCurrentExceptionMsg()}"
-    context.LOG_ERR(fmt"Database exception while inserting, {getCurrentExceptionMsg()}")
+    C.LOG_ERR(fmt"Database exception while inserting, {getCurrentExceptionMsg()}")
 
   db.close()

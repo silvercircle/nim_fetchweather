@@ -79,11 +79,11 @@ proc main(): cint =
   let api = CTX.cfg.api
 
   if api == "CC":
-    data = DataHandler_CC()
+    data = DataHandler_CC(api_id: "CC")
     if run(data) != 0:
       system.quit(-1)
   elif api == "OWM":
-    data = DataHandler_OWM()
+    data = DataHandler_OWM(api_id: "OWM")
     if run(data) != 0:
       system.quit(-1)
 

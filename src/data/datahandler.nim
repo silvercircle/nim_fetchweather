@@ -85,6 +85,9 @@ method markJsonValid*(this: DataHandler, valid: bool = false): void {.base.} =
     this.currentResult["data"] = %* {"status": {"code": "failure"}}
     this.forecastResult = json.parseJson """{"data": {"status": {"code": "failure"}}}"""
 
+# write current and forcast json to cache files. The prefix is basically
+# the shortcode for the API in use. Example: OWM, CC are valid prefixes for
+# OpenWeatherMap and ClimaCell
 method writeCache*(this: DataHandler, prefix: string): void {.base.} =
   let file_current = os.joinPath(CTX.dataDirPath, prefix & "_current.json")
   let file_forecast = os.joinPath(CTX.dataDirPath, prefix & "_forecast.json")
