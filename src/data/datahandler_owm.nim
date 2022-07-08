@@ -156,13 +156,15 @@ method readFromAPI*(this: DataHandler_OWM): int =
       this.currentResult = json.parseJson(webData[])
       if this.checkRawDataValidity() == true:
         res = 0
-        this.markJsonValid(true, "OWM")
+        #this.markJsonValid(true, "OWM")
       else:
-        this.markJsonValid(false, "OWM")
+        res = -1
+        # this.markJsonValid(false, "OWM")
     except:
       context.LOG_ERR(fmt"OWM:readFromApi(), Exception: {getCurrentExceptionMsg()}")
       debugmsg "readFromApi, possible parser exception" & getCurrentExceptionMsg()
-      this.markJsonValid(false, "OWM")
+      # this.markJsonValid(false, "OWM")
+      res = -1
   else:
     res = -1
 

@@ -83,7 +83,7 @@ method construct*(this: DataHandler): DataHandler {.base.} =
 method getIcon(this: DataHandler, code: int = 100): char {.base.} = 'c'
 
 # this marks the json result valid or invalid
-method markJsonValid*(this: DataHandler, valid: bool = false, prefix: string = ""): void {.base.} =
+#[method markJsonValid*(this: DataHandler, valid: bool = false, prefix: string = ""): void {.base.} =
   debugmsg fmt"Mark valid for: {prefix} with mode {valid}"
   if valid and prefix.len > 0:
     this.currentResult["data_" & prefix] = %* {"status": {"code": "success"}}
@@ -91,7 +91,7 @@ method markJsonValid*(this: DataHandler, valid: bool = false, prefix: string = "
   else:
     this.currentResult["data_" & prefix] = %* {"status": {"code": "failure"}}
     this.forecastResult["data_" & prefix] = %* {"status": {"code": "failure"}}
-
+]#
 # write current and forcast json to cache files. The prefix is basically
 # the shortcode for the API in use. Example: OWM, CC are valid prefixes for
 # OpenWeatherMap and ClimaCell
@@ -104,6 +104,7 @@ method writeCache*(this: DataHandler, prefix: string): void {.base.} =
 method readFromCache*(this: DataHandler, prefix: string): int {.base.} =
   let file_current = os.joinPath(CTX.dataDirPath, prefix & "_current.json")
   let file_forecast = os.joinPath(CTX.dataDirPath, prefix & "_forecast.json")
+  debugmsg fmt"Reading from Cache: {file_current} and {file_forecast}"
   if os.fileExists(file_current) and os.fileExists(file_forecast):
     var
       current, forecast: string
@@ -113,13 +114,12 @@ method readFromCache*(this: DataHandler, prefix: string): int {.base.} =
       this.currentResult = json.parseJson(current)
       this.forecastResult = json.parseJson(forecast)
       if this.checkRawDataValidity():
-        this.markJsonValid(true, this.getAPIId())
+        debugmsg fmt"Validity check passed for {prefix}"
         return 0
       else:
-        this.markJsonValid(false, this.getAPIId())
+        return -1
     except:
-      context.LOG_ERR(fmt"readFromCache(): Exception {getCurrentExceptionMsg()}")
-    debugmsg fmt"Reading from Cache: {file_current} and {file_forecast}"
+      context.LOG_ERR(fmt"readFromCache(): ({prefix}) Exception {getCurrentExceptionMsg()}")
   else:
     context.LOG_ERR(fmt"Attempt to read from Cache: {file_current} and {file_forecast}. Error: file(s) don't exist")
     return -1

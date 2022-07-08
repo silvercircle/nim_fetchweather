@@ -49,56 +49,75 @@ var conditions: Table[int, string] = {
        7000: "Ice Pellets", 7001: "Heavy Ice Pellets",
        7102: "Light Ice Pellets", 8000: "Thunderstorm"}.toTable()
 
-var icons: Table[int, string] = {
-      1000: "aA", 1001: "ef",
-      1100: "bB", 1101: "cC",
-      1102: "dD", 2000: "00",
-      2100: "77", 3000: "99",
+var icons_day: Table[int, string] = {
+      0001: "aA", 0007: "ef",
+      0002: "bB", 0003: "cC",
+      0006: "dD", 0011: "00",
+      0011: "77", 3000: "99",
       3001: "99", 3002: "23",
-      4000: "xx", 4001: "gG",
-      4200: "gg", 4201: "jj",
-      5000: "oO", 5001: "xx",
-      5100: "oO", 5101: "ww",
-      6000: "xx", 6001: "yy",
-      6200: "ss", 6201: "yy",
-      7000: "uu", 7001: "uu",
-      7102: "uu", 8000: "kK"}.toTable()
+      0025: "xx", 0018: "gG",
+      0012: "gg", 0018: "jj",
+      0022: "oO", 0019: "xx",
+      0023: "oO", 0022: "ww",
+      0026: "xx", 0026: "yy",
+      0026: "ss", 0026: "yy",
+      0024: "uu", 0024: "uu",
+      0024: "uu", 0015: "kK"}.toTable()
 
-var
-  precipType = [ "", "Rain", "Snow", "Freezing Rain", "Ice Pellets" ]
+var icons_night: Table[int, string] = {
+      0033: "aA", 0038: "ef",
+      0034: "bB", 0035: "cC",
+      0038: "dD", 0038: "00",
+      0037: "77", 3000: "99",
+      3001: "99", 3002: "23",
+      0025: "xx", 0018: "gG",
+      0012: "gg", 0018: "jj",
+      0022: "oO", 0019: "xx",
+      0023: "oO", 0022: "ww",
+      0026: "xx", 0026: "yy",
+      0026: "ss", 0026: "yy",
+      0024: "uu", 0024: "uu",
+      0024: "uu", 0042: "kK"}.toTable()
 
-type DataHandler_CC* = ref object of DataHandler
+type DataHandler_AW* = ref object of DataHandler
   api_id*: string
 
-method getCondition*(this: DataHandler_CC, c: int): string =
+method getCondition*(this: DataHandler_AW, c: int): string =
   try:
     return conditions[c]
   except:
     return "Clear(E)"
 
-method getAPIId*(this: DataHandler_CC): string =
+method getAPIId*(this: DataHandler_AW): string =
   return this.api_id
 
-method getIcon(this: DataHandler_CC, code: int = 0, is_day: bool = true): char =
+method getIcon(this: DataHandler_AW, code: int = 0, is_day: bool = true): char =
   var
     s: string
+    c: int = code
+  debugmsg fmt"The code is {code} and is_day is {is_day}"
   try:
-    if code > 0:
-      s = icons[code]
+    if c > 0:
+      case code:
+        of 4,5:
+          c = 3
+        else:
+          c = 1
+      s = (if is_day: icons_day[c] else: icons_night[c])
     else:
-      s = icons[this.p.weatherCode]
+      s = (if is_day: icons_day[this.p.weatherCode] else: icons_night[this.p.weatherCode])
     return (if is_day: cast[char](s[0]) else: cast[char](s[1]))
   except:
     return 'a'
 
 # checks if the required Json Nodes are in the result and properly filled
-method checkRawDataValidity*(this: DataHandler_CC): bool =
+method checkRawDataValidity*(this: DataHandler_AW): bool =
   # if it throws, there is a problem
-  debugmsg "Check JSON data validity for CC"
+  debugmsg "Check JSON data validity for AW"
   try:
-    if this.currentResult["data"]["timelines"][0]["timestep"].getStr() == "current" and
-       this.currentResult["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"].getInt() != 0 and
-       this.forecastResult["data"]["timelines"][0]["intervals"][1]["values"]["weatherCode"].getInt() != 0:
+    if this.currentResult[0]["EpochTime"].getInt() != 0 and
+       this.forecastResult["Headline"]["EffectiveEpochDate"].getInt() != 0 and
+       this.forecastResult["DailyForecasts"][0]["EpochDate"].getInt() != 0:
           return true
     else:
       C.LOG_ERR(fmt"OWM: checkRawDataValidity(): validity check failed, aborting")
@@ -109,25 +128,26 @@ method checkRawDataValidity*(this: DataHandler_CC): bool =
     C.LOG_ERR(fmt"OWM: checkRawDataValidity(): exception {getCurrentExceptionMsg()}")
     return false
 
-method readFromAPI*(this: DataHandler_CC): int =
+method readFromAPI*(this: DataHandler_AW): int =
+  if false:
+    return 0  # TODO implement this
+
   var
-    baseurl, url, forecasturl: string
+    baseurl, url, forecasturl, loc_key: string
     ret: Code
 
   let webData: ref string = new string
   let webData_fc: ref string = new string
 
+  loc_key = CTX.cfgFile.getSectionValue("AW", "loc_key", "")
   let curl = libcurl.easy_init()
 
-  baseurl = CTX.cfgFile.getSectionValue("CC", "baseurl", "https://data.climacell.co/v4/timelines?&apikey=")
-  baseurl.add(CTX.cfgFile.getSectionValue("CC", "apikey", "none"))
-  baseurl.add("&location=" & $CTX.cfgFile.getSectionValue("CC", "loc", "0,0"))
-  baseurl.add("&timezone=" & $CTX.cfgFile.getSectionValue("CC", "timezone","Europe/Vienna"))
+  baseurl = CTX.cfgFile.getSectionValue("AW", "baseurl", "http://dataservice.accuweather.com/currentconditions/v1/")
+  baseurl.add($loc_key)
+  baseurl.add("?apikey=")
+  baseurl.add(CTX.cfgFile.getSectionValue("AW", "apikey", "none"))
+  baseurl.add("&language=en&details=true")
   url.add(baseurl)
-  url.add("&fields=weatherCode,temperature,temperatureApparent,visibility,windSpeed,windDirection,")
-  url.add("precipitationType,precipitationProbability,pressureSeaLevel,windGust,cloudCover,cloudBase,")
-  url.add("cloudCeiling,humidity,precipitationIntensity,dewPoint&timesteps=current&units=metric")
-
   discard curl.easy_setopt(OPT_USERAGENT, "Mozilla/5.0")
   discard curl.easy_setopt(OPT_HTTPGET, 1)
   discard curl.easy_setopt(OPT_WRITEDATA, webData)
@@ -146,9 +166,11 @@ method readFromAPI*(this: DataHandler_CC): int =
     return -1
 
   # build forecast url
-  forecasturl.add(baseurl)
-  forecasturl.add("&fields=weatherCode,temperatureMax,temperatureMin,sunriseTime,sunsetTime,moonPhase,")
-  forecasturl.add("precipitationType,precipitationProbability&timesteps=1d&startTime=")
+  forecasturl = CTX.cfgFile.getSectionValue("AW", "fc_baseurl", "http://dataservice.accuweather.com/forecasts/v1/daily/5day/")
+  forecasturl.add($loc_key)
+  forecasturl.add("?apikey=")
+  forecasturl.add(CTX.cfgFile.getSectionValue("AW", "apikey", "none"))
+  forecasturl.add("&language=en&details=true")
 
   discard curl.easy_setopt(OPT_WRITEDATA, webData_fc)
   discard curl.easy_setopt(OPT_URL, forecasturl)
@@ -167,81 +189,79 @@ method readFromAPI*(this: DataHandler_CC): int =
 
   if this.checkRawDataValidity():
     this.writeCache("CC")
-    # this.markJsonValid(true, "CC")
+    #this.markJsonValid(true, "CC")
     return 0
   else:
-    # this.markJsonValid(false, "CC")
+    #this.markJsonValid(false, "CC")
     return -1
 
-method populateSnapshot*(this: DataHandler_CC): bool =
+method populateSnapshot*(this: DataHandler_AW): bool =
   var n, f: json.JsonNode
 
   #try:
-  n = this.currentResult["data"]["timelines"][0]["intervals"][0]["values"]
-  f = this.forecastResult["data"]["timelines"][0]["intervals"][0]["values"]
+  n = this.currentResult[0]
+  f = this.forecastResult["DailyForecasts"][0]
 
   debugmsg "setup done"
   this.p.valid = true
-  this.p.api = "OWM"
+  this.p.api = "AW"
 
   # times
-  this.p.sunriseTime = times.parseTime(f["sunriseTime"].getStr(), "yyyy-MM-dd'T'HH:mm:sszz", times.local())
-  this.p.sunsetTime = times.parseTime(f["sunsetTime"].getStr(), "yyyy-MM-dd'T'HH:mm:sszz", times.local())
+  this.p.sunriseTime = times.fromUnix(f["Sun"]["EpochRise"].getInt())
+  this.p.sunsetTime = times.fromUnix(f["Sun"]["EpochSet"].getInt())
   this.p.timeRecorded = times.getTime()
   this.p.timeRecordedAsText = times.format(this.p.timeRecorded, "HH:mm", times.local())
   this.p.sunsetTimeAsString = times.format(this.p.sunsetTime, "HH:mm", times.local())
   this.p.sunriseTimeAsString = times.format(this.p.sunriseTime, "HH:mm", times.local())
 
-  this.p.is_day = (if this.p.timeRecorded > this.p.sunriseTime and this.p.timeRecorded < this.p.sunsetTime: true else: false)
-  this.p.weatherCode = n["weatherCode"].getInt()
+  this.p.is_day = n["IsDayTime"].getBool()
+  this.p.weatherCode = n["WeatherIcon"].getInt()
   this.p.weatherSymbol = this.getIcon(is_day = this.p.is_day)
-  this.p.timeZone = CTX.cfgFile.getSectionValue("OWM", "timezone")
-  this.p.conditionAsString = this.getCondition(this.p.weatherCode)
+  this.p.timeZone = CTX.cfgFile.getSectionValue("AW", "timezone", "Europe/Vienna")
+  this.p.conditionAsString = n["WeatherText"].getStr()
 
   # temps
-  this.p.temperature =          n["temperature"].getFloat()
-  this.p.temperatureApparent =  n["temperatureApparent"].getFloat()
-  this.p.temperatureMax =       f["temperatureMax"].getFloat()
-  this.p.temperatureMin =       f["temperatureMin"].getFloat()
+  this.p.temperature =          n["Temperature"]["Metric"]["Value"].getFloat()
+  this.p.temperatureApparent =  n["RealFeelTemperature"]["Metric"]["Value"].getFloat()
+  this.p.temperatureMax =       f["Temperature"]["Maximum"]["Value"].getFloat()
+  this.p.temperatureMin =       f["Temperature"]["Minimum"]["Value"].getFloat()
 
   # wind stuff
-  this.p.windSpeed =      this.convertWindspeed(n["windSpeed"].getFloat())
-  this.p.windGust =       this.convertWindspeed(n["windGust"].getFloat())
-  this.p.windDirection =  n["windDirection"].getInt()
+  this.p.windSpeed =      this.convertWindspeed(n["Wind"]["Speed"]["Metric"]["Value"].getFloat() / 3.6)
+  this.p.windGust =       this.convertWindspeed(n["WindGust"]["Speed"]["Metric"]["Value"].getFloat() / 3.6)
+  this.p.windDirection =  n["Wind"]["Direction"]["Degrees"].getInt()
   this.p.windBearing =    this.degToBearing(this.p.windDirection)
   this.p.windUnit =       CTX.cfg.wind_unit
 
-  this.p.visibility = this.convertVis(n["visibility"].getFloat())
+  this.p.visibility = this.convertVis(n["Visibility"]["Metric"]["Value"].getFloat() * 1000)
 
-  this.p.pressureSeaLevel = this.convertPressure(n["pressureSeaLevel"].getFloat())
-  this.p.humidity = n["humidity"].getFloat()
+  this.p.pressureSeaLevel = this.convertPressure(n["Pressure"]["Metric"]["Value"].getFloat())
+  this.p.humidity = n["RelativeHumidity"].getFloat()
 
   # daily forecasts, 3 days. TODO: make it customizable?
-  let base = this.forecastResult["data"]["timelines"][0]["intervals"]
+  let base = this.forecastResult["DailyForecasts"]
   for i in countup(0, 2):
-    this.daily[i].code = this.getIcon(base[i + 1]["values"]["weatherCode"].getInt(), true)
-    this.daily[i].temperatureMin = base[i + 1]["values"]["temperatureMin"].getFloat()
-    this.daily[i].temperatureMax = base[i + 1]["values"]["temperatureMax"].getFloat()
-    this.daily[i].weekDay = times.format(times.parseTime(base[i + 1]["startTime"].getStr(),
-                                                        "yyyy-MM-dd'T'HH:mm:sszzz", local()), "ddd", times.local())
+    this.daily[i].code = this.getIcon(base[i + 1]["Day"]["Icon"].getInt(), true)
+    this.daily[i].temperatureMin = base[i + 1]["Temperature"]["Minimum"]["Value"].getFloat()
+    this.daily[i].temperatureMax = base[i + 1]["Temperature"]["Maximum"]["Value"].getFloat()
+    this.daily[i].weekDay = times.format(times.fromUnix(base[i + 1]["EpochDate"].getInt()), "ddd", times.local())
 
-  this.p.haveUVI = false
-  this.p.uvIndex = 0
+  this.p.haveUVI = true
+  this.p.uvIndex = n["UVIndex"].getFloat()
 
-  this.p.dewPoint = n["dewPoint"].getFloat()
-  this.p.precipitationProbability = n["precipitationProbability"].getFloat()
-  this.p.precipitationIntensity = n["precipitationIntensity"].getFloat()
-  if this.p.precipitationIntensity > 0:
-    this.p.precipitationType = n["precipitationType"].getInt()
-    this.p.precipitationTypeAsString = (if this.p.precipitationType >= 0 and this.p.precipitationType <= 4:
-                                        precipType[this.p.precipitationType] else: "")
+  this.p.dewPoint = n["DewPoint"]["Metric"]["Value"].getFloat()
+  this.p.precipitationProbability = f["Day"]["PrecipitationProbability"].getFloat()
+  this.p.precipitationIntensity = n["Precip1hr"]["Metric"]["Value"].getFloat()
+  if n["HasPrecipitation"].getBool():
+    this.p.precipitationType = 0
+    this.p.precipitationTypeAsString = n["PrecipitationType"].getStr()
   else:
     this.p.precipitationType = 0
     this.p.precipitationTypeAsString = ""
 
-  this.p.cloudCover = n["cloudCover"].getFloat()
-  this.p.cloudBase = n["cloudBase"].getFloat()
-  this.p.cloudCeiling = n["cloudCeiling"].getFloat()
+  this.p.cloudCover = n["CloudCover"].getFloat()
+  this.p.cloudBase = 0
+  this.p.cloudCeiling = n["Ceiling"]["Metric"]["Value"].getFloat()
   #except:
   #  C.LOG_ERR(fmt"CC: populateSnapshot() - exception: {getCurrentExceptionMsg()}")
   #  return false

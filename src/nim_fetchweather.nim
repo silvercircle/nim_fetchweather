@@ -27,7 +27,7 @@
 import std/[os, json, parseopt, strformat]
 import context, sql
 
-import data/[datahandler, datahandler_cc, datahandler_owm]
+import data/[datahandler, datahandler_cc, datahandler_owm, datahandler_aw]
 
 proc main(): cint
 when isMainModule:
@@ -41,25 +41,21 @@ proc run(dh: var DataHandler): int =
   else:
     res = dh.readFromApi()
   if res == 0:
-    if dh.currentResult["data_" & dh.getAPIId()]["status"]["code"].getStr() == "success" and
-        dh.forecastResult["data_" & dh.getAPIId()]["status"]["code"].getStr() == "success":
-      if dh.populateSnapshot():
-        if not CTX.cfg.silent:
-          dh.doOutput(stdout)
-        if CTX.cfg.do_dump:
-          var
-            f: File
-          try:
-            debugmsg fmt"dumping to {CTX.cfg.dumpfile}"
-            f = open(CTX.cfg.dumpfile, fmAppend)
-            dh.doOutput(f)
-            f.close()
-          except:
-            LOG_ERR(fmt"run(): Cannot open the dumpf file. {getCurrentExceptionMsg()}")
-        sql.writeSQL(data = dh)
-        return 0
-      else:
-        return -1
+    if dh.populateSnapshot():
+      if not CTX.cfg.silent:
+        dh.doOutput(stdout)
+      if CTX.cfg.do_dump:
+        var
+          f: File
+        try:
+          debugmsg fmt"dumping to {CTX.cfg.dumpfile}"
+          f = open(CTX.cfg.dumpfile, fmAppend)
+          dh.doOutput(f)
+          f.close()
+        except:
+          LOG_ERR(fmt"run(): Cannot open the dumpf file. {getCurrentExceptionMsg()}")
+      sql.writeSQL(data = dh)
+      return 0
     else:
       return -1
   else:
@@ -81,7 +77,7 @@ proc main(): cint =
     of cmdLongOption, cmdShortOption:
       case key:
       of "api":                               # allows to override the default api (OWM)
-        if value == "OWM" or value == "CC":
+        if value == "OWM" or value == "CC" or value == "AW":
           CTX.cfg.api = value
       of "apikey":
         if value.len != 0:                    # allows to override the apikey
@@ -111,5 +107,8 @@ proc main(): cint =
     data = DataHandler_OWM(api_id: "OWM")
     if run(data) != 0:
       system.quit(-1)
-
+  elif api == "AW":
+    data = DataHandler_AW(api_id: "AW")
+    if run(data) != 0:
+      system.quit(-1)
   system.quit(0)
