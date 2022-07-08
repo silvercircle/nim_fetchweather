@@ -70,20 +70,25 @@ type DataHandler* = ref object of RootObj
   currentResult*, forecastResult*: JsonNode
 
 # abstract methods, must be overridden
+
 method populateSnapshot*(this: DataHandler): bool {.base.} = true
 method readFromApi*(this: DataHandler): int {.base.} = -1
 method getCondition*(this: DataHandler, c: int): string {.base.} = "Clear"
 method getIcon(this: DataHandler): char {.base.} = 'c'
 method checkRawDataValidity*(this: DataHandler): bool {.base.} = false
+method getAPIId*(this: DataHandler): string {.base.} = ""
+method construct*(this: DataHandler): DataHandler {.base.} =
+  echo "constructing a datahandler"
+  return this
 
 # this marks the json result valid or invalid
-method markJsonValid*(this: DataHandler, valid: bool = false): void {.base.} =
-  if valid:
-    this.currentResult["data"] = %* {"status": {"code": "success"}}
-    this.forecastResult = json.parseJson """{"data": {"status": {"code": "success"}}}"""
+method markJsonValid*(this: DataHandler, valid: bool = false, prefix: string = ""): void {.base.} =
+  if valid and prefix.len > 0:
+    this.currentResult["data_" & prefix] = %* {"status": {"code": "success"}}
+    this.forecastResult["data_" & prefix] = %* {"status": {"code": "success"}}
   else:
-    this.currentResult["data"] = %* {"status": {"code": "failure"}}
-    this.forecastResult = json.parseJson """{"data": {"status": {"code": "failure"}}}"""
+    this.currentResult["data_" & prefix] = %* {"status": {"code": "failure"}}
+    this.forecastResult["data_" & prefix] = %* {"status": {"code": "failure"}}
 
 # write current and forcast json to cache files. The prefix is basically
 # the shortcode for the API in use. Example: OWM, CC are valid prefixes for

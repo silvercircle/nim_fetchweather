@@ -40,7 +40,14 @@ import times
 type DataHandler_OWM* = ref object of DataHandler
   api_id*: string
 
-method getIcon(this: DataHandler_OWM, code: int = 100): char {.base.} =
+method construct*(this: DataHandler_OWM): DataHandler_OWM {.base.} =
+  echo "constructing a datahandler OWM"
+  return this
+
+method getAPIId*(this: DataHandler_OWM): string =
+  return this.api_id
+
+method getIcon(this: DataHandler_OWM, code: int = 100): char =
   var
     symbol: char = 'c'
     daylight: bool = this.p.is_day
@@ -140,6 +147,7 @@ method readFromAPI*(this: DataHandler_OWM): int =
   discard curl.easy_setopt(OPT_WRITEFUNCTION, utils.curlWriteFn)
   discard curl.easy_setopt(OPT_URL, url)
 
+  this.forecastResult = json.parseJson """{"data_OWM": {"status": {"code": "success"}}}"""
   # fetch the current conditions. For OWM, this includes all the forecast
   ret = curl.easy_perform()
   if ret == E_OK:
@@ -147,18 +155,18 @@ method readFromAPI*(this: DataHandler_OWM): int =
       this.currentResult = json.parseJson(webData[])
       if this.checkRawDataValidity() == true:
         res = 0
-        this.markJsonValid(true)
-        this.writeCache("OWM")
+        this.markJsonValid(true, "OWM")
       else:
-        this.markJsonValid(false)
+        this.markJsonValid(false, "OWM")
     except:
       context.LOG_ERR(fmt"OWM:readFromApi(), Exception: {getCurrentExceptionMsg()}")
       debugmsg "readFromApi, possible parser exception" & getCurrentExceptionMsg()
-      this.markJsonValid(false)
+      this.markJsonValid(false, "OWM")
   else:
     res = -1
 
   if res == 0:
+    this.writeCache("OWM")
     return res
   else:
     # try to read cached data
@@ -220,7 +228,6 @@ method populateSnapshot*(this: DataHandler_OWM): bool =
 
   this.p.haveUVI = true
   this.p.uvIndex = n["uvi"].getFloat()
-  debugmsg "The UVI is " & $this.p.uvIndex
 
   this.p.dewPoint = n["dew_point"].getFloat()
   this.p.precipitationProbability = (if h["pop"].isNil(): 0.0 else: h["pop"].getFloat())

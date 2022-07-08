@@ -1,4 +1,4 @@
-#[
+  #[
  * MIT License
  *
  * Copyright (c) 2021 Alex Vie (silvercircle@gmail.com)
@@ -51,8 +51,7 @@ proc writeSQL*(data: var DataHandler): void =
 
   db = sql.open(sqlite_filename, "", "", "")
 
-  db.exec(sql"""CREATE TABLE IF NOT EXISTS history
-      (
+  db.exec(sql"""CREATE TABLE IF NOT EXISTS history(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           timestamp INTEGER DEFAULT 0,
           summary TEXT NOT NULL DEFAULT 'unknown',
@@ -77,9 +76,7 @@ proc writeSQL*(data: var DataHandler): void =
           sunrise INTEGER DEFAULT 0,
           sunset INTEGER DEFAULT 0,
           tempMax REAL DEFAULT 0.0,
-          tempMin REAL DEFAULT 0.0
-      )"""
-    )
+          tempMin REAL DEFAULT 0.0)""")
   try:
     db.exec(sql"BEGIN")
     let res = db.tryExec(sql"""INSERT INTO history(timestamp, summary, icon, temperature,
@@ -106,5 +103,4 @@ proc writeSQL*(data: var DataHandler): void =
   except:
     debugmsg fmt"Database Exception while inserting, {getCurrentExceptionMsg()}"
     C.LOG_ERR(fmt"Database exception while inserting, {getCurrentExceptionMsg()}")
-
   db.close()

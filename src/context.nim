@@ -81,9 +81,13 @@ var CTX*: Context = Context(id: 111, timestamp: times.now())
 
 template LOG_INFO*(data: untyped) =
   CTX.stdLogger.log(logging.lvlInfo, data)
+  when defined(debug):
+    debugmsg data
 
 template LOG_ERR*(data: untyped) =
   CTX.stdLogger.log(logging.lvlError, data)
+  when defined(debug):
+    debugmsg data
 
 template LOG_FATAL*(data: untyped) =
   CTX.stdLogger.log(logging.lvlFatal, data)

@@ -35,8 +35,8 @@ when isMainModule:
 
 proc run(dh: var DataHandler): int =
   if dh.readFromApi() == 0:
-    if dh.currentResult["data"]["status"]["code"].getStr() == "success" and
-        dh.forecastResult["data"]["status"]["code"].getStr() == "success":
+    if dh.currentResult["data_" & dh.getAPIId()]["status"]["code"].getStr() == "success" and
+        dh.forecastResult["data_" & dh.getAPIId()]["status"]["code"].getStr() == "success":
       if dh.populateSnapshot():
         dh.doOutput(stdout)
         sql.writeSQL(data = dh)
@@ -48,12 +48,13 @@ proc run(dh: var DataHandler): int =
   else:
     return -1
 
-
 proc main(): cint =
-  CTX.init()
   var
     data: DataHandler
-    argCtr : int
+    argCtr: int
+
+  CTX.init()
+
   # command line optinos allow some overriding settings in the cfg file
 
   for kind, key, value in getOpt():
