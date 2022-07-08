@@ -38,6 +38,10 @@ proc writeSQL*(data: var DataHandler): void =
     db: sql.DbConn
     d: ptr DataPoint = data.p.addr
 
+  # skip db (command line option)
+  if CTX.cfg.no_db:
+    return
+
   when defined(debug):
     let sqlite_filename = os.joinPath(CTX.dataDirPath, "historydebug.sqlite3")
     debugmsg fmt"writing to debug Database"

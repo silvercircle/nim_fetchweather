@@ -94,6 +94,7 @@ method getIcon(this: DataHandler_CC, code: int = 0): char =
 # checks if the required Json Nodes are in the result and properly filled
 method checkRawDataValidity*(this: DataHandler_CC): bool =
   # if it throws, there is a problem
+  debugmsg "Check validity for CC"
   try:
     if this.currentResult["data"]["timelines"][0]["timestep"].getStr() == "current" and
        this.currentResult["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"].getInt() != 0 and

@@ -104,6 +104,7 @@ method getIcon(this: DataHandler_OWM, code: int = 100): char =
 # checks if the required Json Nodes are in the result and properly filled
 method checkRawDataValidity*(this: DataHandler_OWM): bool =
   # if it throws, there is a problem
+  debugmsg "Check validity for OWM"
   try:
     if this.currentResult["current"]["dt"].getInt() != 0 and
         this.currentResult["hourly"][0]["dt"].getInt() != 0 and

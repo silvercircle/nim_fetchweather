@@ -24,7 +24,7 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
-import std/[os, json, parseopt]
+import std/[os, json, parseopt, strformat]
 import context, sql
 
 import data/[datahandler, datahandler_cc, datahandler_owm]
@@ -34,11 +34,28 @@ when isMainModule:
   discard os.exitStatusLikeShell(main())
 
 proc run(dh: var DataHandler): int =
-  if dh.readFromApi() == 0:
+  var
+    res: int
+  if CTX.cfg.cached:
+    res = dh.readFromCache(dh.getAPIId())
+  else:
+    res = dh.readFromApi()
+  if res == 0:
     if dh.currentResult["data_" & dh.getAPIId()]["status"]["code"].getStr() == "success" and
         dh.forecastResult["data_" & dh.getAPIId()]["status"]["code"].getStr() == "success":
       if dh.populateSnapshot():
-        dh.doOutput(stdout)
+        if not CTX.cfg.silent:
+          dh.doOutput(stdout)
+        if CTX.cfg.do_dump:
+          var
+            f: File
+          try:
+            debugmsg fmt"dumping to {CTX.cfg.dumpfile}"
+            f = open(CTX.cfg.dumpfile, fmAppend)
+            dh.doOutput(f)
+            f.close()
+          except:
+            LOG_ERR(fmt"run(): Cannot open the dumpf file. {getCurrentExceptionMsg()}")
         sql.writeSQL(data = dh)
         return 0
       else:
@@ -60,25 +77,32 @@ proc main(): cint =
   for kind, key, value in getOpt():
     case kind:
     of cmdArgument:
-      echo "Got arg ", argCtr, ": \"", key, "\""
       argCtr.inc
-
     of cmdLongOption, cmdShortOption:
       case key:
-      of "api":
+      of "api":                               # allows to override the default api (OWM)
         if value == "OWM" or value == "CC":
           CTX.cfg.api = value
       of "apikey":
-        if value.len != 0:
+        if value.len != 0:                    # allows to override the apikey
           CTX.cfg.apikey = value
+      of "silent":                            # --silent - produce no output on stdout
+        CTX.cfg.silent = true
+      of "nodb":                              # --nodb - do not write to the DB
+        CTX.cfg.no_db = true
+      of "dump":                              # --dump - dump to a file
+        CTX.cfg.do_dump = true
+      of "dumpfile":
+        CTX.cfg.dumpfile = value
+      of "cached", "offline":                            # --cached - use cached json
+        CTX.cfg.cached = true
+
       else:
         echo "Unknown option: ", key
-
     of cmdEnd:
       discard
 
   let api = CTX.cfg.api
-
   if api == "CC":
     data = DataHandler_CC(api_id: "CC")
     if run(data) != 0:

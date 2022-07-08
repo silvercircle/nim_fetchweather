@@ -24,7 +24,7 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
-import std/[os, logging, times, parsecfg]
+import std/[os, logging, times, parsecfg, strformat]
 
 template debugmsg*(data: untyped) =
   when not defined(release):
@@ -45,6 +45,11 @@ type Options = object
   pressure_unit*: string
   metric*:        bool
   api*:           string
+  silent*:        bool      # command line option, no output
+  no_db*:         bool      # do not record to db
+  dumpfile*:      string    # dump output to file
+  do_dump*:       bool      # we want a dump?
+  cached*:        bool      # skip online, use cached data
 
 # this initializes our configuration object
 # it sets defaults and parses the command line options
@@ -61,7 +66,12 @@ proc initOptions(): Options =
     vis_unit: "km",
     pressure_unit: "hPa",
     metric: true,
-    api:  "OWM")
+    api:  "OWM",
+    silent: false,
+    no_db:  false,
+    dumpfile: "",
+    do_dump: false,
+    cached: false)
   return o
 
 type Context* = ref object
@@ -91,11 +101,6 @@ template LOG_ERR*(data: untyped) =
 
 template LOG_FATAL*(data: untyped) =
   CTX.stdLogger.log(logging.lvlFatal, data)
-
-proc greeter*(this: Context): void =
-  echo "The context ID is: " & $this.id
-  echo "I was created at: " & $this.timestamp.format("HH:mm:ss")
-  echo "CFG: ", this.cfg, "\n", "CFG_saved: ", this.cfg_saved
 
 # populate our config file object with defaults
 proc setCfgDefaults(this: Context): void =
@@ -157,5 +162,8 @@ proc init*(this: Context): void =
   this.cfg.vis_unit = $this.cfgFile.getSectionValue("units", "visibility", "km")
   this.cfg.pressure_unit = $this.cfgFile.getSectionValue("units", "pressure", "hPa")
   this.cfg.api = $this.cfgFile.getSectionValue("General", "api", "OWM")
+  # set a default for the dump file this can be overridden on the command line
+  this.cfg.dumpfile = os.joinPath(this.dataDirPath, "dump_" & $times.getTime())
+  debugmsg fmt"The dump file path is: {this.cfg.dumpfile}"
   this.cfg_saved = this.cfg
   this.cfg_saved.dryRun = true

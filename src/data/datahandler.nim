@@ -26,7 +26,7 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
-import std/[json, times, os]
+import std/[json, times, os, strformat]
 import "../context"
 import "../utils/utils"
 
@@ -80,9 +80,11 @@ method getAPIId*(this: DataHandler): string {.base.} = ""
 method construct*(this: DataHandler): DataHandler {.base.} =
   echo "constructing a datahandler"
   return this
+method getIcon(this: DataHandler, code: int = 100): char {.base.} = 'c'
 
 # this marks the json result valid or invalid
 method markJsonValid*(this: DataHandler, valid: bool = false, prefix: string = ""): void {.base.} =
+  debugmsg fmt"Mark valid for: {prefix} with mode {valid}"
   if valid and prefix.len > 0:
     this.currentResult["data_" & prefix] = %* {"status": {"code": "success"}}
     this.forecastResult["data_" & prefix] = %* {"status": {"code": "success"}}
@@ -98,6 +100,30 @@ method writeCache*(this: DataHandler, prefix: string): void {.base.} =
   let file_forecast = os.joinPath(CTX.dataDirPath, prefix & "_forecast.json")
   writeFile(file_current, $this.currentResult)
   writeFile(file_forecast, $this.forecastResult)
+
+method readFromCache*(this: DataHandler, prefix: string): int {.base.} =
+  let file_current = os.joinPath(CTX.dataDirPath, prefix & "_current.json")
+  let file_forecast = os.joinPath(CTX.dataDirPath, prefix & "_forecast.json")
+  if os.fileExists(file_current) and os.fileExists(file_forecast):
+    var
+      current, forecast: string
+    current = readFile(file_current)
+    forecast = readFile(file_forecast)
+    try:
+      this.currentResult = json.parseJson(current)
+      this.forecastResult = json.parseJson(forecast)
+      if this.checkRawDataValidity():
+        this.markJsonValid(true, this.getAPIId())
+        return 0
+      else:
+        this.markJsonValid(false, this.getAPIId())
+    except:
+      context.LOG_ERR(fmt"readFromCache(): Exception {getCurrentExceptionMsg()}")
+    debugmsg fmt"Reading from Cache: {file_current} and {file_forecast}"
+  else:
+    context.LOG_ERR(fmt"Attempt to read from Cache: {file_current} and {file_forecast}. Error: file(s) don't exist")
+    return -1
+  return 0
 
 method convertPressure*(this: DataHandler, hPa: float = 1013): float {.base.} =
   if CTX.cfg.pressure_unit == "inhg": hPa / 33.863886666667 else: hPa
