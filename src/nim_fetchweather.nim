@@ -27,7 +27,7 @@
 import std/[os, json, parseopt, strformat]
 import context, sql
 
-import data/[datahandler, datahandler_cc, datahandler_owm, datahandler_aw]
+import data/[datahandler, datahandler_cc, datahandler_owm, datahandler_aw, datahandler_vc]
 
 proc main(): cint
 when isMainModule:
@@ -82,7 +82,7 @@ proc main(): cint =
     of cmdLongOption, cmdShortOption:
       case key:
       of "api":                               # allows to override the default api (OWM)
-        if value == "OWM" or value == "CC" or value == "AW":
+        if value == "OWM" or value == "CC" or value == "AW" or value == "VC":
           CTX.cfg.api = value
       of "apikey":
         if value.len != 0:                    # allows to override the apikey
@@ -118,6 +118,9 @@ proc main(): cint =
     data = DataHandler_AW(api_id: "AW")
     if run(data) != 0:
       res = -1
-
+  elif api == "VC":
+    data = DataHandler_VC(api_id: "VC")
+    if run(data) != 0:
+      res = -1
   CTX.finalize()
   system.quit(res)

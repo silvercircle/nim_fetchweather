@@ -118,6 +118,7 @@ method readFromCache*(this: DataHandler, prefix: string): int {.base.} =
     return -1
   return 0
 
+# read basic stats, update last timestamp, reset daily requests when necessary
 method updateStats*(this: DataHandler, api:string): void {.base.} =
   # read and update stats
   let now = times.now()
@@ -134,6 +135,7 @@ method updateStats*(this: DataHandler, api:string): void {.base.} =
 method writeStats*(this: DataHandler, api: string): void {.base.} =
   CTX.statsFile.setSectionKey(api, "RequestsAll", $this.stats.requests_all)
   CTX.statsFile.setSectionKey(api, "RequestsToday", $this.stats.requests_today)
+  CTX.statsFile.setSectionKey(api, "RequestsFailed", $this.stats.requests_failed)
 
 method convertPressure*(this: DataHandler, hPa: float = 1013): float {.base.} =
   if CTX.cfg.pressure_unit == "inhg": hPa / 33.863886666667 else: hPa
