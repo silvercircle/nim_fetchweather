@@ -27,6 +27,7 @@
 {.warning[CStringConv]: off.}
 {.warning[LockLevel]: off.}
 
+# this implements the AccuWeather(tm) API to fetch
 import datahandler
 import std/[json, parsecfg, tables, strformat]
 import libcurl
@@ -115,31 +116,49 @@ method checkRawDataValidity*(this: DataHandler_AW): bool =
   # if it throws, there is a problem
   debugmsg "Check JSON data validity for AW"
   try:
+    try:
+      if this.currentResult.contains("Code"):
+        debugmsg "Error message found"
+        let msg = this.currentResult["Code"].getStr() & " / " & this.currentResult["Message"].getStr()
+        C.LOG_ERR(fmt"AW: checkRawDataValidity(): Api returned error ({msg})")
+        return false
+    except:
+      discard
+    debugmsg "check for json validity"
     if this.currentResult[0]["EpochTime"].getInt() != 0 and
        this.forecastResult["Headline"]["EffectiveEpochDate"].getInt() != 0 and
        this.forecastResult["DailyForecasts"][0]["EpochDate"].getInt() != 0:
           return true
     else:
-      C.LOG_ERR(fmt"OWM: checkRawDataValidity(): validity check failed, aborting")
+      C.LOG_ERR(fmt"AW: checkRawDataValidity(): validity check failed, aborting")
       debugmsg "raw data check failed"
       return false
   except:
     debugmsg "raw data check: exception"
-    C.LOG_ERR(fmt"OWM: checkRawDataValidity(): exception {getCurrentExceptionMsg()}")
+    C.LOG_ERR(fmt"AW: checkRawDataValidity(): exception {getCurrentExceptionMsg()}")
     return false
 
+# TODO: obtain location code if not specified on command line or in the configuration
+#       file
 method readFromAPI*(this: DataHandler_AW): int =
-  if false:
-    return 0  # TODO implement this
-
   var
     baseurl, url, forecasturl, loc_key: string
     ret: Code
+    res: int = 0
 
   let webData: ref string = new string
   let webData_fc: ref string = new string
 
+  this.updateStats(api = this.api_id)
+
+  # location key. AccuWeather does not accept direct location input in the api. The key must be
+  # obtained with a separate call.
   loc_key = CTX.cfgFile.getSectionValue("AW", "loc_key", "")
+
+  if loc_key.len == 0:
+    # TODO find the location key
+    discard
+
   let curl = libcurl.easy_init()
 
   baseurl = CTX.cfgFile.getSectionValue("AW", "baseurl", "http://dataservice.accuweather.com/currentconditions/v1/")
@@ -153,7 +172,7 @@ method readFromAPI*(this: DataHandler_AW): int =
   discard curl.easy_setopt(OPT_WRITEDATA, webData)
   discard curl.easy_setopt(OPT_WRITEFUNCTION, utils.curlWriteFn)
   discard curl.easy_setopt(OPT_URL, url)
-
+  debugmsg fmt"The url is {url}"
   # fetch the current conditions
   ret = curl.easy_perform()
   if ret == E_OK:
@@ -161,16 +180,17 @@ method readFromAPI*(this: DataHandler_AW): int =
       this.currentResult = json.parseJson(webData[])
     except:
       C.LOG_ERR(fmt"CC: readFromApi(): Exception {getCurrentExceptionMsg()}")
+      res = -1
   else:
     C.LOG_ERR(fmt"CC: readFromApi(): curl.easy_perform() returned error {ret}")
-    return -1
+    res = -1
 
   # build forecast url
   forecasturl = CTX.cfgFile.getSectionValue("AW", "fc_baseurl", "http://dataservice.accuweather.com/forecasts/v1/daily/5day/")
   forecasturl.add($loc_key)
   forecasturl.add("?apikey=")
   forecasturl.add(CTX.cfgFile.getSectionValue("AW", "apikey", "none"))
-  forecasturl.add("&language=en&details=true")
+  forecasturl.add("&language=en&details=true&metric=true")
 
   discard curl.easy_setopt(OPT_WRITEDATA, webData_fc)
   discard curl.easy_setopt(OPT_URL, forecasturl)
@@ -183,17 +203,21 @@ method readFromAPI*(this: DataHandler_AW): int =
       this.forecastResult = json.parseJson(webData_fc[])
     except:
       C.LOG_ERR(fmt"CC: readFromApi(): Exception {getCurrentExceptionMsg()}")
+      res = -1
   else:
     C.LOG_ERR(fmt"CC: readFromApi(): curl.easy_perform() returned error {ret}")
-    return -1
+    res = -1
 
   if this.checkRawDataValidity():
     this.writeCache("CC")
-    #this.markJsonValid(true, "CC")
-    return 0
+    this.stats.requests_today += 2
+    this.stats.requests_all += 2
   else:
-    #this.markJsonValid(false, "CC")
-    return -1
+    res = -1
+    this.stats.requests_today += 2
+    this.stats.requests_all += 2
+    this.stats.requests_failed += 1
+  return res
 
 method populateSnapshot*(this: DataHandler_AW): bool =
   var n, f: json.JsonNode
@@ -209,7 +233,7 @@ method populateSnapshot*(this: DataHandler_AW): bool =
   # times
   this.p.sunriseTime = times.fromUnix(f["Sun"]["EpochRise"].getInt())
   this.p.sunsetTime = times.fromUnix(f["Sun"]["EpochSet"].getInt())
-  this.p.timeRecorded = times.getTime()
+  this.p.timeRecorded = times.fromUnix(n["EpochTime"].getInt())
   this.p.timeRecordedAsText = times.format(this.p.timeRecorded, "HH:mm", times.local())
   this.p.sunsetTimeAsString = times.format(this.p.sunsetTime, "HH:mm", times.local())
   this.p.sunriseTimeAsString = times.format(this.p.sunriseTime, "HH:mm", times.local())
@@ -262,6 +286,7 @@ method populateSnapshot*(this: DataHandler_AW): bool =
   this.p.cloudCover = n["CloudCover"].getFloat()
   this.p.cloudBase = 0
   this.p.cloudCeiling = n["Ceiling"]["Metric"]["Value"].getFloat()
+  this.p.apiId = this.api_id
   #except:
   #  C.LOG_ERR(fmt"CC: populateSnapshot() - exception: {getCurrentExceptionMsg()}")
   #  return false

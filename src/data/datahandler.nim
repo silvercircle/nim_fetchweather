@@ -26,9 +26,10 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
-import std/[json, times, os, strformat]
+import std/[json, times, os, strformat, parsecfg]
 import "../context"
 import "../utils/utils"
+import "../utils/stats" as S
 
 type DailyForecast* = object
   code*:                                              char
@@ -62,12 +63,13 @@ type DataPoint* = object
   conditionAsString*:                                 string
   uvIndex*:                                           float
   haveUVI*:                                           bool
-
+  apiId*:                                             string
 
 type DataHandler* = ref object of RootObj
   p*:               DataPoint
   daily*:           array[3, DailyForecast]
-  currentResult*, forecastResult*: JsonNode
+  currentResult*,   forecastResult*: JsonNode
+  stats*:           APIStats
 
 # abstract methods, must be overridden
 
@@ -77,21 +79,12 @@ method getCondition*(this: DataHandler, c: int): string {.base.} = "Clear"
 method getIcon(this: DataHandler): char {.base.} = 'c'
 method checkRawDataValidity*(this: DataHandler): bool {.base.} = false
 method getAPIId*(this: DataHandler): string {.base.} = ""
+method getIcon(this: DataHandler, code: int = 100, is_day: bool = true): char {.base.} = 'c'
+
 method construct*(this: DataHandler): DataHandler {.base.} =
   echo "constructing a datahandler"
   return this
-method getIcon(this: DataHandler, code: int = 100): char {.base.} = 'c'
 
-# this marks the json result valid or invalid
-#[method markJsonValid*(this: DataHandler, valid: bool = false, prefix: string = ""): void {.base.} =
-  debugmsg fmt"Mark valid for: {prefix} with mode {valid}"
-  if valid and prefix.len > 0:
-    this.currentResult["data_" & prefix] = %* {"status": {"code": "success"}}
-    this.forecastResult["data_" & prefix] = %* {"status": {"code": "success"}}
-  else:
-    this.currentResult["data_" & prefix] = %* {"status": {"code": "failure"}}
-    this.forecastResult["data_" & prefix] = %* {"status": {"code": "failure"}}
-]#
 # write current and forcast json to cache files. The prefix is basically
 # the shortcode for the API in use. Example: OWM, CC are valid prefixes for
 # OpenWeatherMap and ClimaCell
@@ -124,6 +117,23 @@ method readFromCache*(this: DataHandler, prefix: string): int {.base.} =
     context.LOG_ERR(fmt"Attempt to read from Cache: {file_current} and {file_forecast}. Error: file(s) don't exist")
     return -1
   return 0
+
+method updateStats*(this: DataHandler, api:string): void {.base.} =
+  # read and update stats
+  let now = times.now()
+
+  S.readStats(this.stats, api)
+  let old_time = times.parse(CTX.statsFile.getSectionValue(api, "last_request",
+                                 $now), "yyyy-MM-dd'T'HH:mm:sszzz", times.local())
+  this.stats.last_request = times.now()
+  CTX.statsFile.setSectionKey(api, "last_request", $this.stats.last_request)
+
+  if old_time.weekday() != now.weekday():
+    this.stats.requests_today = 0
+
+method writeStats*(this: DataHandler, api: string): void {.base.} =
+  CTX.statsFile.setSectionKey(api, "RequestsAll", $this.stats.requests_all)
+  CTX.statsFile.setSectionKey(api, "RequestsToday", $this.stats.requests_today)
 
 method convertPressure*(this: DataHandler, hPa: float = 1013): float {.base.} =
   if CTX.cfg.pressure_unit == "inhg": hPa / 33.863886666667 else: hPa
@@ -215,5 +225,5 @@ method doOutput*(this: DataHandler, stream: File): void {.base.} =
   discard fprintf(stream, "%.0f (Clouds)\n", this.p.cloudCover)
   discard fprintf(stream, "%.0f (Cloudbase)\n", this.p.cloudBase)
   discard fprintf(stream, "%.0f (Cloudceil)\n", this.p.cloudCeiling)
-  discard fprintf(stream, "%d (Moon)\n", this.p.moonPhase);
-
+  discard fprintf(stream, "%d (Moon)\n", this.p.moonPhase)
+  discard fprintf(stream, "%s\n", this.p.apiId)

@@ -35,6 +35,7 @@ import std/[json, logging, strformat, parsecfg]
 import libcurl
 import "../context"
 import "../utils/utils"
+import "../utils/stats" as S
 import times
 
 type DataHandler_OWM* = ref object of DataHandler
@@ -47,7 +48,7 @@ method construct*(this: DataHandler_OWM): DataHandler_OWM {.base.} =
 method getAPIId*(this: DataHandler_OWM): string =
   return this.api_id
 
-method getIcon(this: DataHandler_OWM, code: int = 100): char =
+method getIcon(this: DataHandler_OWM, code: int = 100, is_day: bool = true): char =
   var
     symbol: char = 'c'
     daylight: bool = this.p.is_day
@@ -127,8 +128,9 @@ method readFromAPI*(this: DataHandler_OWM): int =
     res: int32 = -1
 
   let webData: ref string = new string
-
   let curl = libcurl.easy_init()
+
+  this.updateStats(api = this.api_id)
 
   baseurl = CTX.cfgFile.getSectionValue("OWM", "baseurl", "http://api.openweathermap.org/data/2.5/onecall?appid=")
   if CTX.cfg.apikey != "none":
@@ -141,13 +143,14 @@ method readFromAPI*(this: DataHandler_OWM): int =
   url.add(baseurl)
   url.add("&exclude=minutely&units=metric");
 
-  context.LOG_INFO(fmt"The url is: {url}")
+  context.LOG_INFO(fmt"OWM. readFromApi() request one-call data from {url}")
   discard curl.easy_setopt(OPT_USERAGENT, "Mozilla/5.0")
   discard curl.easy_setopt(OPT_HTTPGET, 1)
   discard curl.easy_setopt(OPT_WRITEDATA, webData)
   discard curl.easy_setopt(OPT_WRITEFUNCTION, utils.curlWriteFn)
   discard curl.easy_setopt(OPT_URL, url)
 
+  # owm does not use separate requests for forecasts. They offer an one-call API.
   this.forecastResult = json.parseJson """{"data_OWM": {"status": {"code": "success"}}}"""
   # fetch the current conditions. For OWM, this includes all the forecast
   ret = curl.easy_perform()
@@ -156,22 +159,24 @@ method readFromAPI*(this: DataHandler_OWM): int =
       this.currentResult = json.parseJson(webData[])
       if this.checkRawDataValidity() == true:
         res = 0
-        #this.markJsonValid(true, "OWM")
       else:
         res = -1
-        # this.markJsonValid(false, "OWM")
     except:
       context.LOG_ERR(fmt"OWM:readFromApi(), Exception: {getCurrentExceptionMsg()}")
       debugmsg "readFromApi, possible parser exception" & getCurrentExceptionMsg()
-      # this.markJsonValid(false, "OWM")
       res = -1
   else:
     res = -1
 
   if res == 0:
     this.writeCache("OWM")
+    this.stats.requests_today.inc
+    this.stats.requests_all.inc
     return res
   else:
+    this.stats.requests_today.inc
+    this.stats.requests_all.inc
+    this.stats.requests_failed.inc
     # try to read cached data
     context.LOG_ERR(fmt"OWM: readFromApi() failed, trying cached data")
 
@@ -224,7 +229,7 @@ method populateSnapshot*(this: DataHandler_OWM): bool =
 
   # daily forecasts, 3 days. TODO: make it customizable?
   for i in countup(0, 2):
-    this.daily[i].code = this.getIcon(this.currentResult["daily"][i + 1]["weather"][0]["id"].getInt())
+    this.daily[i].code = this.getIcon(this.currentResult["daily"][i + 1]["weather"][0]["id"].getInt(), true)
     this.daily[i].temperatureMin = this.currentResult["daily"][i + 1]["temp"]["min"].getFloat()
     this.daily[i].temperatureMax = this.currentResult["daily"][i + 1]["temp"]["max"].getFloat()
     this.daily[i].weekDay = times.format(times.fromUnix(this.currentResult["daily"][i + 1]["dt"].getInt()), "ddd", times.local())
@@ -246,4 +251,5 @@ method populateSnapshot*(this: DataHandler_OWM): bool =
     this.p.precipitationTypeAsString =  (if n.contains("snow"): "Snow" else: "Rain")
 
   this.p.cloudCover = n["clouds"].getFloat()
+  this.p.apiId = this.api_id
   return true

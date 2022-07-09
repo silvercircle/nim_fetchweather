@@ -113,9 +113,12 @@ method readFromAPI*(this: DataHandler_CC): int =
   var
     baseurl, url, forecasturl: string
     ret: Code
+    res: int = 0
 
   let webData: ref string = new string
   let webData_fc: ref string = new string
+
+  this.updateStats(api = this.api_id)
 
   let curl = libcurl.easy_init()
 
@@ -140,10 +143,11 @@ method readFromAPI*(this: DataHandler_CC): int =
     try:
       this.currentResult = json.parseJson(webData[])
     except:
+      res = -1
       C.LOG_ERR(fmt"CC: readFromApi(): Exception {getCurrentExceptionMsg()}")
   else:
     C.LOG_ERR(fmt"CC: readFromApi(): curl.easy_perform() returned error {ret}")
-    return -1
+    res = -1
 
   # build forecast url
   forecasturl.add(baseurl)
@@ -161,17 +165,21 @@ method readFromAPI*(this: DataHandler_CC): int =
       this.forecastResult = json.parseJson(webData_fc[])
     except:
       C.LOG_ERR(fmt"CC: readFromApi(): Exception {getCurrentExceptionMsg()}")
+      res = -1
   else:
     C.LOG_ERR(fmt"CC: readFromApi(): curl.easy_perform() returned error {ret}")
-    return -1
+    res = -1
 
   if this.checkRawDataValidity():
     this.writeCache("CC")
-    # this.markJsonValid(true, "CC")
-    return 0
+    this.stats.requests_today += 2
+    this.stats.requests_all += 2
   else:
-    # this.markJsonValid(false, "CC")
-    return -1
+    res = -1
+    this.stats.requests_today += 2
+    this.stats.requests_all += 2
+    this.stats.requests_failed += 1
+  return res
 
 method populateSnapshot*(this: DataHandler_CC): bool =
   var n, f: json.JsonNode
@@ -242,6 +250,7 @@ method populateSnapshot*(this: DataHandler_CC): bool =
   this.p.cloudCover = n["cloudCover"].getFloat()
   this.p.cloudBase = n["cloudBase"].getFloat()
   this.p.cloudCeiling = n["cloudCeiling"].getFloat()
+  this.p.apiId = this.api_id
   #except:
   #  C.LOG_ERR(fmt"CC: populateSnapshot() - exception: {getCurrentExceptionMsg()}")
   #  return false

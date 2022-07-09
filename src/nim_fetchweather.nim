@@ -40,6 +40,10 @@ proc run(dh: var DataHandler): int =
     res = dh.readFromCache(dh.getAPIId())
   else:
     res = dh.readFromApi()
+    dh.writeStats(dh.getAPIId())
+    # online operation failed, try the cache
+    if res == -1 and CTX.cfg.fallback:
+      res = dh.readFromCache(dh.getAPIId())
   if res == 0:
     if dh.populateSnapshot():
       if not CTX.cfg.silent:
@@ -65,6 +69,7 @@ proc main(): cint =
   var
     data: DataHandler
     argCtr: int
+    res: int
 
   CTX.init()
 
@@ -90,25 +95,29 @@ proc main(): cint =
         CTX.cfg.do_dump = true
       of "dumpfile":
         CTX.cfg.dumpfile = value
-      of "cached", "offline":                            # --cached - use cached json
+      of "cached", "offline":                 # --cached - use cached json
         CTX.cfg.cached = true
-
+      of "fallbackoffline":                   # use cache in case online operation fails
+        CTX.cfg.fallback = true
       else:
         echo "Unknown option: ", key
     of cmdEnd:
       discard
 
   let api = CTX.cfg.api
+
   if api == "CC":
     data = DataHandler_CC(api_id: "CC")
     if run(data) != 0:
-      system.quit(-1)
+      res = -1
   elif api == "OWM":
     data = DataHandler_OWM(api_id: "OWM")
     if run(data) != 0:
-      system.quit(-1)
+      res = -1
   elif api == "AW":
     data = DataHandler_AW(api_id: "AW")
     if run(data) != 0:
-      system.quit(-1)
-  system.quit(0)
+      res = -1
+
+  CTX.finalize()
+  system.quit(res)

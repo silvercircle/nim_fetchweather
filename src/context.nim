@@ -48,8 +48,10 @@ type Options = object
   silent*:        bool      # command line option, no output
   no_db*:         bool      # do not record to db
   dumpfile*:      string    # dump output to file
+  statsfile*:     string
   do_dump*:       bool      # we want a dump?
   cached*:        bool      # skip online, use cached data
+  fallback*:      bool      # fall back to cache when online fails
 
 # this initializes our configuration object
 # it sets defaults and parses the command line options
@@ -80,7 +82,7 @@ type Context* = ref object
   # cfg_saved are the options from the ini file
   # cfg are the effective options that are overriden by command line switches
   cfg_saved*, cfg*: Options
-  cfgFile*: parsecfg.Config
+  cfgFile*, statsFile*: parsecfg.Config
 
   # directories
   cfgDirPath, cfgFilePath, logFilePath, dataDirPath*: string
@@ -103,7 +105,7 @@ template LOG_FATAL*(data: untyped) =
   CTX.stdLogger.log(logging.lvlFatal, data)
 
 # populate our config file object with defaults
-proc setCfgDefaults(this: Context): void =
+method setCfgDefaults(this: Context): void {.base.} =
   this.cfgFile = newConfig()
   this.cfgFile.setSectionKey("General", "firstRun", "yes")
   this.cfgFile.setSectionKey("General", "metric", "true")
@@ -116,7 +118,7 @@ proc setCfgDefaults(this: Context): void =
 
 # init the config, read config file (or create one), handle default
 # values
-proc init*(this: Context): void =
+method init*(this: Context): void {.base.} =
   setCfgDefaults(this)
   let cfgDir = os.getConfigDir()
   var dataDir = os.getHomeDir()
@@ -164,6 +166,14 @@ proc init*(this: Context): void =
   this.cfg.api = $this.cfgFile.getSectionValue("General", "api", "OWM")
   # set a default for the dump file this can be overridden on the command line
   this.cfg.dumpfile = os.joinPath(this.dataDirPath, "dump_" & $times.getTime())
+  this.cfg.statsfile = os.joinPath(this.dataDirPath, "stats.ini")
+  if os.fileExists(this.cfg.statsfile):
+    this.statsFile = parsecfg.loadConfig(this.cfg.statsfile)
+  else:
+    this.statsFile = parsecfg.newConfig()
   debugmsg fmt"The dump file path is: {this.cfg.dumpfile}"
   this.cfg_saved = this.cfg
   this.cfg_saved.dryRun = true
+
+method finalize*(this: Context): void {.base.} =
+  this.statsFile.writeConfig(this.cfg.statsfile)
