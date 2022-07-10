@@ -1,12 +1,30 @@
 [General]
 firstRun=yes
 [OWM]
-apikey=OWM_apikey
-; data for climacell
-[CC]
-baseurl=https://data.climacell.co/v4/timelines?&apikey=
-apikey=your api key
-; must be lat,lon format
-loc="48.1222795,16.3347827"
-; set this to your time zone
+apikey=
+baseurl="http://api.openweathermap.org/data/2.5/onecall?appid="
+; edit this
+lat=48.1222795
+lon=16.3347827
 timezone=Europe/Vienna
+[CC]
+baseurl="https://data.climacell.co/v4/timelines?&apikey="
+; edit this
+timezone=
+loc=
+apikey=
+[AW]
+apikey=
+baseurl="http://dataservice.accuweather.com/currentconditions/v1/"
+fc_baseurl="http://dataservice.accuweather.com/forecasts/v1/daily/5day/"
+; loc key must be obtained from AccuWeather API
+loc_key=
+[units]
+pressure=hPa
+windspeed=km/h
+metric=true
+[VC]
+baseurl="https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/___LOC___?unitGroup=metric&include=events,days,hours,alerts,current&iconSet=icons2&contentType=json&key="
+; edit this
+loc=
+apikey=

@@ -35,21 +35,6 @@ import "../utils/utils" as utils
 import "../context" as C
 import times
 
-var conditions: Table[int, string] = {
-       1000: "Clear", 1001: "Cloudy",
-       1100: "Mostly Clear", 1101: "Partly Cloudy",
-       1102: "Mostly Cloudy", 2000: "Fog",
-       2100: "Light Fog", 3000: "Light Wind",
-       3001: "Wind", 3002: "Strong Wind",
-       4000: "Drizzle", 4001: "Rain",
-       4200: "Light Rain", 4201: "Heavy Rain",
-       5000: "Snow", 5001: "Flurries",
-       5100: "Light Snow", 5101: "Heavy Snow",
-       6000: "Freezing Drizzle", 6001: "Freezing Rain",
-       6200: "Light Freezing Rain", 6201: "Heavy Freezing Rain",
-       7000: "Ice Pellets", 7001: "Heavy Ice Pellets",
-       7102: "Light Ice Pellets", 8000: "Thunderstorm"}.toTable()
-
 var icons_day: Table[int, string] = {
       0001: "aA", 0007: "ef",
       0002: "bB", 0003: "cC",
@@ -82,12 +67,6 @@ var icons_night: Table[int, string] = {
 
 type DataHandler_AW* = ref object of DataHandler
   api_id*: string
-
-method getCondition*(this: DataHandler_AW, c: int): string =
-  try:
-    return conditions[c]
-  except:
-    return "Clear(E)"
 
 method getAPIId*(this: DataHandler_AW): string =
   return this.api_id
@@ -139,7 +118,8 @@ method checkRawDataValidity*(this: DataHandler_AW): bool =
     return false
 
 # TODO: obtain location code if not specified on command line or in the configuration
-#       file
+#       file. For now, the lockey must be obtained manually and passed via the
+#       configuration file or command line option.
 method readFromAPI*(this: DataHandler_AW): int =
   var
     baseurl, url, forecasturl, loc_key: string

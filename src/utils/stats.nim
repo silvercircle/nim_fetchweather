@@ -38,8 +38,6 @@ type APIStats* = object
   last_request*:        DateTime
   last_failed*:         DateTime
 
-type Stats = ref object of RootObj
-
 # read the stores values from the stats.ini file.
 proc readStats*(s: var APIStats, api: string = "OWM"): void =
   s.requests_all = parseInt(C.CTX.statsFile.getSectionValue(api, "RequestsAll", "0"))

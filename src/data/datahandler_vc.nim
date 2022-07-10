@@ -28,7 +28,7 @@
 
 #[
   * this implements the VisualCrossing API to fetch current conditions and a
-  * 3 days forecast TODO: everything :)
+  * 3 days forecast
 ]#
 import datahandler
 import std/[json, logging, strformat, parsecfg, tables]
@@ -39,25 +39,11 @@ import "../utils/utils"
 import "../utils/stats" as S
 import times
 
-var icons: Table[int, string] = {
-      1000: "aA", 1001: "ef",
-      1100: "bB", 1101: "cC",
-      1102: "dD", 2000: "00",
-      2100: "77", 3000: "99",
-      3001: "99", 3002: "23",
-      4000: "xx", 4001: "gG",
-      4200: "gg", 4201: "jj",
-      5000: "oO", 5001: "xx",
-      5100: "oO", 5101: "ww",
-      6000: "xx", 6001: "yy",
-      6200: "ss", 6201: "yy",
-      7000: "uu", 7001: "uu",
-      7102: "uu", 8000: "kK"}.toTable()
-
+# this requires the icons2 iconSet to be selected via the API call!
 var icons1: Table[string, char] = {
   "clear-day":            'a',        "clear-night":          'A',
-  "cloudy":               'e',        "partly-cloudy-day":    'b',
-  "partly-cloudy-night":  'B',        "fog":                  '0',
+  "cloudy":               'e',        "partly-cloudy-day":    'c',
+  "partly-cloudy-night":  'C',        "fog":                  '0',
   "rain":                 'j',        "showers-day":          'g',
   "showers-night":        'g',        "snow":                 'o',
   "show-showers-day":     'o',        "snow-showers-night":   'O',
@@ -77,8 +63,6 @@ method getAPIId*(this: DataHandler_VC): string =
 method getIcon(this: DataHandler_VC, code: string = "clear-day"): char =
   var
     symbol: char = 'c'
-
-  debugmsg fmt"Get icon for code: {code}"
   try:
     symbol = icons1[code]
   except:

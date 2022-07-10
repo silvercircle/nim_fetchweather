@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"r",
+				"requests_failed"
+			],
+			[
 				"seq",
 				"sequence"
 			],
@@ -144,10 +148,6 @@
 				"getSelection"
 			],
 			[
-				"r",
-				"registers"
-			],
-			[
 				"fina",
 				"final_url"
 			],
@@ -195,7 +195,7 @@
 			"file": "src/context.nim",
 			"settings":
 			{
-				"buffer_size": 5734,
+				"buffer_size": 8323,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			},
@@ -207,7 +207,7 @@
 					"reindent",
 					null,
 					"AQAAAFsLAAAAAAAAXQsAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAFsLAAAAAAAAWwsAAAAAAAAAAAAAAIBmQA"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAWwsAAAAAAABbCwAAAAAAAAAAAAAAgGZA"
 				],
 				[
 					18,
@@ -217,7 +217,7 @@
 						"characters": "CTX."
 					},
 					"BAAAAF0LAAAAAAAAXgsAAAAAAAAAAAAAXgsAAAAAAABfCwAAAAAAAAAAAABfCwAAAAAAAGALAAAAAAAAAAAAAGALAAAAAAAAYQsAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAF0LAAAAAAAAXQsAAAAAAAAAAAAAAADwvw"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAXQsAAAAAAABdCwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					21,
@@ -225,7 +225,7 @@
 					"right_delete",
 					null,
 					"AgAAAFsLAAAAAAAAWwsAAAAAAAAGAAAAICBDVFguWwsAAAAAAABbCwAAAAAAAAEAAAAK",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAFsLAAAAAAAAYQsAAAAAAAD////////vfw"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAWwsAAAAAAABhCwAAAAAAAP///////+9/"
 				],
 				[
 					22,
@@ -235,7 +235,7 @@
 						"characters": "\n"
 					},
 					"AQAAAFsLAAAAAAAAXAsAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAFsLAAAAAAAAWwsAAAAAAAAAAAAAAADwvw"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAWwsAAAAAAABbCwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					23,
@@ -243,15 +243,63 @@
 					"remove_final_newlines",
 					null,
 					"AQAAAGYWAAAAAAAAZhYAAAAAAAABAAAACg",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAFwLAAAAAAAAXAsAAAAAAAAAAAAAAADwvw"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAXAsAAAAAAABcCwAAAAAAAAAAAAAAAPC/"
 				]
 			]
 		},
 		{
-			"contents": " _______________________________________ \n/ Machine-Independent, adj.:            \\\n|                                       |\n\\ Does not run on any existing machine. /\n --------------------------------------- \n        \\   ^__^\n         \\  (oo)\\_______\n            (__)\\       )\\/\\\n                ||----w |\n                ||     ||\n[0:59:21::alex@warpcore:nim/nim_fetchweather]$>",
+			"file": "src/data/datahandler_vc.nim",
 			"settings":
 			{
-				"buffer_size": 380,
+				"buffer_size": 8470,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					37,
+					1,
+					"remove_final_newlines",
+					null,
+					"AQAAABYhAAAAAAAAFiEAAAAAAAABAAAACg",
+					"AQAAAAAAAAABAAAAggUAAAAAAACCBQAAAAAAAAAAAAAAAGBA"
+				]
+			]
+		},
+		{
+			"file": "src/data/datahandler.nim",
+			"settings":
+			{
+				"buffer_size": 11205,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/data/datahandler_aw.nim",
+			"settings":
+			{
+				"buffer_size": 10185,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/data/datahandler_owm.nim",
+			"settings":
+			{
+				"buffer_size": 9157,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"contents": " _____________________ \n< Doing gets it done. >\n --------------------- \n        \\   ^__^\n         \\  (oo)\\_______\n            (__)\\       )\\/\\\n                ||----w |\n                ||     ||\n[17:49:19::alex@warpcore:nim/nim_fetchweather]$>",
+			"settings":
+			{
+				"buffer_size": 243,
 				"line_ending": "Unix",
 				"name": "zsh",
 				"scratch": true
@@ -264,7 +312,7 @@
 					"terminus_render",
 					null,
 					"OwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAgAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAwAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABQAAAAAAAAAAAAAABQAAAAAAAAAFAAAAAAAAAAAAAAAFAAAAAAAAAAYAAAAAAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAAAAAABgAAAAAAAAAHAAAAAAAAAAAAAAAHAAAAAAAAAAcAAAAAAAAAAAAAAAcAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAkAAAAAAAAAAAAAAAkAAAAAAAAACQAAAAAAAAAAAAAACQAAAAAAAAAKAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAAAAAAkAAAAAAAAACQAAAAAAAAABAAAACggAAAAAAAAACAAAAAAAAAABAAAACgcAAAAAAAAABwAAAAAAAAABAAAACgYAAAAAAAAABgAAAAAAAAABAAAACgUAAAAAAAAABQAAAAAAAAABAAAACgQAAAAAAAAABAAAAAAAAAABAAAACgMAAAAAAAAAAwAAAAAAAAABAAAACgIAAAAAAAAAAgAAAAAAAAABAAAACgEAAAAAAAAAAQAAAAAAAAABAAAACgAAAAAAAAAAAAAAAAAAAAABAAAACgAAAAAAAAAAKAAAAAAAAAAAAAAAKAAAAAAAAAApAAAAAAAAAAAAAAApAAAAAAAAACoAAAAAAAAAAAAAACoAAAAAAAAAUwAAAAAAAAAAAAAAUwAAAAAAAABUAAAAAAAAAAAAAABUAAAAAAAAAH0AAAAAAAAAAAAAAH0AAAAAAAAAfgAAAAAAAAAAAAAAfgAAAAAAAACnAAAAAAAAAAAAAACnAAAAAAAAAKgAAAAAAAAAAAAAAKgAAAAAAAAA0AAAAAAAAAAAAAAA0AAAAAAAAADRAAAAAAAAAAAAAADRAAAAAAAAANIAAAAAAAAAAAAAANIAAAAAAAAA4gAAAAAAAAAAAAAA4gAAAAAAAADjAAAAAAAAAAAAAADjAAAAAAAAAPsAAAAAAAAAAAAAAPsAAAAAAAAA/AAAAAAAAAAAAAAA/AAAAAAAAAAYAQAAAAAAAAAAAAAYAQAAAAAAABkBAAAAAAAAAAAAABkBAAAAAAAAMgEAAAAAAAAAAAAAMgEAAAAAAAAzAQAAAAAAAAAAAAAzAQAAAAAAAEwBAAAAAAAAAAAAAEwBAAAAAAAATQEAAAAAAAAAAAAATQEAAAAAAABNAQAAAAAAAAAAAABNAQAAAAAAANMBAAAAAAAAAAAAAE0BAAAAAAAATQEAAAAAAACGAAAAICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNAQAAAAAAAHwBAAAAAAAAAAAAAHwBAAAAAAAA0wEAAAAAAAAAAAAAfAEAAAAAAAB8AQAAAAAAAFcAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvw"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					5,
@@ -272,7 +320,7 @@
 					"terminus_render",
 					null,
 					"HgAAAAAAAAAAAAAAKAAAAAAAAAApAAAAIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyAoAAAAAAAAACkAAAAAAAAAAAAAACoAAAAAAAAAUwAAAAAAAAApAAAALyBNYWNoaW5lLUluZGVwZW5kZW50LCBhZGouOiAgICAgICAgICAgIFxUAAAAAAAAAH0AAAAAAAAAKQAAAHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8fgAAAAAAAACnAAAAAAAAACkAAABcIERvZXMgbm90IHJ1biBvbiBhbnkgZXhpc3RpbmcgbWFjaGluZS4gL6gAAAAAAAAA0AAAAAAAAAApAAAAIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDQAAAAAAAAANEAAAAAAAAAAAAAANIAAAAAAAAA4gAAAAAAAAAQAAAAICAgICAgICBcICAgXl9fXuMAAAAAAAAA+wAAAAAAAAAYAAAAICAgICAgICAgXCAgKG9vKVxfX19fX19f/AAAAAAAAAAYAQAAAAAAABwAAAAgICAgICAgICAgICAoX18pXCAgICAgICApXC9cGQEAAAAAAAAyAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwtLS0tdyB8MwEAAAAAAABMAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwgICAgIHx8TQEAAAAAAAB8AQAAAAAAAC8AAABbMDo1ODowMTo6YWxleEB3YXJwY29yZTpuaW0vbmltX2ZldGNod2VhdGhlcl0kPnwBAAAAAAAA0wEAAAAAAAAAAAAA0wEAAAAAAADUAQAAAAAAAAAAAADUAQAAAAAAANQBAAAAAAAAAAAAANQBAAAAAAAA1QEAAAAAAAAAAAAA1QEAAAAAAADVAQAAAAAAAAAAAADUAQAAAAAAANQBAAAAAAAAAQAAAArTAQAAAAAAANMBAAAAAAAAAQAAAAp8AQAAAAAAAHwBAAAAAAAAVwAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE0BAAAAAAAAfAEAAAAAAAAvAAAAWzA6NTg6MDE6OmFsZXhAd2FycGNvcmU6bmltL25pbV9mZXRjaHdlYXRoZXJdJD58AQAAAAAAANMBAAAAAAAAAAAAANMBAAAAAAAA1AEAAAAAAAAAAAAA1AEAAAAAAADUAQAAAAAAAAAAAADUAQAAAAAAANUBAAAAAAAAAAAAANUBAAAAAAAA1QEAAAAAAAAAAAAA1AEAAAAAAADUAQAAAAAAAAEAAAAK0wEAAAAAAADTAQAAAAAAAAEAAAAKfAEAAAAAAAB8AQAAAAAAAFcAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAHwBAAAAAAAAfAEAAAAAAAAAAAAAAADwvw"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAfAEAAAAAAAB8AQAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					7,
@@ -280,7 +328,7 @@
 					"terminus_render",
 					null,
 					"EgAAAAAAAAAAAAAAKAAAAAAAAAApAAAAIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyAoAAAAAAAAACkAAAAAAAAAAAAAACoAAAAAAAAAUwAAAAAAAAApAAAALyBNYWNoaW5lLUluZGVwZW5kZW50LCBhZGouOiAgICAgICAgICAgIFxUAAAAAAAAAH0AAAAAAAAAKQAAAHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8fgAAAAAAAACnAAAAAAAAACkAAABcIERvZXMgbm90IHJ1biBvbiBhbnkgZXhpc3RpbmcgbWFjaGluZS4gL6gAAAAAAAAA0AAAAAAAAAApAAAAIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDQAAAAAAAAANEAAAAAAAAAAAAAANIAAAAAAAAA4gAAAAAAAAAQAAAAICAgICAgICBcICAgXl9fXuMAAAAAAAAA+wAAAAAAAAAYAAAAICAgICAgICAgXCAgKG9vKVxfX19fX19f/AAAAAAAAAAYAQAAAAAAABwAAAAgICAgICAgICAgICAoX18pXCAgICAgICApXC9cGQEAAAAAAAAyAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwtLS0tdyB8MwEAAAAAAABMAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwgICAgIHx8TQEAAAAAAAB8AQAAAAAAAC8AAABbMDo1ODowNTo6YWxleEB3YXJwY29yZTpuaW0vbmltX2ZldGNod2VhdGhlcl0kPnwBAAAAAAAA0wEAAAAAAAAAAAAAfAEAAAAAAAB8AQAAAAAAAFcAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNAQAAAAAAAHwBAAAAAAAALwAAAFswOjU4OjA1OjphbGV4QHdhcnBjb3JlOm5pbS9uaW1fZmV0Y2h3ZWF0aGVyXSQ+fAEAAAAAAADUAQAAAAAAAAAAAAB8AQAAAAAAAHwBAAAAAAAAWAAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAHwBAAAAAAAAfAEAAAAAAAAAAAAAAADwvw"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAfAEAAAAAAAB8AQAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					9,
@@ -288,7 +336,7 @@
 					"terminus_render",
 					null,
 					"HgAAAAAAAAAAAAAAKAAAAAAAAAApAAAAIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyAoAAAAAAAAACkAAAAAAAAAAAAAACoAAAAAAAAAUwAAAAAAAAApAAAALyBNYWNoaW5lLUluZGVwZW5kZW50LCBhZGouOiAgICAgICAgICAgIFxUAAAAAAAAAH0AAAAAAAAAKQAAAHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8fgAAAAAAAACnAAAAAAAAACkAAABcIERvZXMgbm90IHJ1biBvbiBhbnkgZXhpc3RpbmcgbWFjaGluZS4gL6gAAAAAAAAA0AAAAAAAAAApAAAAIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDQAAAAAAAAANEAAAAAAAAAAAAAANIAAAAAAAAA4gAAAAAAAAAQAAAAICAgICAgICBcICAgXl9fXuMAAAAAAAAA+wAAAAAAAAAYAAAAICAgICAgICAgXCAgKG9vKVxfX19fX19f/AAAAAAAAAAYAQAAAAAAABwAAAAgICAgICAgICAgICAoX18pXCAgICAgICApXC9cGQEAAAAAAAAyAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwtLS0tdyB8MwEAAAAAAABMAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwgICAgIHx8TQEAAAAAAAB8AQAAAAAAAC8AAABbMDo1OToxMzo6YWxleEB3YXJwY29yZTpuaW0vbmltX2ZldGNod2VhdGhlcl0kPnwBAAAAAAAA1AEAAAAAAAAAAAAA1AEAAAAAAADVAQAAAAAAAAAAAADVAQAAAAAAANUBAAAAAAAAAAAAANUBAAAAAAAA1gEAAAAAAAAAAAAA1gEAAAAAAADWAQAAAAAAAAAAAADVAQAAAAAAANUBAAAAAAAAAQAAAArUAQAAAAAAANQBAAAAAAAAAQAAAAp8AQAAAAAAAHwBAAAAAAAAWAAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNAQAAAAAAAHwBAAAAAAAALwAAAFswOjU5OjEzOjphbGV4QHdhcnBjb3JlOm5pbS9uaW1fZmV0Y2h3ZWF0aGVyXSQ+fAEAAAAAAADlAQAAAAAAAAAAAADlAQAAAAAAAOYBAAAAAAAAAAAAAOYBAAAAAAAA5gEAAAAAAAAAAAAA5gEAAAAAAADnAQAAAAAAAAAAAADnAQAAAAAAAOcBAAAAAAAAAAAAAOYBAAAAAAAA5gEAAAAAAAABAAAACuUBAAAAAAAA5QEAAAAAAAABAAAACnwBAAAAAAAAfAEAAAAAAABpAAAAICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAHwBAAAAAAAAfAEAAAAAAAAAAAAAAADwvw"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAfAEAAAAAAAB8AQAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					11,
@@ -296,7 +344,48 @@
 					"terminus_render",
 					null,
 					"HgAAAAAAAAAAAAAAKAAAAAAAAAApAAAAIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyAoAAAAAAAAACkAAAAAAAAAAAAAACoAAAAAAAAAUwAAAAAAAAApAAAALyBNYWNoaW5lLUluZGVwZW5kZW50LCBhZGouOiAgICAgICAgICAgIFxUAAAAAAAAAH0AAAAAAAAAKQAAAHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8fgAAAAAAAACnAAAAAAAAACkAAABcIERvZXMgbm90IHJ1biBvbiBhbnkgZXhpc3RpbmcgbWFjaGluZS4gL6gAAAAAAAAA0AAAAAAAAAApAAAAIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDQAAAAAAAAANEAAAAAAAAAAAAAANIAAAAAAAAA4gAAAAAAAAAQAAAAICAgICAgICBcICAgXl9fXuMAAAAAAAAA+wAAAAAAAAAYAAAAICAgICAgICAgXCAgKG9vKVxfX19fX19f/AAAAAAAAAAYAQAAAAAAABwAAAAgICAgICAgICAgICAoX18pXCAgICAgICApXC9cGQEAAAAAAAAyAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwtLS0tdyB8MwEAAAAAAABMAQAAAAAAABkAAAAgICAgICAgICAgICAgICAgfHwgICAgIHx8TQEAAAAAAAB8AQAAAAAAAC8AAABbMDo1OToyMDo6YWxleEB3YXJwY29yZTpuaW0vbmltX2ZldGNod2VhdGhlcl0kPnwBAAAAAAAA5QEAAAAAAAAAAAAA5QEAAAAAAADmAQAAAAAAAAAAAADmAQAAAAAAAOYBAAAAAAAAAAAAAOYBAAAAAAAA5wEAAAAAAAAAAAAA5wEAAAAAAADnAQAAAAAAAAAAAADmAQAAAAAAAOYBAAAAAAAAAQAAAArlAQAAAAAAAOUBAAAAAAAAAQAAAAp8AQAAAAAAAHwBAAAAAAAAaQAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE0BAAAAAAAAfAEAAAAAAAAvAAAAWzA6NTk6MjA6OmFsZXhAd2FycGNvcmU6bmltL25pbV9mZXRjaHdlYXRoZXJdJD58AQAAAAAAAOUBAAAAAAAAAAAAAOUBAAAAAAAA5gEAAAAAAAAAAAAA5gEAAAAAAADmAQAAAAAAAAAAAADmAQAAAAAAAOcBAAAAAAAAAAAAAOcBAAAAAAAA5wEAAAAAAAAAAAAA5gEAAAAAAADmAQAAAAAAAAEAAAAK5QEAAAAAAADlAQAAAAAAAAEAAAAKfAEAAAAAAAB8AQAAAAAAAGkAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAHwBAAAAAAAAfAEAAAAAAAAAAAAAAADwvw"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAfAEAAAAAAAB8AQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					3,
+					1,
+					"terminus_activate",
+					{
+						"auto_close": true,
+						"cancellable": false,
+						"cmd":
+						[
+							"zsh",
+							"-i",
+							"-l"
+						],
+						"cwd": "/data/mnt/shared/data/code/nim/nim_fetchweather",
+						"default_title": "zsh",
+						"env":
+						{
+							"LANG": "en_US.UTF-8",
+							"TERM": "linux",
+							"TERMINUS_SUBLIME": "1",
+							"TERM_PROGRAM": "Terminus-Sublime"
+						},
+						"file_regex": null,
+						"line_regex": null,
+						"panel_name": "Terminus",
+						"show_in_panel": null,
+						"tag": null,
+						"timeit": false,
+						"title": null
+					},
+					"AQAAAAAAAAAAAAAAAAAAAAAAAAB8AQAAIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyAKLyBNYWNoaW5lLUluZGVwZW5kZW50LCBhZGouOiAgICAgICAgICAgIFwKfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwKXCBEb2VzIG5vdCBydW4gb24gYW55IGV4aXN0aW5nIG1hY2hpbmUuIC8KIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAKICAgICAgICBcICAgXl9fXgogICAgICAgICBcICAob28pXF9fX19fX18KICAgICAgICAgICAgKF9fKVwgICAgICAgKVwvXAogICAgICAgICAgICAgICAgfHwtLS0tdyB8CiAgICAgICAgICAgICAgICB8fCAgICAgfHwKWzA6NTk6MjE6OmFsZXhAd2FycGNvcmU6bmltL25pbV9mZXRjaHdlYXRoZXJdJD4",
+					"AQAAAAAAAAABAAAATAEAAAAAAABMAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					4,
+					3,
+					"terminus_render",
+					null,
+					"TwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAgAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAwAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABQAAAAAAAAAAAAAABQAAAAAAAAAFAAAAAAAAAAAAAAAFAAAAAAAAAAYAAAAAAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAAAAAABgAAAAAAAAAHAAAAAAAAAAAAAAAHAAAAAAAAAAcAAAAAAAAAAAAAAAcAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAkAAAAAAAAAAAAAAAkAAAAAAAAACQAAAAAAAAAAAAAACQAAAAAAAAAKAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAAAAAAoAAAAAAAAACwAAAAAAAAAAAAAACwAAAAAAAAALAAAAAAAAAAAAAAALAAAAAAAAAAwAAAAAAAAAAAAAAAwAAAAAAAAADAAAAAAAAAAAAAAADAAAAAAAAAANAAAAAAAAAAAAAAANAAAAAAAAAA0AAAAAAAAAAAAAAAwAAAAAAAAADAAAAAAAAAABAAAACgsAAAAAAAAACwAAAAAAAAABAAAACgoAAAAAAAAACgAAAAAAAAABAAAACgkAAAAAAAAACQAAAAAAAAABAAAACggAAAAAAAAACAAAAAAAAAABAAAACgcAAAAAAAAABwAAAAAAAAABAAAACgYAAAAAAAAABgAAAAAAAAABAAAACgUAAAAAAAAABQAAAAAAAAABAAAACgQAAAAAAAAABAAAAAAAAAABAAAACgMAAAAAAAAAAwAAAAAAAAABAAAACgIAAAAAAAAAAgAAAAAAAAABAAAACgEAAAAAAAAAAQAAAAAAAAABAAAACgAAAAAAAAAAAAAAAAAAAAABAAAACgAAAAAAAAAAFgAAAAAAAAAAAAAAFgAAAAAAAAAXAAAAAAAAAAAAAAAXAAAAAAAAABgAAAAAAAAAAAAAABgAAAAAAAAALwAAAAAAAAAAAAAALwAAAAAAAAAwAAAAAAAAAAAAAAAwAAAAAAAAAEYAAAAAAAAAAAAAAEYAAAAAAAAARwAAAAAAAAAAAAAARwAAAAAAAABIAAAAAAAAAAAAAABIAAAAAAAAAFgAAAAAAAAAAAAAAFgAAAAAAAAAWQAAAAAAAAAAAAAAWQAAAAAAAABxAAAAAAAAAAAAAABxAAAAAAAAAHIAAAAAAAAAAAAAAHIAAAAAAAAAjgAAAAAAAAAAAAAAjgAAAAAAAACPAAAAAAAAAAAAAACPAAAAAAAAAKgAAAAAAAAAAAAAAKgAAAAAAAAAqQAAAAAAAAAAAAAAqQAAAAAAAADCAAAAAAAAAAAAAADCAAAAAAAAAMMAAAAAAAAAAAAAAMMAAAAAAAAAwwAAAAAAAAAAAAAAwwAAAAAAAABaAQAAAAAAAAAAAADDAAAAAAAAAMMAAAAAAAAAlwAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDDAAAAAAAAAPMAAAAAAAAAAAAAAPMAAAAAAAAAWgEAAAAAAAAAAAAAWgEAAAAAAABbAQAAAAAAAAAAAABbAQAAAAAAAFsBAAAAAAAAAAAAAFsBAAAAAAAAXAEAAAAAAAAAAAAAXAEAAAAAAABcAQAAAAAAAAAAAABcAQAAAAAAAF0BAAAAAAAAAAAAAF0BAAAAAAAAXQEAAAAAAAAAAAAAXQEAAAAAAABeAQAAAAAAAAAAAABeAQAAAAAAAF4BAAAAAAAAAAAAAF4BAAAAAAAAXwEAAAAAAAAAAAAAXwEAAAAAAABfAQAAAAAAAAAAAABeAQAAAAAAAF4BAAAAAAAAAQAAAApdAQAAAAAAAF0BAAAAAAAAAQAAAApcAQAAAAAAAFwBAAAAAAAAAQAAAApbAQAAAAAAAFsBAAAAAAAAAQAAAApaAQAAAAAAAFoBAAAAAAAAAQAAAArzAAAAAAAAAPMAAAAAAAAAZwAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				]
 			]
 		}
@@ -796,10 +885,12 @@
 	"expanded_folders":
 	[
 		"/data/mnt/shared/data/code/nim/nim_fetchweather",
-		"/data/mnt/shared/data/code/nim/nim_fetchweather/src"
+		"/data/mnt/shared/data/code/nim/nim_fetchweather/src",
+		"/data/mnt/shared/data/code/nim/nim_fetchweather/src/data"
 	],
 	"file_history":
 	[
+		"/data/mnt/shared/data/code/nim/nim_fetchweather/src/data/datahandler_cc.nim",
 		"/data/mnt/shared/data/code/nim/nim_fetchweather/src/sql.nim",
 		"/data/mnt/shared/data/code/nim/nim_testproject/src/utils/tables.nim",
 		"/home/alex/.config/katerc",
@@ -926,8 +1017,7 @@
 		"/mnt/shared/data/testpage/_posts/de/2021-12-23-hustinettenbaer.md",
 		"/mnt/shared/data/testpage/_plugins/video.rb",
 		"/mnt/shared/data/testpage/_sass/theme-retro.scss",
-		"/mnt/shared/data/testpage/assets/css/style.scss",
-		"/mnt/shared/data/testpage/_sass/font-breve-sans.scss"
+		"/mnt/shared/data/testpage/assets/css/style.scss"
 	],
 	"find":
 	{
@@ -969,19 +1059,18 @@
 				{
 					"buffer": 0,
 					"file": "src/context.nim",
-					"selected": true,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5734,
+						"buffer_size": 8323,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1792,
-								1792
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1016,7 +1105,7 @@
 							"ensure_newline_at_eof_on_save": false,
 							"incomplete_sync": null,
 							"lsp_active": true,
-							"lsp_hover_provider_count": 3,
+							"lsp_hover_provider_count": 4,
 							"lsp_uri": "file:///data/mnt/shared/data/code/nim/nim_fetchweather/src/context.nim",
 							"remote_loading": false,
 							"show_definitions": false,
@@ -1030,7 +1119,272 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 4,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/data/datahandler_vc.nim",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8470,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1087,
+								1087
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ". ",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "nimlsp"
+								}
+							],
+							"bs_sintax": "nim",
+							"buffer_scroll_name": "c8e40f3b",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": false,
+							"incomplete_sync": null,
+							"lsp_active": true,
+							"lsp_hover_provider_count": 1,
+							"lsp_uri": "file:///data/mnt/shared/data/code/nim/nim_fetchweather/src/data/datahandler_vc.nim",
+							"remote_loading": false,
+							"show_definitions": false,
+							"synced": false,
+							"syntax": "Packages/NimLime/Syntaxes/Nim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/data/datahandler.nim",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11205,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ". ",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "nimlsp"
+								}
+							],
+							"bs_sintax": "nim",
+							"buffer_scroll_name": "28751b00",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": false,
+							"incomplete_sync": null,
+							"lsp_active": true,
+							"lsp_hover_provider_count": 1,
+							"lsp_uri": "file:///data/mnt/shared/data/code/nim/nim_fetchweather/src/data/datahandler.nim",
+							"remote_loading": false,
+							"show_definitions": false,
+							"synced": false,
+							"syntax": "Packages/NimLime/Syntaxes/Nim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/data/datahandler_aw.nim",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10185,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ". ",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "nimlsp"
+								}
+							],
+							"bs_sintax": "nim",
+							"buffer_scroll_name": "df61a12c",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": false,
+							"incomplete_sync": null,
+							"lsp_active": true,
+							"lsp_hover_provider_count": 1,
+							"lsp_uri": "file:///data/mnt/shared/data/code/nim/nim_fetchweather/src/data/datahandler_aw.nim",
+							"remote_loading": false,
+							"show_definitions": false,
+							"synced": false,
+							"syntax": "Packages/NimLime/Syntaxes/Nim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/data/datahandler_owm.nim",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9157,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1228,
+								1228
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ". ",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "nimlsp"
+								}
+							],
+							"bs_sintax": "nim",
+							"buffer_scroll_name": "ac418b78",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": false,
+							"incomplete_sync": null,
+							"lsp_active": true,
+							"lsp_hover_provider_count": 1,
+							"lsp_uri": "file:///data/mnt/shared/data/code/nim/nim_fetchweather/src/data/datahandler_owm.nim",
+							"remote_loading": false,
+							"show_definitions": false,
+							"synced": false,
+							"syntax": "Packages/NimLime/Syntaxes/Nim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"stack_multiselect": false,
 					"type": "text"
 				}
@@ -1040,24 +1394,32 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
+					"buffer": 5,
 					"selected": true,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 380,
+						"buffer_size": 243,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								380,
-								380
+								243,
+								243
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "plain text"
+							},
 							"__vi_external_disable": true,
 							"auto_complete": false,
 							"auto_complete_commit_on_tab": false,

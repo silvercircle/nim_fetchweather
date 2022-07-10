@@ -69,12 +69,10 @@ proc main(): cint =
   var
     data: DataHandler
     argCtr: int
-    res: int
+    res: int = 0
 
   CTX.init()
-
   # command line optinos allow some overriding settings in the cfg file
-
   for kind, key, value in getOpt():
     case kind:
     of cmdArgument:
@@ -122,5 +120,8 @@ proc main(): cint =
     data = DataHandler_VC(api_id: "VC")
     if run(data) != 0:
       res = -1
+  else:
+    debugmsg fmt"No known API selected ({api} is not valid)"
+    res = -1
   CTX.finalize()
   system.quit(res)

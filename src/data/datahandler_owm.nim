@@ -31,7 +31,7 @@
   * 3 days forecast
 ]#
 import datahandler
-import std/[json, logging, strformat, parsecfg]
+import std/[json, logging, strformat, parsecfg, strutils]
 import libcurl
 import "../context"
 import "../utils/utils"
@@ -137,12 +137,17 @@ method readFromAPI*(this: DataHandler_OWM): int =
     baseurl.add(CTX.cfg.apikey)
   else:
     baseurl.add(CTX.cfgFile.getSectionValue("OWM", "apikey", "none"))
-  baseurl.add("&lat=" & $CTX.cfgFile.getSectionValue("OWM", "lat", "0,0"))
-  baseurl.add("&lon=" & $CTX.cfgFile.getSectionValue("OWM", "lon", "0,0"))
+  let loc = $CTX.cfgFile.getSectionValue("OWM", "loc", "0,0")
+
+  let latlon = strutils.split(loc, ",", 2)
+
+  baseurl.add("&lat=" & latlon[0])
+  baseurl.add("&lon=" & latlon[1])
   # baseurl.add("&timezone=" & $CTX.cfgFile.getSectionValue("CC", "timezone","Europe/Vienna"))
   url.add(baseurl)
   url.add("&exclude=minutely&units=metric");
 
+  debugmsg fmt"The url is: {url}"
   context.LOG_INFO(fmt"OWM. readFromApi() request one-call data from {url}")
   discard curl.easy_setopt(OPT_USERAGENT, "Mozilla/5.0")
   discard curl.easy_setopt(OPT_HTTPGET, 1)

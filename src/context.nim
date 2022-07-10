@@ -26,6 +26,31 @@
 
 import std/[os, logging, times, parsecfg, strformat]
 
+type apiconfig = object
+  shortname:    string
+  fullname:     string
+  baseurl:      string
+  baseurl_fc:   string
+
+var
+  apiconfigs:    array[4, apiconfig] = [
+    apiconfig(shortname:"CC", fullname: "Climacell",
+              baseurl: "https://data.climacell.co/v4/timelines?&apikey=",
+              baseurl_fc: "https://data.climacell.co/v4/timelines?&apikey="),
+
+    apiconfig(shortname:"VC", fullname: "Visual Crossing",
+              baseurl: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/___LOC___?unitGroup=metric&include=events,days,hours,alerts,current&iconSet=icons2&contentType=json&key=",
+              baseurl_fc: "none"),
+
+    apiconfig(shortname:"AW", fullname: "AccuWeather",
+              baseurl: "http://dataservice.accuweather.com/currentconditions/v1/",
+              baseurl_fc: "http://dataservice.accuweather.com/forecasts/v1/daily/5day/"),
+
+    apiconfig(shortname:"OWM", fullname: "Open Weather Map",
+              baseurl: "http://api.openweathermap.org/data/2.5/onecall?appid=",
+              baseurl_fc: "none")
+  ]
+
 template debugmsg*(data: untyped) =
   when not defined(release):
     echo "DEBUG: " & data
@@ -103,6 +128,8 @@ template LOG_ERR*(data: untyped) =
 
 template LOG_FATAL*(data: untyped) =
   CTX.stdLogger.log(logging.lvlFatal, data)
+  when defined(debug):
+    debugmsg data
 
 # populate our config file object with defaults
 method setCfgDefaults(this: Context): void {.base.} =
@@ -115,6 +142,20 @@ method setCfgDefaults(this: Context): void {.base.} =
   this.cfgFile.setSectionKey("OWM", "apikey", "none")
   this.cfgFile.setSectionKey("CC", "loc", "none")
   this.cfgFile.setSectionKey("OWM", "loc", "none")
+
+  # units
+  this.cfgFile.setSectionKey("Units", "pressure", "hPa");
+  this.cfgFile.setSectionKey("Units", "windspeed", "km/h");
+  this.cfgFile.setSectionKey("Units", "metric", "true");
+
+  # apiconfigs
+  for a in apiconfigs:
+    this.cfgFile.setSectionKey(a.shortname, "fullname", a.fullname)
+    this.cfgFile.setSectionKey(a.shortname, "baseurl", a.baseurl)
+    this.cfgFile.setSectionKey(a.shortname, "fc_baseurl", a.baseurl_fc)
+    this.cfgFile.setSectionKey(a.shortname, "apikey", "none")
+    this.cfgFile.setSectionKey(a.shortname, "loc", "none")
+
 
 # init the config, read config file (or create one), handle default
 # values
@@ -143,19 +184,19 @@ method init*(this: Context): void {.base.} =
   # read the existing config (if we have one)
   if os.fileExists(this.cfgFilePath):
     this.cfgFile = loadConfig(this.cfgFilePath)
-
-  # create a new config file if none exists.
-  try:
-    if os.existsOrCreateDir(this.cfgDirPath):
-      # debug "The config file is at " & this.cfgFilePath
-      if not os.fileExists(this.cfgFilePath):
-        let f = system.open(this.cfgFilePath, fmReadWrite)
-        defer: f.close()
-      this.cfgFile.writeConfig(this.cfgFilePath)
-  except OSError as e:
-    echo "The config path is invalid or cannot be created (Permission problem?)"
-    echo e.msg
-    system.quit(-1)
+  else:
+    # create a new config file if none exists.
+    try:
+      if os.existsOrCreateDir(this.cfgDirPath):
+        # debug "The config file is at " & this.cfgFilePath
+        if not os.fileExists(this.cfgFilePath):
+          let f = system.open(this.cfgFilePath, fmReadWrite)
+          defer: f.close()
+          this.cfgFile.writeConfig(this.cfgFilePath)
+    except OSError as e:
+      LOG_ERR fmt"The config path is invalid or cannot be created (Permission problem?)"
+      echo e.msg
+      system.quit(-1)
 
   # echo this.cfgFile
   this.cfg = initOptions()

@@ -31,6 +31,14 @@ import "../context"
 import "../utils/utils"
 import "../utils/stats" as S
 
+var wind_directions*:  array[16, string] = [
+      "N", "NNE", "NE",
+      "ENE", "E", "ESE",
+      "SE", "SSE", "S",
+      "SSW", "SW", "WSW",
+      "W", "WNW", "NW",
+      "NNW"]
+
 type DailyForecast* = object
   code*:                                              char
   temperatureMin*, temperatureMax*:                   float
@@ -73,13 +81,14 @@ type DataHandler* = ref object of RootObj
 
 # abstract methods, must be overridden
 
-method populateSnapshot*(this: DataHandler): bool {.base.} = true
-method readFromApi*(this: DataHandler): int {.base.} = -1
-method getCondition*(this: DataHandler, c: int): string {.base.} = "Clear"
-method getIcon(this: DataHandler): char {.base.} = 'c'
-method checkRawDataValidity*(this: DataHandler): bool {.base.} = false
-method getAPIId*(this: DataHandler): string {.base.} = ""
-method getIcon(this: DataHandler, code: int = 100, is_day: bool = true): char {.base.} = 'c'
+method populateSnapshot*      (this: DataHandler): bool {.base.} = true
+method readFromApi*           (this: DataHandler): int {.base.} = -1
+method getCondition*          (this: DataHandler, c: int): string {.base.} = "Clear"
+method checkRawDataValidity*  (this: DataHandler): bool {.base.} = false
+method getAPIId*              (this: DataHandler): string {.base.} = ""
+method getIcon                (this: DataHandler): char {.base.} = 'c'
+method getIcon                (this: DataHandler, code: int = 100, is_day: bool = true): char {.base.} = 'c'
+method getIcon                (this: DataHandler, code: string = ""): char {.base.} = 'c'
 
 method construct*(this: DataHandler): DataHandler {.base.} =
   echo "constructing a datahandler"
@@ -159,7 +168,7 @@ method convertVis*(this: DataHandler, vis: float): float {.base.} =
 method degToBearing*(this: DataHandler, wind_direction: int = 0): string {.base.} =
   var wd: int = (if wind_direction > 360 or wind_direction < 0: 0 else: wind_direction)
   let val = wd.float / 22.5 + 0.5
-  return utils.wind_directions[val.uint mod 16]
+  return wind_directions[val.uint mod 16]
 
 method convertTemperature(this: DataHandler, val: float): float {.base.} =
   if not CTX.cfg.metric:

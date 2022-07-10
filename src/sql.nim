@@ -33,6 +33,7 @@ import data/datahandler
 import os
 import context as C
 
+# record a datapoin in the history db
 proc writeSQL*(data: var DataHandler): void =
   var
     db: sql.DbConn
@@ -105,6 +106,5 @@ proc writeSQL*(data: var DataHandler): void =
 
     db.exec(sql"COMMIT")
   except:
-    debugmsg fmt"Database Exception while inserting, {getCurrentExceptionMsg()}"
     C.LOG_ERR(fmt"Database exception while inserting, {getCurrentExceptionMsg()}")
   db.close()
