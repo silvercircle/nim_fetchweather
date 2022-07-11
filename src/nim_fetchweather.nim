@@ -24,8 +24,9 @@
  * This class handles API specific stuff for the ClimaCell Weather API.
  *]#
 
-import std/[os, json, parseopt, strformat]
+import std/[os, json, parseopt, strformat, strutils]
 import context, sql
+import utils/utils
 
 import data/[datahandler, datahandler_cc, datahandler_owm, datahandler_aw, datahandler_vc]
 
@@ -79,24 +80,35 @@ proc main(): cint =
       argCtr.inc
     of cmdLongOption, cmdShortOption:
       case key:
-      of "api":                               # allows to override the default api (OWM)
+      of "api", "a":                          # allows to override the default api (OWM)
         if value == "OWM" or value == "CC" or value == "AW" or value == "VC":
           CTX.cfg.api = value
       of "apikey":
         if value.len != 0:                    # allows to override the apikey
           CTX.cfg.apikey = value
-      of "silent":                            # --silent - produce no output on stdout
+      of "silent", "s":                       # --silent - produce no output on stdout
         CTX.cfg.silent = true
       of "nodb":                              # --nodb - do not write to the DB
         CTX.cfg.no_db = true
-      of "dump":                              # --dump - dump to a file
+      of "dump", "d":                         # --dump - dump to a file
         CTX.cfg.do_dump = true
       of "dumpfile":
         CTX.cfg.dumpfile = value
-      of "cached", "offline":                 # --cached - use cached json
+      of "cached", "offline", "c", "o":       # --cached - use cached json
         CTX.cfg.cached = true
       of "fallbackoffline":                   # use cache in case online operation fails
         CTX.cfg.fallback = true
+      of "location":
+        let parts = split(value, ",")
+        if parts.len != 2:
+          utils.show_help()
+          system.quit(-1)
+      of "version", "v":
+        utils.show_version()
+        system.quit(0)
+      of "help", "h":
+        utils.show_help()
+        system.quit(0)
       else:
         echo "Unknown option: ", key
     of cmdEnd:

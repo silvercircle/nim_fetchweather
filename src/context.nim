@@ -131,6 +131,12 @@ template LOG_FATAL*(data: untyped) =
   when defined(debug):
     debugmsg data
 
+method getCfgFilePath*(this: Context): string {.base.} =
+  return this.cfgFilePath
+
+method getDataDirPath*(this: Context): string {.base.} =
+  return this.dataDirPath
+
 # populate our config file object with defaults
 method setCfgDefaults(this: Context): void {.base.} =
   this.cfgFile = newConfig()

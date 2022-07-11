@@ -25,6 +25,10 @@
  *]#
 
 # printf like C
+
+import std/strformat
+import "../context" as C
+
 proc printf*(format: cstring): cint {.importc, header: "<stdio.h>", varargs.}
 proc fprintf*(stream: File, format: cstring): cint {.importc, header: "<stdio.h>", varargs.}
 proc sprintf*(str: cstring, format: cstring): cint {.header: "<stdio.h>", importc: "sprintf", varargs.}
@@ -46,4 +50,45 @@ proc curlWriteFn*(buffer: cstring, size: int, count: int, outstream: pointer): i
   let outbuf = cast[ref string](outstream)
   outbuf[] &= buffer
   result = size * count
+
+proc show_help*(): void =
+  let cfgfilepath = C.CTX.getCfgFilePath()
+  let datadir = C.CTX.getDataDirPath()
+
+  echo fmt"""USAGE IS: nim_fetchweather [options]
+Configuration is read from: {cfgfilepath}
+
+Allowed command line options are:
+--help -h:        Show this help
+--version -v:     Show version information
+--apikey=key      Override apikey with this value
+                  A valid API key is mandatory for proper operation!
+--api=CODE        Use API (allowed values for CODE are VC, CC, AW, OWM)
+                  (case sensitive!)
+                  VC: Visual Crossing API
+                  CC: tomorrow.io (formerly ClimaCell)
+                  AW: AccuWeather
+                  OWM:Open Weather Map.
+--silent, -s      Produce no output on stdout
+--dump, -d        Dump output to file. Files will be created in the data dir
+                  ({datadir})
+                  Filename will be dump_DATETIME_IN_ISO_FORMAT
+--dumpfile        Create dump in this file. The directory must exist and must
+                  have write access.
+--cached, -c      used cached data (if available). Do NOT go online
+--offline, -o     same as --cached
+--nodb            Do not record to database.
+--location=LOC    override location from configuration file. LOC must be in the
+                  format lat,lon. E.g. 15.39938,16.38389
+--fallbackoffline If online operation fails, try the cache. If that fails as
+                  well, bail out with an error.
+"""
+
+proc show_version*(): void =
+  echo """This is nim_fetchweather version 0.9.1
+(C) 2022 by Alex Vie <silvercircle at gmail dot com>
+
+This software is free software governed by the MIT License.
+Please visit https://github.com/silvercircle/nim_fetchweather
+for more information about this software and copyright information."""
 
