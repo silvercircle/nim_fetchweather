@@ -26,11 +26,14 @@
 
 import std/[os, logging, times, parsecfg, strformat]
 
+let g_version* = "0.9.1"
+
 type apiconfig = object
-  shortname:    string
-  fullname:     string
-  baseurl:      string
-  baseurl_fc:   string
+  shortname:    string        # the shortcode
+  fullname:     string        # full name of the api, currently not used anywhere
+  baseurl:      string        # the base url for the standard current condition request
+  baseurl_fc:   string        # the base url for the forecast request. This is optional for some
+                              # apis
 
 var
   apiconfigs:    array[4, apiconfig] = [

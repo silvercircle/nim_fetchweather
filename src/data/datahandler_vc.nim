@@ -107,9 +107,6 @@ method readFromAPI*(this: DataHandler_VC): int =
   let loc = CTX.cfgFile.getSectionValue("VC", "loc", "")
   url = replace(baseurl, "___LOC___", by = loc)
 
-  debugmsg fmt"VC: The url is {url}"
-  debugmsg fmt"The loc is {loc}"
-
   context.LOG_INFO(fmt"VC readFromApi() request one-call data from {url}")
   discard curl.easy_setopt(OPT_USERAGENT, "Mozilla/5.0")
   discard curl.easy_setopt(OPT_HTTPGET, 1)
@@ -141,11 +138,12 @@ method readFromAPI*(this: DataHandler_VC): int =
     this.stats.requests_all.inc
     return res
   else:
+    res = -1
     this.stats.requests_today.inc
     this.stats.requests_all.inc
     this.stats.requests_failed.inc
-    # try to read cached data
     context.LOG_ERR(fmt"VC: readFromApi() failed, trying cached data")
+  return res
 
 # populate DataHandler.p (type DataPoint) with current and 3 days
 # forecast

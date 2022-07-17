@@ -195,7 +195,7 @@ method populateSnapshot*(this: DataHandler_CC): bool =
   # times
   this.p.sunriseTime = times.parseTime(f["sunriseTime"].getStr(), "yyyy-MM-dd'T'HH:mm:sszz", times.local())
   this.p.sunsetTime = times.parseTime(f["sunsetTime"].getStr(), "yyyy-MM-dd'T'HH:mm:sszz", times.local())
-  this.p.timeRecorded = times.getTime()
+  this.p.timeRecorded = times.parseTime(this.currentResult["data"]["timelines"][0]["intervals"][0]["startTime"].getStr(), "yyyy-MM-dd'T'HH:mm:sszzz", times.local())
   this.p.timeRecordedAsText = times.format(this.p.timeRecorded, "HH:mm", times.local())
   this.p.sunsetTimeAsString = times.format(this.p.sunsetTime, "HH:mm", times.local())
   this.p.sunriseTimeAsString = times.format(this.p.sunriseTime, "HH:mm", times.local())

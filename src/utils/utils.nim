@@ -55,10 +55,12 @@ proc show_help*(): void =
   let cfgfilepath = C.CTX.getCfgFilePath()
   let datadir = C.CTX.getDataDirPath()
 
-  echo fmt"""USAGE IS: nim_fetchweather [options]
-Configuration is read from: {cfgfilepath}
-
+  echo fmt"""This is nim_fetchweather version {C.g_version}
+USAGE IS: nim_fetchweather [options]
+Configuration file: {cfgfilepath}
+Command line options will override configuration file settings.
 Allowed command line options are:
+
 --help -h:        Show this help
 --version -v:     Show version information
 --apikey=key      Override apikey with this value
@@ -85,7 +87,7 @@ Allowed command line options are:
 """
 
 proc show_version*(): void =
-  echo """This is nim_fetchweather version 0.9.1
+  echo fmt"""This is nim_fetchweather version {g_version}
 (C) 2022 by Alex Vie <silvercircle at gmail dot com>
 
 This software is free software governed by the MIT License.

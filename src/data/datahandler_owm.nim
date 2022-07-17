@@ -139,6 +139,8 @@ method readFromAPI*(this: DataHandler_OWM): int =
     baseurl.add(CTX.cfgFile.getSectionValue("OWM", "apikey", "none"))
   let loc = $CTX.cfgFile.getSectionValue("OWM", "loc", "0,0")
 
+  ## OWM does not accept lat,lon as location, they want them separated into lat and lon
+  ## so be it.
   let latlon = strutils.split(loc, ",", 2)
 
   baseurl.add("&lat=" & latlon[0])
@@ -147,8 +149,7 @@ method readFromAPI*(this: DataHandler_OWM): int =
   url.add(baseurl)
   url.add("&exclude=minutely&units=metric");
 
-  debugmsg fmt"The url is: {url}"
-  context.LOG_INFO(fmt"OWM. readFromApi() request one-call data from {url}")
+  context.LOG_INFO(fmt"OWM readFromApi() request one-call data from {url}")
   discard curl.easy_setopt(OPT_USERAGENT, "Mozilla/5.0")
   discard curl.easy_setopt(OPT_HTTPGET, 1)
   discard curl.easy_setopt(OPT_WRITEDATA, webData)
@@ -168,7 +169,6 @@ method readFromAPI*(this: DataHandler_OWM): int =
         res = -1
     except:
       context.LOG_ERR(fmt"OWM:readFromApi(), Exception: {getCurrentExceptionMsg()}")
-      debugmsg "readFromApi, possible parser exception" & getCurrentExceptionMsg()
       res = -1
   else:
     res = -1
@@ -179,11 +179,12 @@ method readFromAPI*(this: DataHandler_OWM): int =
     this.stats.requests_all.inc
     return res
   else:
+    res = -1
     this.stats.requests_today.inc
     this.stats.requests_all.inc
     this.stats.requests_failed.inc
-    # try to read cached data
     context.LOG_ERR(fmt"OWM: readFromApi() failed, trying cached data")
+  return res
 
 # populate DataHandler.p (type DataPoint) with current and 3 days
 # forecast
@@ -203,7 +204,7 @@ method populateSnapshot*(this: DataHandler_OWM): bool =
   # times
   this.p.sunriseTime = times.fromUnix(n["sunrise"].getInt())
   this.p.sunsetTime = times.fromUnix(n["sunset"].getInt())
-  this.p.timeRecorded = times.getTime()
+  this.p.timeRecorded = times.fromUnix(n["dt"].getInt())
   this.p.timeRecordedAsText = times.format(this.p.timeRecorded, "HH:mm", times.local())
   this.p.sunsetTimeAsString = times.format(this.p.sunsetTime, "HH:mm", times.local())
   this.p.sunriseTimeAsString = times.format(this.p.sunriseTime, "HH:mm", times.local())

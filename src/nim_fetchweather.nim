@@ -110,7 +110,9 @@ proc main(): cint =
         utils.show_help()
         system.quit(0)
       else:
-        echo "Unknown option: ", key
+        echo "Unknown option: ", key, "\n"
+        utils.show_help()
+        system.quit(0)
     of cmdEnd:
       discard
 
