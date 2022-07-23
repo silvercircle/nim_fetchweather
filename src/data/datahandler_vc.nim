@@ -202,7 +202,6 @@ method populateSnapshot*(this: DataHandler_VC): bool =
     this.daily[i].temperatureMax = this.currentResult["days"][i + 1]["tempmax"].getFloat()
     this.daily[i].weekDay = times.format(times.fromUnix(this.currentResult["days"][i + 1]["datetimeEpoch"].getInt()), "ddd", times.local())
 
-
   this.p.haveUVI = true
   this.p.uvIndex = n["uvindex"].getFloat()
 

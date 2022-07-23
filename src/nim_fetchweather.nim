@@ -117,25 +117,24 @@ proc main(): cint =
       discard
 
   let api = CTX.cfg.api
+  case api:
+    of "CC":
+      data = DataHandler_CC(api_id: "CC")
+    of "OWM":
+      data = DataHandler_OWM(api_id: "OWM")
+    of "AW":
+      data = DataHandler_AW(api_id: "AW")
+    of "VC":
+      data = DataHandler_VC(api_id: "VC")
+    else:
+      debugmsg fmt"No known API selected ({api} is not valid)"
+      res = -1
+      data = nil
 
-  if api == "CC":
-    data = DataHandler_CC(api_id: "CC")
-    if run(data) != 0:
-      res = -1
-  elif api == "OWM":
-    data = DataHandler_OWM(api_id: "OWM")
-    if run(data) != 0:
-      res = -1
-  elif api == "AW":
-    data = DataHandler_AW(api_id: "AW")
-    if run(data) != 0:
-      res = -1
-  elif api == "VC":
-    data = DataHandler_VC(api_id: "VC")
+  if data != nil:
     if run(data) != 0:
       res = -1
   else:
-    debugmsg fmt"No known API selected ({api} is not valid)"
     res = -1
   CTX.finalize()
   system.quit(res)
