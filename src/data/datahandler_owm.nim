@@ -80,7 +80,7 @@ method getIcon(this: DataHandler_OWM, code: int = 100, is_day: bool = true): cha
       else:
         symbol = (if daylight: 'o' else: 'O')
 
-  if code >= 800 and code <= 899:         # other
+  if code >= 801 and code <= 899:         # other
     case code:
       of 801:
         symbol = (if daylight: 'b' else: 'B')
@@ -124,7 +124,7 @@ method checkRawDataValidity*(this: DataHandler_OWM): bool =
 method readFromAPI*(this: DataHandler_OWM): int =
   var
     baseurl, url: string
-    ret: Code
+    ret: libcurl.Code
     res: int32 = -1
 
   let webData: ref string = new string
@@ -211,7 +211,7 @@ method populateSnapshot*(this: DataHandler_OWM): bool =
 
   this.p.is_day = (if this.p.timeRecorded > this.p.sunriseTime and this.p.timeRecorded < this.p.sunsetTime: true else: false)
   this.p.weatherCode = n["weather"][0]["id"].getInt()
-  this.p.weatherSymbol = this.getIcon()
+  this.p.weatherSymbol = this.getIcon(this.p.weatherCode)
   this.p.timeZone = CTX.cfgFile.getSectionValue("OWM", "timezone")
   this.p.conditionAsString = n["weather"][0]["main"].getStr()
 

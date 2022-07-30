@@ -160,9 +160,16 @@ method convertWindspeed*(this: DataHandler, speed: float = 0): float {.base.} =
   else:
     return speed;
 
-# vis: must be in meters
-method convertVis*(this: DataHandler, vis: float): float {.base.} =
-  return (if CTX.cfg.vis_unit == "mi": vis / 1000 / 1.609 else : vis / 1000)
+# vis: must be in meters by default, but can be in km or miles if indicated via
+# source_unit
+method convertVis*(this: DataHandler, vis: float, source_unit: string = "m"): float {.base.} =
+  case source_unit:
+    of "km":
+      return (if CTX.cfg.vis_unit == "mi": vis / 1.609 else: vis)
+    of "mi":
+      return (if CTX.cfg.vis_unit == "mi": vis else: vis * 1.609)
+    else:   # assuming source = in meters
+      return (if CTX.cfg.vis_unit == "mi": vis / 1000 / 1.609 else : vis / 1000)
 
 # convert a wind direction (in degrees) into a compass sector
 method degToBearing*(this: DataHandler, wind_direction: int = 0): string {.base.} =
@@ -219,7 +226,7 @@ method doOutput*(this: DataHandler, stream: File): void {.base.} =
 
   discard fprintf(stream, "%s", this.p.conditionAsString)                                               # 27
   if this.p.cloudCover > 0:
-    discard fprintf(stream, " (%.0f%% cov.)\n", this.p.cloudCover)                                      # 28
+    discard fprintf(stream, " (%.0f%%)\n", this.p.cloudCover)                                      # 28
   else:
     discard fprintf(stream, "\n")
 

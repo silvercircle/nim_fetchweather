@@ -225,5 +225,6 @@ method init*(this: Context): void {.base.} =
   this.cfg_saved = this.cfg
   this.cfg_saved.dryRun = true
 
+# just write the config file
 method finalize*(this: Context): void {.base.} =
   this.statsFile.writeConfig(this.cfg.statsfile)

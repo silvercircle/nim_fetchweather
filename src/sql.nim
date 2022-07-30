@@ -81,7 +81,8 @@ proc writeSQL*(data: var DataHandler): void =
           sunrise INTEGER DEFAULT 0,
           sunset INTEGER DEFAULT 0,
           tempMax REAL DEFAULT 0.0,
-          tempMin REAL DEFAULT 0.0)""")
+          tempMin REAL DEFAULT 0.0,
+          api TEXT NOT NULL DEFAULT'unknown')""")
   try:
     db.exec(sql"BEGIN")
     let res = db.tryExec(sql"""INSERT INTO history(timestamp, summary, icon, temperature,
@@ -89,14 +90,14 @@ proc writeSQL*(data: var DataHandler): void =
                         windgust, humidity, visibility, pressure,
                         precip_probability, precip_intensity, precip_type,
                         uvindex, sunrise, sunset, cloudBase, cloudCover, cloudCeiling, moonPhase,
-                        tempMin, tempMax) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                        tempMin, tempMax, api) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                         d.timeRecorded.toUnix(), d.conditionAsString, d.weatherSymbol,
                         d.temperature, d.temperatureApparent, d.dewPoint, d.windDirection,
                         d.windSpeed, d.windGust, d.humidity, d.visibility, d.pressureSeaLevel,
                         d.precipitationProbability, d.precipitationIntensity, d.precipitationTypeAsString,
                         d.uvIndex.int, d.sunriseTime.toUnix(), d.sunsetTime.toUnix(), d.cloudBase,
                         d.cloudCover, d.cloudCeiling, d.moonPhase, d.temperatureMin,
-                        d.temperatureMax)
+                        d.temperatureMax, d.api)
     if not res:
       debugmsg fmt"failed insert (code = {res})"
       C.LOG_ERR(fmt"writeSql: insert failed with code {res}")
