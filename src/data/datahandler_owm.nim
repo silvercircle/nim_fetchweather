@@ -60,7 +60,7 @@ method getIcon(this: DataHandler_OWM, code: int = 100, is_day: bool = true): cha
     symbol = 'x'
 
   if code == 800:
-    symbol = 'a'
+    symbol = (if daylight: 'a' else: 'A')
 
   if code >= 500 and code <= 599:    # rain
     case code:
