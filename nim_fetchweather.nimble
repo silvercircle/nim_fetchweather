@@ -8,7 +8,7 @@ bin           = @["nim_fetchweather"]
 
 # Dependencies
 
-requires "nim >= 1.6.6"
+requires "nim >= 1.6.6", "curl >= 1.0.0"
 
 task release, "We just foo around":
     exec("nim compile  -o:build/release/nim_fetchweather -r --threads:on --mm:arc --cc:clang -d:release --opt:speed src/nim_fetchweather.nim")

@@ -6,7 +6,7 @@ This is the Nim Version of my old darksky Rust app that fetches JSON weather dat
 
 This application will be able to use multiple APIs and normalize the data into a common format. Planned are support for ClimaCell (mostly done), OpenWeatherMap, VisualCrossing and maybe others.
 
-Right now, it can fetch weather from ClimaCell and Open Weather Map.
+Right now, it can fetch weather from ClimaCell, AccuWeather, Open Weather Map and Visual Crossing API.
 
 ## Built instructions
 

@@ -223,7 +223,8 @@ method populateSnapshot*(this: DataHandler_OWM): bool =
 
   # wind stuff
   this.p.windSpeed = this.convertWindspeed(n["wind_speed"].getFloat())
-  this.p.windGust = this.convertWindspeed(h["wind_gust"].getFloat())
+  this.p.windGust = (if h.hasKey("wind_gust"): h["wind_gust"].getFloat() else: 0)
+  this.p.windGust = this.convertWindspeed(this.p.windGust)
   this.p.windDirection = n["wind_deg"].getInt()
   this.p.windBearing = this.degToBearing(this.p.windDirection)
   this.p.windUnit = CTX.cfg.wind_unit

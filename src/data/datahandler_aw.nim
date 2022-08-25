@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This class handles API specific stuff for the ClimaCell Weather API.
+ * This class handles API specific stuff for the AccuWeather Weather API.
  *]#
 
 {.warning[CStringConv]: off.}
