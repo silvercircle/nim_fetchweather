@@ -206,7 +206,6 @@ method populateSnapshot*(this: DataHandler_AW): bool =
   n = this.currentResult[0]
   f = this.forecastResult["DailyForecasts"][0]
 
-  debugmsg "setup done"
   this.p.valid = true
   this.p.api = "AW"
 
